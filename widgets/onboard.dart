@@ -1,4 +1,4 @@
-import '../constants/images.dart';
+import '../../gaas/lib/constants/images.dart';
 
 class Onboard {
   final String image;
