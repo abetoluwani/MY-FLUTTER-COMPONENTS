@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primary = Color(0xFF3e7362);
-  static const Color primarylight = Color(0xFF9bc16b);
-  static const Color secondary = Color(0xFFFFE24B);
-  static const Color accent = Color(0xFFB0C7FF);
-  static const Color black = Color(0xFF333333);
+  static const Color primary = Color(0xFF5CB67F);
+  static const Color primary200 = Color(0xFFEAF6EE);
+  static const Color primaryLight = Color(0xFFF8FCFA);
+  static const Color primaryLight100 = Color(0xFFA3D6B7);
+  static const Color primaryDark = Color(0xFF36784f);
+  static const Color secondary = Color(0xFFFEF0DD);
+  static const Color lightRed = Color(0xFFFEF0DD);
+  static const Color red = Color.fromARGB(255, 249, 11, 11);
+  static const Color disabledPrimary = Color(0xFFDCEFE3);
   static const Color white = Color(0xFFFFFFFF);
-  static const Color textprimary = Color(0xFF333333);
-  static const Color textsecondary = Color(0xFF6C757D);
-  static const Color light = Color(0xFFF6F6F6);
-  static const Color dark = Color(0xFF272727);
-  static const Color borderprimary = Color(0xFFD9D9D9);
-  static const Color bordersecondary = Color(0xFFE8E8E8);
-  static const Color error = Color(0xFFe2252d);
-  static const Color success = Color(0xFF388E3C);
-  static const Color info = Color(0xFF1976D2);
-  static const Color warning = Color(0xFFF57C00);
-  static const Color green = Color(0xFF00C853);
-  static const Color red = Color(0xFFF44336);
-  static const Color yellow = Color(0xFFFFC107);
-  static const Color pink = Color(0xFFE91E63);
-  static const Color purple = Color(0xFF9C27B0);
-  static const Color grey = Color(0xFF9E9E9E);
-  static const Color darkgrey = Color(0xFF212121);
-  static const Color softgrey = Color(0XFFbfa27d);
+  static const Color black = Color(0xFF080808);
+  static const Color black200 = Color(0xFFDDDDDD);
+  static const Color grey = Color(0xFF848484);
+  static const Color grey100 = Color(0xFFDDDDDD);
+  static const Color grey200 = Color(0xFFBBBBBB);
+  static const Color grey300 = Color(0xFFFAFAFA);
+  static const Color purple = Color(0xFFC7008F);
+  static const Color darkGrey = Color(0xFF8C9B92);
+  static const Color green = Color(0xFF5CB67F);
+  static const Color grey400 = Color(0xFFEEEEEE);
+  static const Color lightGrey = Color(0xFF8B8B8B);
 }

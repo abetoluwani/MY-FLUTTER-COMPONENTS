@@ -103,12 +103,4 @@ class AppDeviceUtils {
     return Platform.isAndroid;
   }
 
-  static void lauchUrl(String url) async{
-    if (await canLaunchUrlString(url)) {
-      await launchUrlString(url);
-      
-    }else{
-      throw 'Could not launch $url';
-    }
-  }
-}
+   }

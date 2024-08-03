@@ -6,17 +6,27 @@ import 'package:google_fonts/google_fonts.dart';
 import '../utils/theme/colors.dart';
 
 class SmallAppText extends StatelessWidget {
-  SmallAppText(this.data,
-      {super.key, this.color, this.fontSize, this.fontWeight, this.alignment});
+  SmallAppText(
+    this.data, {
+    super.key,
+    this.color,
+    this.fontSize,
+    this.fontWeight,
+    this.alignment,
+    this.maxLines,
+  });
   String data;
   final Color? color;
   final double? fontSize;
   final FontWeight? fontWeight;
   final TextAlign? alignment;
+  final int? maxLines;
   @override
   Widget build(BuildContext context) {
     return Text(
       data,
+      overflow: TextOverflow.ellipsis,
+      maxLines: maxLines ?? 99999,
       textAlign: alignment,
       style: GoogleFonts.figtree(
         color: color ?? AppColors.black,
@@ -28,100 +38,68 @@ class SmallAppText extends StatelessWidget {
 }
 
 class MedAppText extends StatelessWidget {
-  MedAppText(this.data,
-      {super.key, this.color, this.fontSize, this.fontWeight, this.textAlign});
+  MedAppText(
+    this.data, {
+    super.key,
+    this.color,
+    this.fontSize,
+    this.fontWeight,
+    this.alignment,
+    this.maxLines,
+    this.textStyle,
+  });
   String data;
   final Color? color;
   final double? fontSize;
   final FontWeight? fontWeight;
-  final TextAlign? textAlign;
+  final int? maxLines;
+  final TextAlign? alignment;
+  final TextStyle? textStyle;
   @override
   Widget build(BuildContext context) {
     return Text(
       data,
-      style: GoogleFonts.figtree(
-        color: color ?? AppColors.black,
-        fontSize: fontSize ?? 20.sp,
-        fontWeight: fontWeight ?? FontWeight.normal,
-      ),
-      textAlign: textAlign,
+      overflow: TextOverflow.ellipsis,
+      maxLines: maxLines ?? 99999,
+      textAlign: alignment,
+      style: textStyle ??
+          GoogleFonts.outfit(
+            color: color ?? AppColors.black,
+            fontSize: fontSize ?? 18.sp,
+            fontWeight: fontWeight ?? FontWeight.normal,
+          ),
     );
   }
 }
 
 class BigAppText extends StatelessWidget {
-  BigAppText(this.data,
-      {super.key, this.color, this.fontSize, this.fontWeight, this.textAlign});
+  BigAppText(
+    this.data, {
+    super.key,
+    this.color,
+    this.fontSize,
+    this.fontWeight,
+    this.alignment,
+    this.maxLines,
+  });
   String data;
   final Color? color;
   final double? fontSize;
   final FontWeight? fontWeight;
-  final TextAlign? textAlign;
+  final TextAlign? alignment;
+  final int? maxLines;
   @override
   Widget build(BuildContext context) {
     return Text(
       data,
-      style: GoogleFonts.figtree(
+      overflow: TextOverflow.ellipsis,
+      maxLines: maxLines ?? 99999,
+      textAlign: alignment,
+      style: GoogleFonts.outfit(
         color: color ?? AppColors.black,
-        fontSize: fontSize ?? 25.sp,
+        fontSize: fontSize ?? 20.sp,
         fontWeight: fontWeight ?? FontWeight.bold,
       ),
-      textAlign: textAlign ?? TextAlign.left,
-    );
-  }
-}
-
-class TitleTextEllipsis extends StatelessWidget {
-  const TitleTextEllipsis({
-    super.key,
-    required this.title,
-    this.smallSize = false,
-    this.maxLines = 2,
-    this.textAlign = TextAlign.left,
-  });
-
-  final String title;
-  final bool smallSize;
-  final int maxLines;
-  final TextAlign textAlign;
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: smallSize
-          ? Theme.of(context).textTheme.titleMedium
-          : Theme.of(context).textTheme.headlineSmall,
-      overflow: TextOverflow.ellipsis,
-      maxLines: maxLines,
-      textAlign: textAlign,
-    );
-  }
-}
-
-class MaxLineText extends StatelessWidget {
-  const MaxLineText({
-    super.key,
-    required this.title,
-    this.smallSize = false,
-    this.maxLines = 2,
-    this.textAlign = TextAlign.left,
-  });
-
-  final String title;
-  final bool smallSize;
-  final int maxLines;
-  final TextAlign textAlign;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: smallSize
-          ? Theme.of(context).textTheme.labelMedium
-          : Theme.of(context).textTheme.titleMedium,
-      overflow: TextOverflow.ellipsis,
-      maxLines: maxLines,
-      textAlign: textAlign,
     );
   }
 }

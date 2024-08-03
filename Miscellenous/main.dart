@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'app/modules/splashscreen/bindings/splashscreen_binding.dart';
-import 'app/routes/app_pages.dart';
+import '../app/modules/splashscreen/bindings/splashscreen_binding.dart';
+import '../app/routes/app_pages.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -18,11 +18,13 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, _) {
           return GetMaterialApp(
-            getPages: AppPages.routes,
-            debugShowCheckedModeBanner: false,
-            initialBinding: SplashscreenBinding(),
-            initialRoute: '/',
-          );
+          debugShowCheckedModeBanner: false,
+          initialRoute: AppPages.INITIAL,
+          initialBinding: SplashscreenBinding(),
+          getPages: AppPages.routes,
+          darkTheme: AppTheme.darkTheme,
+          theme: AppTheme.theme,
+        );
         });
   }
 }
