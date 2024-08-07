@@ -15,7 +15,7 @@ To start using these components in your Flutter project, follow these steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/flutter-components.git
+   git clone https://github.com/abetoluwani/MY-FLUTTER-COMPONENTS.git
    ```
 
 2. **Add the components to your project:**
