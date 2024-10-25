@@ -1,0 +1,41 @@
+name: greep_customer
+description: Customer app for Greep
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_screenutil: ^5.9.3
+  get: ^4.6.6
+  get_cli: ^1.8.4
+  get_storage: ^2.1.1
+  intl_phone_field: ^3.2.0
+  pinput: ^5.0.0
+  
+dev_dependencies:  
+
+dependency_overrides:
+ 
+flutter_icons:
+  # android: "launcher_icon"
+  # ios: true
+  # remove_alpha_ios: true
+
+  # image_path_android: "assets/icons/playstore.png"
+  # image_path_ios: "assets/icons/appstore.png"
+
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
