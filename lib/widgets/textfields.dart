@@ -176,9 +176,16 @@ class AppPhoneTextField extends StatelessWidget {
   const AppPhoneTextField({
     super.key,
     this.label,
+    this.obscureText = false,
+    this.controller,
+    this.readOnly = false,
+    this.onChanged,
   });
   final String? label;
-
+  final bool obscureText;
+  final TextEditingController? controller;
+  final bool readOnly;
+  final Function(PhoneNumber)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -193,7 +200,12 @@ class AppPhoneTextField extends StatelessWidget {
           ),
         ),
         vSpace(10),
-        const IntlPhoneField(
+        IntlPhoneField(
+          onChanged: onChanged ??
+              (value) => print(value.countryCode + '' + value.number),
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          obscureText: obscureText,
+          controller: controller,
           decoration: InputDecoration(
               // labelText: 'Phone Number',
               border: OutlineInputBorder(
@@ -207,7 +219,6 @@ class AppPhoneTextField extends StatelessWidget {
               enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.grey100, width: 1.5),
                   borderRadius: BorderRadius.all(Radius.circular(12)))),
-                  
           cursorColor: AppColors.green,
           keyboardType: TextInputType.phone,
           initialCountryCode: 'NG',
@@ -217,8 +228,6 @@ class AppPhoneTextField extends StatelessWidget {
     );
   }
 }
-
-
 class AppMultiLineTextFormField extends StatelessWidget {
   const AppMultiLineTextFormField({
     super.key,
@@ -371,3 +380,64 @@ class AppRoundedTextFormField extends StatelessWidget {
 }
 
 
+class BioField extends StatelessWidget {
+  const BioField({
+    super.key,
+    this.label,
+    this.fontsize,
+    this.validator,
+    this.hint,
+    this.bordercolor,
+  });
+  final double? fontsize;
+  final FormFieldValidator<String>? validator;
+  final String? label, hint;
+  final Color? bordercolor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Visibility(
+          visible: label != null,
+          child: MedAppText(
+            label ?? '',
+            color: AppColors.black,
+            fontSize: 18.sp,
+          ),
+        ),
+        vSpace(10),
+        TextField(
+          decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: bordercolor ?? AppColors.primary, width: 1.5),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: bordercolor ?? AppColors.grey100, width: 1.5),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              border: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: AppColors.grey), // Grey border
+                borderRadius: BorderRadius.circular(12),
+              ),
+              hintText: hint ?? "Send us a message",
+              fillColor: AppColors.white,
+              filled: true,
+              // Use the provided validator function, or it
+              labelStyle: const TextStyle(
+                  color: AppColors.grey200), // Customize label text color
+              hintStyle: const TextStyle(color: AppColors.grey100)),
+          cursorColor: AppColors.primary,
+          minLines: 3, // Set this
+          maxLines: 10, // and this
+          keyboardType: TextInputType.multiline,
+        ),
+      ],
+    );
+  }
+}
