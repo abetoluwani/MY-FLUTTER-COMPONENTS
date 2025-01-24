@@ -40,6 +40,21 @@ class FormValidator {
     return null;
   }
 
+  // is valid username
+
+  static String? isValidUsername(String? username) {
+    if (username == null || username.isEmpty) {
+      return 'Please enter a valid username.';
+    }
+    if (username.length > 85) {
+      return 'Username must not exceed 85 characters.';
+    }
+    if (username.length < 3) {
+      return 'Username must be atleast 3 Characters';
+    }
+    return null;
+  }
+
   static String? isValidPhone(String? phoneNo) {
     if (phoneNo == null || phoneNo.isEmpty) {
       return 'Please enter a valid phone number.';
