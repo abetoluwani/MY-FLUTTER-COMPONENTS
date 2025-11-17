@@ -7,11 +7,6 @@ class AppTheme {
   static ThemeData get lighttheme {
     return ThemeData(
         scaffoldBackgroundColor: AppColors.white,
-        dialogBackgroundColor: AppColors.white,
-        dialogTheme: const DialogTheme(
-          backgroundColor: AppColors.white,
-          surfaceTintColor: AppColors.white,
-        ),
         primaryColor: AppColors.primary,
         cardColor: AppColors.white,
         appBarTheme: const AppBarTheme(
