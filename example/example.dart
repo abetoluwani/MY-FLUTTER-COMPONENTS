@@ -1,0 +1,716 @@
+// ignore_for_file: avoid_print
+
+import 'package:flutter/material.dart';
+import 'package:swiss_army_component/swiss_army_component.dart';
+
+void main() {
+  runApp(const ExampleApp());
+}
+
+// =============================================================================
+// THEME CONFIGURATION EXAMPLES
+// =============================================================================
+
+/// Example 1: Using default themes
+class DefaultThemeApp extends StatelessWidget {
+  const DefaultThemeApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: SACTheme.light(),
+      darkTheme: SACTheme.dark(),
+      home: const Placeholder(),
+    );
+  }
+}
+
+/// Example 2: Custom theme with SACThemeConfig
+class CustomThemeApp extends StatelessWidget {
+  const CustomThemeApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Define custom colors using SACThemeConfig
+    const config = SACThemeConfig(
+      // Shared fallback colors
+      primary: Colors.teal,
+      secondary: Colors.orange,
+      error: Colors.redAccent,
+      success: Colors.green,
+
+      // Light mode specific
+      primaryLight: Colors.teal,
+      secondaryLight: Colors.orange,
+      backgroundLight: Color(0xFFFDFCF9),
+      surfaceLight: Colors.white,
+      borderLight: Color(0xFFE5E5E5),
+
+      // Dark mode specific
+      primaryDark: Colors.deepPurple,
+      secondaryDark: Colors.tealAccent,
+      backgroundDark: Color(0xFF0E1116),
+      surfaceDark: Color(0xFF161B22),
+      borderDark: Color(0xFF30363D),
+    );
+
+    return MaterialApp(
+      theme: SACTheme.light(config),
+      darkTheme: SACTheme.dark(config),
+      home: const Placeholder(),
+    );
+  }
+}
+
+/// Example 3: Reusable theme class extending SACThemeBase
+class MyAppTheme extends SACThemeBase {
+  const MyAppTheme();
+
+  @override
+  SACThemeConfig? config() => const SACThemeConfig(
+    primaryLight: Colors.indigo,
+    secondaryLight: Colors.amber,
+    primaryDark: Colors.indigoAccent,
+    secondaryDark: Colors.amberAccent,
+  );
+}
+
+// Usage: final theme = MyAppTheme(); theme.light() / theme.dark()
+
+/// Main app entry - demonstrating theme setup
+class ExampleApp extends StatelessWidget {
+  const ExampleApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const config = SACThemeConfig(
+      primaryLight: Colors.teal,
+      secondaryLight: Colors.orange,
+      primaryDark: Colors.deepPurple,
+      secondaryDark: Colors.tealAccent,
+    );
+
+    return MaterialApp(
+      title: 'Swiss Army Component Demo',
+      theme: SACTheme.light(config),
+      darkTheme: SACTheme.dark(config),
+      home: const ComponentShowcase(),
+    );
+  }
+}
+
+/// Main showcase screen with navigation to all component demos
+class ComponentShowcase extends StatelessWidget {
+  const ComponentShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: const CustomAppBar(
+        title: 'Swiss Army Component',
+        gradientColors: [Color(0xFF10BB76), Color(0xFF086D50)],
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          _buildSection('Theme Configuration', const ThemeExamples()),
+          _buildSection('Buttons', const ButtonExamples()),
+          _buildSection('App Bars', const AppBarExamples()),
+          _buildSection('Text Widgets', const TextExamples()),
+          _buildSection('Text Fields', const TextFieldExamples()),
+          _buildSection('OTP Input', const OTPExamples()),
+          _buildSection('Search Bars', const SearchBarExamples()),
+          _buildSection('Utilities', const UtilityExamples()),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSection(String title, Widget content) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      child: ExpansionTile(
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        initiallyExpanded: false,
+        children: [Padding(padding: const EdgeInsets.all(16), child: content)],
+      ),
+    );
+  }
+}
+
+// =============================================================================
+// THEME CONFIGURATION SECTION
+// =============================================================================
+
+class ThemeExamples extends StatelessWidget {
+  const ThemeExamples({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        BigAppText('Theme System Overview'),
+        vSpace(8),
+        SmallAppText('Swiss Army Component provides a complete theme system:'),
+        vSpace(12),
+
+        // SACTheme usage
+        MedAppText('1. SACTheme - Theme Factory'),
+        vSpace(4),
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.grey[100],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: const Text(
+            'SACTheme.light()  // Default light theme\n'
+            'SACTheme.dark()   // Default dark theme\n'
+            'SACTheme.light(config)  // Custom colors',
+            style: TextStyle(fontFamily: 'monospace', fontSize: 12),
+          ),
+        ),
+        vSpace(16),
+
+        // SACThemeConfig usage
+        MedAppText('2. SACThemeConfig - Color Configuration'),
+        vSpace(4),
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.grey[100],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: const Text(
+            'const config = SACThemeConfig(\n'
+            '  primaryLight: Colors.teal,\n'
+            '  primaryDark: Colors.deepPurple,\n'
+            '  backgroundLight: Color(0xFFFDFCF9),\n'
+            '  surfaceDark: Color(0xFF161B22),\n'
+            ');',
+            style: TextStyle(fontFamily: 'monospace', fontSize: 12),
+          ),
+        ),
+        vSpace(16),
+
+        // SACThemeBase usage
+        MedAppText('3. SACThemeBase - Reusable Theme Class'),
+        vSpace(4),
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.grey[100],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: const Text(
+            'class AppTheme extends SACThemeBase {\n'
+            '  @override\n'
+            '  SACThemeConfig? config() => SACThemeConfig(...);\n'
+            '}\n'
+            '// Use: AppTheme().light(), AppTheme().dark()',
+            style: TextStyle(fontFamily: 'monospace', fontSize: 12),
+          ),
+        ),
+        vSpace(16),
+
+        // AppColors
+        MedAppText('4. AppColors - Color Constants'),
+        vSpace(8),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            _colorChip('primary', AppColors.primary),
+            _colorChip('secondary', AppColors.secondary),
+            _colorChip('green', AppColors.green),
+            _colorChip('red', AppColors.red),
+            _colorChip('grey', AppColors.grey),
+            _colorChip('black', AppColors.black),
+            _colorChip('white', AppColors.white),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _colorChip(String name, Color color) {
+    return Chip(
+      avatar: CircleAvatar(backgroundColor: color),
+      label: Text(name, style: const TextStyle(fontSize: 12)),
+    );
+  }
+}
+
+// =============================================================================
+// BUTTON EXAMPLES
+// =============================================================================
+
+class ButtonExamples extends StatelessWidget {
+  const ButtonExamples({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        // Primary elevated button
+        const AppElevatedButton(
+          title: 'Primary Button',
+          onPressed: _handlePress,
+        ),
+        vSpace(12),
+
+        // Normal filled button
+        const NormalElevatedButton(
+          title: 'Filled Button',
+          onPressed: _handlePress,
+        ),
+        vSpace(12),
+
+        // Secondary button
+        const AppSecondaryElevatedButton(
+          label: 'Secondary Button',
+          onPressed: _handlePress,
+        ),
+        vSpace(12),
+
+        // Outlined button
+        const AppOutlinedButton(
+          label: 'Outlined Button',
+          onPressed: _handlePress,
+        ),
+        vSpace(12),
+
+        // Configurable buttons with custom sizes
+        Row(
+          children: [
+            Expanded(
+              child: ConfigElevatedButton(
+                label: 'Sized',
+                width: 160,
+                bgcolour: Colors.purple,
+                onPressed: () => _handlePress(),
+              ),
+            ),
+            hSpace(12),
+            Expanded(
+              child: ConfigOutlinedButton(
+                label: 'Outlined',
+                width: 160,
+                brdcolour: Colors.purple,
+                onPressed: () => _handlePress(),
+              ),
+            ),
+          ],
+        ),
+        vSpace(12),
+
+        // Button with loading state
+        const AppElevatedButton(
+          title: 'Loading Button',
+          isLoading: true,
+          onPressed: null,
+        ),
+      ],
+    );
+  }
+
+  static void _handlePress() {
+    print('Button pressed!');
+  }
+}
+
+// =============================================================================
+// APP BAR EXAMPLES
+// =============================================================================
+
+class AppBarExamples extends StatelessWidget {
+  const AppBarExamples({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        MedAppText('CustomAppBar - Gradient background with actions'),
+        vSpace(8),
+        SizedBox(
+          height: 60,
+          child: CustomAppBar(
+            title: 'Dashboard',
+            gradientColors: const [Colors.teal, Colors.green],
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.notifications, color: Colors.white),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ),
+        vSpace(16),
+
+        MedAppText('SearchAppBar - Integrated search field'),
+        vSpace(8),
+        SizedBox(
+          height: 60,
+          child: SearchAppBar(
+            hintText: 'Search products...',
+            onChanged: (q) => print('Search: $q'),
+            gradientColors: const [Colors.indigo, Colors.blue],
+          ),
+        ),
+        vSpace(16),
+
+        MedAppText('TransparentAppBar - Overlay on content'),
+        vSpace(8),
+        Container(
+          height: 60,
+          color: Colors.grey[300],
+          child: const TransparentAppBar(
+            title: 'Profile',
+            foregroundColor: Colors.black87,
+          ),
+        ),
+        vSpace(16),
+
+        SmallAppText(
+          'TabbedAppBar and CustomSliverAppBar require TabController/ScrollView',
+        ),
+      ],
+    );
+  }
+}
+
+// =============================================================================
+// TEXT WIDGET EXAMPLES
+// =============================================================================
+
+class TextExamples extends StatelessWidget {
+  const TextExamples({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Size variants
+        SmallAppText('SmallAppText - Caption text (12sp)'),
+        vSpace(8),
+        MedAppText('MedAppText - Body text (14sp)'),
+        vSpace(8),
+        BigAppText('BigAppText - Headline (18sp)'),
+        vSpace(16),
+
+        // Special text widgets
+        const BrandNameText(title: 'Swiss Army'),
+        vSpace(8),
+        const ProductTitleText(
+          title: 'Travel Backpack',
+          size: ProductTitleSize.small,
+        ),
+        vSpace(8),
+        ImportantAppText('Required Field *'),
+        vSpace(16),
+
+        // Price formatting
+        Row(
+          children: [
+            const PriceText(
+              price: '1299.99',
+              currency: Currency.usd,
+              showDecimals: true,
+            ),
+            hSpace(16),
+            const PriceText(
+              price: '50000',
+              currency: Currency.naira,
+              isProfit: true,
+            ),
+            hSpace(16),
+            const PriceText(
+              price: '-250',
+              currency: Currency.eur,
+              isProfit: false,
+            ),
+          ],
+        ),
+        vSpace(12),
+
+        // Slashed price (for discounts)
+        Row(
+          children: [
+            const SlashedPriceText(price: '1599', currency: Currency.usd),
+            hSpace(16),
+            const PriceText(price: '1299', currency: Currency.usd),
+          ],
+        ),
+        vSpace(16),
+
+        // AppText with full customization
+        AppText(
+          'Customizable AppText',
+          style: AppTextStyle.heading,
+          color: Colors.purple,
+          fontWeight: FontWeight.bold,
+          decoration: AppTextDecoration.underline,
+        ),
+      ],
+    );
+  }
+}
+
+// =============================================================================
+// TEXT FIELD EXAMPLES
+// =============================================================================
+
+class TextFieldExamples extends StatelessWidget {
+  const TextFieldExamples({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Standard text field with label
+        AppTextField(
+          label: 'Email',
+          hint: 'you@example.com',
+          prefixIconData: Icons.email,
+          keyboardType: TextInputType.emailAddress,
+          validator: FormValidator.isValidEmail,
+        ),
+        vSpace(16),
+
+        // Password field with toggle
+        const AppPasswordField(
+          label: 'Password',
+          hint: 'Enter your password',
+          showPasswordToggle: true,
+          prefixIconData: Icons.lock,
+        ),
+        vSpace(16),
+
+        // Phone number input
+        AppPhoneTextField(
+          label: 'Phone Number',
+          onChanged: (phone) => print('Phone: ${phone.completeNumber}'),
+        ),
+        vSpace(16),
+
+        // Multiline text field
+        const AppMultiLineTextField(
+          label: 'Notes',
+          hint: 'Enter your notes here...',
+          maxLines: 4,
+        ),
+        vSpace(16),
+
+        // Rounded/pill text field
+        const AppRoundedTextField(
+          hint: 'Search...',
+          prefixIcon: Icon(Icons.search),
+        ),
+        vSpace(16),
+
+        // Simple text field (no label)
+        const NormalAppTextFormField(hint: 'Simple input without label'),
+        vSpace(16),
+
+        // Bio field
+        const BioField(label: 'About You'),
+      ],
+    );
+  }
+}
+
+// =============================================================================
+// OTP INPUT EXAMPLES
+// =============================================================================
+
+class OTPExamples extends StatelessWidget {
+  const OTPExamples({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SmallAppText('Standard OTP Input (6 digits)'),
+        vSpace(12),
+        OTPTextField(
+          length: 6,
+          onCompleted: (code) => print('OTP entered: $code'),
+          onChanged: (value) => print('Current: $value'),
+        ),
+        vSpace(24),
+
+        SmallAppText('Underline Style OTP'),
+        vSpace(12),
+        OTPTextField(
+          length: 4,
+          style: OTPStyle.underline,
+          onCompleted: (code) => print('PIN: $code'),
+        ),
+        vSpace(24),
+
+        SmallAppText('Filled Style with Custom Colors'),
+        vSpace(12),
+        OTPTextField(
+          length: 6,
+          style: OTPStyle.filled,
+          fillColor: Colors.grey[200],
+          focusedBorderColor: Colors.teal,
+          onCompleted: (code) => print('Code: $code'),
+        ),
+        vSpace(24),
+
+        SmallAppText('Circle Style'),
+        vSpace(12),
+        OTPTextField(
+          length: 4,
+          style: OTPStyle.circle,
+          defaultBorderColor: Colors.purple,
+          focusedBorderColor: Colors.deepPurple,
+          onCompleted: (code) => print('Circle OTP: $code'),
+        ),
+      ],
+    );
+  }
+}
+
+// =============================================================================
+// SEARCH BAR EXAMPLES
+// =============================================================================
+
+class SearchBarExamples extends StatelessWidget {
+  const SearchBarExamples({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SmallAppText('Standard Search Bar'),
+        vSpace(8),
+        CustomSearchBar(
+          hintText: 'Search products...',
+          onSearch: (query) => print('Search: $query'),
+          onChanged: (value) => print('Changed: $value'),
+          showClearButton: true,
+        ),
+        vSpace(16),
+
+        SmallAppText('Pill Style with Voice Search'),
+        vSpace(8),
+        CustomSearchBar(
+          style: SearchBarStyle.pill,
+          hintText: 'Voice search enabled',
+          showVoiceButton: true,
+          onVoiceSearch: () => print('Voice search tapped'),
+          onSearch: (q) => print('Search: $q'),
+        ),
+        vSpace(16),
+
+        SmallAppText('Filterable Search Bar'),
+        vSpace(8),
+        FilterableSearchBar(
+          filters: const ['All', 'Products', 'Users', 'Orders'],
+          selectedFilter: 'All',
+          onFilterChanged: (filter) => print('Filter: $filter'),
+          onSearch: (query) => print('Search with filter: $query'),
+        ),
+        vSpace(16),
+
+        SmallAppText('Expandable Search Bar'),
+        vSpace(8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ExpandableSearchBar(
+              hintText: 'Tap to expand...',
+              expandedWidth: 250,
+              onSearch: (query) => print('Expandable search: $query'),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+// =============================================================================
+// UTILITY EXAMPLES
+// =============================================================================
+
+class UtilityExamples extends StatelessWidget {
+  const UtilityExamples({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Spacing utilities
+        BigAppText('Spacing Utilities'),
+        vSpace(8),
+        Container(
+          padding: simPad(12, 16), // Symmetric padding
+          color: Colors.grey[200],
+          child: Column(
+            children: [
+              SmallAppText('vSpace(12) - Vertical space'),
+              vSpace(12),
+              SmallAppText('hSpace(8) - Horizontal space (in Row)'),
+              Row(
+                children: [
+                  const Icon(Icons.star),
+                  hSpace(8),
+                  const Icon(Icons.star),
+                ],
+              ),
+              vSpace(8),
+              SmallAppText('simPad(v, h) - Symmetric padding'),
+            ],
+          ),
+        ),
+        vSpace(24),
+
+        // Form Validators
+        BigAppText('Form Validators'),
+        vSpace(8),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SmallAppText('• FormValidator.isValidEmail'),
+            SmallAppText('• FormValidator.isValidPassword'),
+            SmallAppText('• FormValidator.isValidPhone'),
+            SmallAppText('• FormValidator.isValidFullName'),
+            SmallAppText('• FormValidator.isValidName'),
+            SmallAppText('• FormValidator.isValidUsername'),
+          ],
+        ),
+        vSpace(16),
+
+        // Validator demo
+        AppTextField(
+          label: 'Email Validation Demo',
+          hint: 'test@example.com',
+          validator: FormValidator.isValidEmail,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+        ),
+        vSpace(24),
+
+        // Logging
+        BigAppText('Logging Utility'),
+        vSpace(8),
+        AppElevatedButton(
+          title: 'Log Message',
+          onPressed: () {
+            appLog('User action', {
+              'screen': 'example',
+              'action': 'button_tap',
+            });
+          },
+        ),
+      ],
+    );
+  }
+}
