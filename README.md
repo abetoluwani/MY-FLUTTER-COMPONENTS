@@ -1,142 +1,260 @@
 # Swiss Army Component
 
-A reusable Flutter component library with widgets, utilities, and theme support. Ships with a simple CLI to help install and use the package in existing apps.
+A reusable Flutter component library with widgets, theme helpers, validators, and a small CLI. This README answers the most common “how do I use X?” questions with examples for every component we ship.
 
 ## Install
 
-Add to your app's `pubspec.yaml`:
+Add to `pubspec.yaml`:
 
 ```yaml
 dependencies:
   swiss_army_component: ^0.2.0
 ```
 
-Or using our CLI inside your app directory:
+Or from the CLI (run inside your Flutter app directory):
 
 ```bash
 sac install
 flutter pub get
 ```
 
-## Features
+## What’s Inside (and Examples)
 
-### Pre-built Widgets
-- **Custom AppBar** - Flexible app bar component
-- **Themed Buttons** - Customizable action buttons
-- **Text Components** - Text styling with theme support
-- **OTP Input** - Secure OTP entry field
-- **Search Bar** - Search functionality
-- **Text Fields** - Validation-ready input fields
-- **Spacing Utilities** - Responsive spacing helpers
-
-### Theme System
-- Complete color palette management
-- **Customizable colors** - override any color via `SACThemeConfig`
-- Mode-aware colors: `...Light` fields apply to the light theme, `...Dark` fields apply to the dark theme; shared fields (e.g., `primary`) are used when mode-specific values are not provided.
-- Custom chip themes
-- Responsive design utilities
-- Light and dark theme support
-- Material 3 design
-
-### Utilities
-- Form validation functions
-- Device utilities (tablet, phone detection)
-- Application logging
-- Constants management (API, images, sizes, strings)
-
-### CLI
-- `sac doctor` - Check Flutter environment
-- `sac install` - Add this package to your app's pubspec
-- `sac examples` - Show quick usage examples
-
-## Usage
-
-### As a Package
-
-Import the package:
+Import once:
 
 ```dart
 import 'package:swiss_army_component/swiss_army_component.dart';
 ```
 
-**Using Widgets:**
+### Buttons
 
 ```dart
-// Custom AppButton
-AppButton(
-  label: 'Click Me',
-  onPressed: () {},
-)
-
-// AppTextField
-AppTextField(
-  hintText: 'Enter text',
-  onChanged: (value) {},
-)
-
-// OTP Input
-OtpInput(
-  onComplete: (otp) {
-    print('OTP: $otp');
-  },
-)
+Column(
+  children: [
+    const AppElevatedButton(
+      title: 'Primary',
+      onPressed: doSomething,
+    ),
+    const NormalElevatedButton(
+      title: 'Filled',
+      onPressed: doSomething,
+    ),
+    const AppSecondaryElevatedButton(
+      label: 'Secondary',
+      onPressed: doSomething,
+    ),
+    const AppOutlinedButton(
+      label: 'Outline',
+      onPressed: doSomething,
+    ),
+    const ConfigElevatedButton(
+      label: 'Sized 40%',
+      width: 160,
+      onPressed: doSomething,
+    ),
+    const ConfigOutlinedButton(
+      label: 'Outlined 40%',
+      width: 160,
+      onPressed: doSomething,
+    ),
+  ],
+);
 ```
 
-**Using Utilities:**
+Key props: `bgColor/textColor`, `radius`, `width/height`, `brdColor`, `buttonHeight`.
+
+### App Bars
 
 ```dart
-// Validation
-if (Validator.validateEmail(email)) {
-  print('Valid email');
-}
+// Basic with gradient
+Scaffold(
+  appBar: const CustomAppBar(
+    title: 'Dashboard',
+    gradientColors: [Color(0xFF10BB76), Color(0xFF086D50)],
+  ),
+);
 
-// Device info
-bool isTablet = DeviceUtility.isTablet();
+// Solid background + custom back
+CustomAppBar(
+  title: 'Settings',
+  backgroundColor: Colors.indigo,
+  onBack: () => Navigator.pop(context),
+);
+
+// Transparent overlay
+const TransparentAppBar(
+  title: 'Profile',
+  foregroundColor: Colors.white,
+);
+
+// Search bar
+SearchAppBar(
+  hintText: 'Search products...',
+  onChanged: (q) => filter(q),
+  gradientColors: [Colors.teal, Colors.green],
+);
+
+// Tabbed
+TabbedAppBar(
+  title: 'Orders',
+  tabs: const [Tab(text: 'Active'), Tab(text: 'History')],
+  controller: tabController,
+);
+
+// Sliver (collapsing)
+CustomScrollView(
+  slivers: [
+    CustomSliverAppBar(
+      title: 'Profile',
+      expandedHeight: 200,
+      gradientColors: [Colors.purple, Colors.deepPurple],
+    ),
+    SliverList(...),
+  ],
+);
 ```
 
-**Using Theme:**
+Key props: `gradientColors`, `backgroundColor`, `transparent`, `actions`, `bottom`, `leading`, `onBack`, `titleWidget`, `height`, `elevation`, `shape`.
+
+### Search
 
 ```dart
-import 'package:flutter/material.dart';
-import 'package:swiss_army_component/swiss_army_component.dart';
+// size controls bottom margin if ismargin=true
+const CustomSearchBar(16);
+```
 
-// Use default theme
+### Text Widgets
+
+```dart
+const BrandNameText(title: 'Swiss Army');
+const ProductTitleText(title: 'Travel Backpack', smallSize: true);
+SmallAppText('Caption');
+MedAppText('Body');
+BigAppText('Headline');
+ImportantAppText('Required Field');
+PriceText(price: '1299.95', currency: Currency.naira, isProfit: true);
+const SlashedPriceText(price: '1599', currency: '₺');
+```
+
+### Spacing Helpers
+
+```dart
+Column(
+  children: [
+    vSpace(12),
+    hSpace(8),
+    Padding(padding: simPad(12, 16), child: const Text('Padded')),
+  ],
+);
+```
+
+### Text Fields
+
+```dart
+// Labeled input with validation
+AppTextFormField(
+  label: 'Email',
+  hint: 'you@example.com',
+  keyboardType: TextInputType.emailAddress,
+  validator: FormValidator.isValidEmail,
+  textInputAction: TextInputAction.done,
+);
+
+// Minimal input
+const NormalAppTextFormField(
+  hint: 'Username',
+  textInputAction: TextInputAction.next,
+);
+
+// Phone input
+AppPhoneTextField(
+  label: 'Phone',
+  onChanged: (number) => debugPrint(number.completeNumber),
+);
+
+// Multiline
+const AppMultiLineTextFormField(
+  label: 'Notes',
+  maxLines: 5,
+  textInputAction: TextInputAction.newline,
+);
+
+// Rounded pill input
+const AppRoundedTextFormField(
+  hint: 'Search',
+  prefixIcon: IconButton(icon: Icon(Icons.search), onPressed: null),
+);
+
+// Bio/long text
+const BioField(label: 'About you');
+```
+
+### OTP Input
+
+```dart
+OTPTextField(
+  controller: otpController,
+  onCompleted: (code) => debugPrint('OTP: $code'),
+);
+```
+
+6-digit input using `pinput`, with a disabled soft keyboard by default.
+
+### Validators
+
+```dart
+Form(
+  child: AppTextFormField(
+    label: 'Password',
+    obscureText: true,
+    validator: FormValidator.isValidPassword,
+    textInputAction: TextInputAction.done,
+  ),
+);
+```
+
+Available checks: `isValidEmail`, `isValidFullName`, `isValidName`, `isValidUsername`, `isValidPhone`, `isValidPassword`.
+
+### Logging
+
+```dart
+appLog('User logged in', {'id': userId});
+```
+
+### Theme (Light/Dark + Overrides)
+
+```dart
+// Default palettes
 MaterialApp(
   theme: SACTheme.light(),
   darkTheme: SACTheme.dark(),
-  home: const HomePage(),
 );
 
-// Customize colors (per-mode)
+// Per-mode overrides
 final config = SACThemeConfig(
-  // Shared fallbacks
-  primary: Colors.blue,
+  primary: Colors.blue, // shared fallback
   secondary: Colors.amber,
-
-  // Light-specific overrides
   primaryLight: Colors.teal,
   secondaryLight: Colors.orange,
   backgroundLight: const Color(0xFFFDFCF9),
   surfaceLight: Colors.white,
-
-  // Dark-specific overrides
   primaryDark: Colors.deepPurple,
   secondaryDark: Colors.tealAccent,
+  backgroundDark: const Color(0xFF0E1116),
+  surfaceDark: const Color(0xFF161B22),
 );
 
 MaterialApp(
   theme: SACTheme.light(config),
   darkTheme: SACTheme.dark(config),
-  home: const HomePage(),
 );
 
-// Or define your own theme class
+// Custom theme class using SACThemeBase
 class AppTheme extends SACThemeBase {
   const AppTheme();
 
   @override
   SACThemeConfig? config() => const SACThemeConfig(
-        // Different palettes per mode
         primaryLight: Colors.teal,
         secondaryLight: Colors.orange,
         primaryDark: Colors.deepPurple,
@@ -148,71 +266,46 @@ final appTheme = AppTheme();
 MaterialApp(
   theme: appTheme.light(),
   darkTheme: appTheme.dark(),
-  home: const HomePage(),
 );
 ```
+
+Mode-aware fields: `...Light` apply in light mode, `...Dark` apply in dark mode; shared fields (e.g., `primary`) are used when no mode-specific value is provided.
+
+### CLI Commands
+
+- `sac install` — Adds the package dependency to your pubspec.
+- `sac doctor` — Quick environment check.
+- `sac examples` — Prints code snippets for reference.
+
+## Exports Map
+
+Public API (from swiss_army_component.dart):
+
+- Widgets: AppElevatedButton, NormalElevatedButton, AppSecondaryElevatedButton, AppOutlinedButton, ConfigElevatedButton, ConfigOutlinedButton, CustomAppBar, CustomSearchBar, OTPTextField, text widgets (SmallAppText, MedAppText, BigAppText, PriceText, SlashedPriceText, BrandNameText, ProductTitleText, ImportantAppText), spacing helpers (vSpace, hSpace, simPad), text fields (AppTextFormField, NormalAppTextFormField, AppPhoneTextField, AppMultiLineTextFormField, AppRoundedTextFormField, BioField).
+- Theme: SACTheme, SACThemeConfig, SACThemeBase, AppChipTheme, AppColors.
+- Utilities: FormValidator, appLog.
 
 ## Project Structure
 
 ```
 lib/
 ├── widgets/                  # Reusable UI components
-├── utils/                    # Utility functions
-│   ├── constants/           # App constants (removed from exports)
-│   ├── theme/               # Theme configuration
-│   ├── validators/          # Form validators
-│   ├── devices/             # Device utilities
-│   └── logging/             # Logging utilities
+├── utils/                    # Theme + validators + logging
+│   ├── theme/                # Theme builders and config
+│   ├── validators/           # Form validators
+│   └── logging/              # Logging utility
 └── swiss_army_component.dart # Public exports
 ```
 
-## Dependencies
-
-- `flutter` - Flutter framework
-- `get` - State management and routing
-- `flutter_screenutil` - Responsive design
-- `google_fonts` - Font management
-- `pinput` - OTP input widget
-- `intl_phone_field` - Phone number input
-- `url_launcher` - URL handling
-- `intl` - Internationalization
-
-## Customization
-
-### Adding New Widgets
-
-Create new widget files in `lib/widgets/` and export them from `lib/swiss_army_component.dart` for package mode.
-
-### Customizing Theme
-
-Edit theme files in `lib/utils/theme/` to match your brand colors and styles.
-
 ## Publishing to pub.dev
 
-To publish this package to pub.dev:
-
-1. Update the version in `pubspec.yaml`
-2. Update `CHANGELOG.md` with new changes
-3. Run:
-
-```bash
-flutter pub publish
-```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Authors
-
-- [abetoluwani](https://github.com/abetoluwani)
+1. Bump version in `pubspec.yaml`.
+2. Update `CHANGELOG.md`.
+3. Run `flutter pub publish`.
 
 ## Support
 
 For issues, feature requests, or questions:
+
 - Open an issue on [GitHub Issues](https://github.com/abetoluwani/MY-FLUTTER-COMPONENTS/issues)
-- Check existing issues for similar problems
+- Check existing issues before filing new ones
