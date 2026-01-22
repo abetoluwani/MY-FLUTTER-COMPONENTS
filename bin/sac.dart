@@ -151,7 +151,7 @@ Future<void> _install({required String path, required bool useGit}) async {
       ['dependencies', 'swiss_army_component'],
       {
         'git': {
-          'url': 'https://github.com/abetoluwani/MY-FLUTTER-COMPONENTS.git',
+          'url': 'https://github.com/Mensa-Philosophical-Circle/Swiss-Army.git',
           'ref': 'main',
         },
       },

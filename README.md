@@ -315,5 +315,5 @@ lib/
 
 For issues, feature requests, or questions:
 
-- Open an issue on [GitHub Issues](https://github.com/abetoluwani/MY-FLUTTER-COMPONENTS/issues)
+- Open an issue on [GitHub Issues](https://github.com/Mensa-Philosophical-Circle/Swiss-Army/issues)
 - Check existing issues before filing new ones
