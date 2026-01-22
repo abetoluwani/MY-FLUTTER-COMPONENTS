@@ -92,4 +92,100 @@ class FormValidator {
 
     return null;
   }
+
+  // ============== OTP Validation ==============
+
+  /// Validates if the input is a valid numeric OTP of specified length
+  static String? isValidOTP(String? otp, {int length = 6}) {
+    if (otp == null || otp.isEmpty) {
+      return 'Please enter the verification code.';
+    }
+
+    if (otp.length != length) {
+      return 'Code must be $length digits.';
+    }
+
+    final numericRegExp = RegExp(r'^\d+$');
+    if (!numericRegExp.hasMatch(otp)) {
+      return 'Code must contain only numbers.';
+    }
+
+    return null;
+  }
+
+  /// Validates if the input is a valid alphanumeric OTP of specified length
+  static String? isValidAlphanumericOTP(String? otp, {int length = 6}) {
+    if (otp == null || otp.isEmpty) {
+      return 'Please enter the verification code.';
+    }
+
+    if (otp.length != length) {
+      return 'Code must be $length characters.';
+    }
+
+    final alphanumericRegExp = RegExp(r'^[A-Za-z0-9]+$');
+    if (!alphanumericRegExp.hasMatch(otp)) {
+      return 'Code must contain only letters and numbers.';
+    }
+
+    return null;
+  }
+
+  /// Validates PIN (typically 4-6 digits)
+  static String? isValidPIN(String? pin, {int length = 4}) {
+    if (pin == null || pin.isEmpty) {
+      return 'Please enter your PIN.';
+    }
+
+    if (pin.length != length) {
+      return 'PIN must be $length digits.';
+    }
+
+    final numericRegExp = RegExp(r'^\d+$');
+    if (!numericRegExp.hasMatch(pin)) {
+      return 'PIN must contain only numbers.';
+    }
+
+    return null;
+  }
+}
+
+/// Extension for easy OTP validation on String
+extension OTPValidation on String {
+  bool isValidOTP([int length = 6]) {
+    return this.length == length && RegExp(r'^\d+$').hasMatch(this);
+  }
+  bool isValidAlphanumericOTP([int length = 6]) {
+    return this.length == length && RegExp(r'^[A-Za-z0-9]+$').hasMatch(this);
+  }
+  bool isValidPIN([int length = 4]) {
+    return this.length == length && RegExp(r'^\d+$').hasMatch(this);
+  }
+  bool get isNumeric => RegExp(r'^\d+$').hasMatch(this);
+  bool get isAlphanumeric => RegExp(r'^[A-Za-z0-9]+$').hasMatch(this);
+}
+
+/// Extension for sanitizing user input
+extension InputSanitizer on String {
+  String get digitsOnly => replaceAll(RegExp(r'[^\d]'), '');
+
+  String get alphanumericOnly => replaceAll(RegExp(r'[^a-zA-Z0-9]'), '');
+
+  String get lettersOnly => replaceAll(RegExp(r'[^a-zA-Z]'), '');
+
+  String get normalizeWhitespace => trim().replaceAll(RegExp(r'\s+'), ' ');
+
+  String get removeWhitespace => replaceAll(RegExp(r'\s'), '');
+
+  String sanitizeOTP({bool numericOnly = true}) {
+    if (numericOnly) {
+      return digitsOnly;
+    }
+    return alphanumericOnly;
+  }
+
+  String get sanitizePhone => replaceAll(RegExp(r'[^\d+]'), '');
+  String get sanitizeEmail => trim().toLowerCase();
+  String get sanitizeUsername =>
+      toLowerCase().replaceAll(RegExp(r'[^a-z0-9_]'), '');
 }

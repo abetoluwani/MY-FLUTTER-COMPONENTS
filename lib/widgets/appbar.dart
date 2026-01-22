@@ -4,6 +4,13 @@ import 'package:get/get.dart';
 
 import '../utils/utils.dart';
 
+/// A secure, customizable AppBar with input validation and safe callbacks.
+///
+/// Security Features:
+/// - Input validation for sizes, heights, and font sizes
+/// - Safe callback execution with error handling
+/// - Text sanitization to prevent overflow
+/// - Accessibility support with semantic labels
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final Widget? titleWidget;
@@ -49,6 +56,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconThemeData? iconTheme;
   final IconThemeData? actionsIconTheme;
   final TextStyle? toolbarTextStyle;
+  final String? semanticLabel;
+  final bool? enableSecurity;
 
   const CustomAppBar({
     super.key,
@@ -96,13 +105,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.iconTheme,
     this.actionsIconTheme,
     this.toolbarTextStyle,
+    this.semanticLabel,
+    this.enableSecurity,
   });
 
   @override
-  Size get preferredSize =>
-      Size.fromHeight(height + (bottom?.preferredSize.height ?? 0));
+  Size get preferredSize => Size.fromHeight(
+    validateAppBarHeight(
+          height,
+          defaultValue: 60.0,
+          enableSecurity: enableSecurity,
+        ) +
+        (bottom?.preferredSize.height ?? 0),
+  );
 
-  /// Resolve the leading widget.
   Widget? _buildLeading(BuildContext context) {
     if (leading != null) return leading;
     if (!showBackButton) return const SizedBox.shrink();
@@ -110,15 +126,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return IconButton(
       icon: Icon(
         backIcon,
-        size: backIconSize,
+        size: validateIconSize(
+          backIconSize,
+          defaultValue: 24,
+          enableSecurity: enableSecurity,
+        ),
         color: backIconColor ?? foregroundColor ?? Colors.white,
       ),
-      onPressed: onBack ?? () => Get.back(),
+      onPressed: () => safeAppBarCallback(
+        onBack ?? () => Get.back(),
+        context: 'back button',
+      ),
       tooltip: MaterialLocalizations.of(context).backButtonTooltip,
     );
   }
 
-  /// Build flexible space with gradient or solid color.
   Widget? _buildFlexibleSpace() {
     if (flexibleSpace != null) return flexibleSpace;
     if (transparent) return null;
@@ -127,11 +149,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       return Container(decoration: flexibleSpaceDecoration);
     }
 
-    if (gradientColors != null && gradientColors!.isNotEmpty) {
+    final validGradient = validateGradientColors(
+      gradientColors,
+      enableSecurity: enableSecurity,
+    );
+    if (validGradient != null) {
       return Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: gradientColors!,
+            colors: validGradient,
             begin: gradientBegin,
             end: gradientEnd,
             stops: gradientStops,
@@ -140,11 +166,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
-    // Solid color handled by AppBar's backgroundColor.
     return null;
   }
 
-  /// Build title widget.
   Widget _buildTitle() {
     if (titleWidget != null) return titleWidget!;
 
@@ -152,12 +176,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         titleTextStyle ??
         TextStyle(
           color: titleColor ?? Colors.white,
-          fontSize: titleFontSize,
+          fontSize: validateTitleFontSize(
+            titleFontSize,
+            defaultValue: 20.0,
+            enableSecurity: enableSecurity,
+          ),
           fontWeight: titleFontWeight,
         );
 
     return Text(
-      title ?? '',
+      sanitizeTitleText(title, enableSecurity: enableSecurity),
       style: style,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
@@ -170,17 +198,32 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ? Colors.transparent
         : (gradientColors != null ? Colors.transparent : backgroundColor);
 
-    return AppBar(
+    final validActions = validateActions(
+      actions,
+      enableSecurity: enableSecurity,
+    );
+    final safeHeight = validateAppBarHeight(
+      height,
+      defaultValue: 60.0,
+      enableSecurity: enableSecurity,
+    );
+    final safeElevation = validateAppBarElevation(
+      elevation,
+      defaultValue: 0,
+      enableSecurity: enableSecurity,
+    );
+
+    final appBar = AppBar(
       leading: _buildLeading(context),
       leadingWidth: leadingWidth,
       automaticallyImplyLeading:
           automaticallyImplyLeading ?? (leading == null && showBackButton),
       title: _buildTitle(),
       centerTitle: centerTitle,
-      actions: actions,
+      actions: validActions,
       flexibleSpace: _buildFlexibleSpace(),
       bottom: bottom,
-      elevation: elevation,
+      elevation: safeElevation,
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor ?? Colors.transparent,
       backgroundColor: resolvedBg,
@@ -191,18 +234,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       excludeHeaderSemantics: excludeHeaderSemantics,
       titleTextStyle: titleTextStyle,
       toolbarTextStyle: toolbarTextStyle,
-      systemOverlayStyle: systemOverlayStyle,
+      systemOverlayStyle: validateSystemOverlayStyle(systemOverlayStyle),
       forceMaterialTransparency: forceMaterialTransparency,
       clipBehavior: clipBehavior,
-      toolbarHeight: toolbarHeight ?? height,
-      toolbarOpacity: toolbarOpacity,
-      bottomOpacity: bottomOpacity,
+      toolbarHeight: toolbarHeight ?? safeHeight,
+      toolbarOpacity: toolbarOpacity.clamp(0.0, 1.0),
+      bottomOpacity: bottomOpacity.clamp(0.0, 1.0),
       shape: shape,
     );
+
+    if (semanticLabel != null) {
+      return Semantics(label: semanticLabel, header: true, child: appBar);
+    }
+
+    return appBar;
   }
 }
 
-/// A sliver version of [CustomAppBar] for use in CustomScrollView.
+/// A secure sliver version of [CustomAppBar] for use in CustomScrollView.
 class CustomSliverAppBar extends StatelessWidget {
   final String? title;
   final Widget? titleWidget;
@@ -233,6 +282,8 @@ class CustomSliverAppBar extends StatelessWidget {
   final Color? titleColor;
   final double titleFontSize;
   final FontWeight titleFontWeight;
+  final String? semanticLabel;
+  final bool? enableSecurity;
 
   const CustomSliverAppBar({
     super.key,
@@ -265,6 +316,8 @@ class CustomSliverAppBar extends StatelessWidget {
     this.titleColor,
     this.titleFontSize = 20.0,
     this.titleFontWeight = FontWeight.bold,
+    this.semanticLabel,
+    this.enableSecurity,
   });
 
   Widget? _buildLeading(BuildContext context) {
@@ -276,32 +329,42 @@ class CustomSliverAppBar extends StatelessWidget {
         backIcon,
         color: backIconColor ?? foregroundColor ?? Colors.white,
       ),
-      onPressed: onBack ?? () => Get.back(),
+      onPressed: () => safeAppBarCallback(
+        onBack ?? () => Get.back(),
+        context: 'CustomSliverAppBar.back',
+      ),
     );
   }
 
   Widget _buildFlexibleSpace() {
     if (flexibleSpace != null) return flexibleSpace!;
 
-    final hasGradient = gradientColors != null && gradientColors!.isNotEmpty;
+    final validGradient = validateGradientColors(
+      gradientColors,
+      enableSecurity: enableSecurity,
+    );
 
     return FlexibleSpaceBar(
       centerTitle: centerTitle,
       title:
           titleWidget ??
           Text(
-            title ?? '',
+            sanitizeTitleText(title, enableSecurity: enableSecurity),
             style: TextStyle(
               color: titleColor ?? Colors.white,
-              fontSize: titleFontSize,
+              fontSize: validateTitleFontSize(
+                titleFontSize,
+                defaultValue: 20.0,
+                enableSecurity: enableSecurity,
+              ),
               fontWeight: titleFontWeight,
             ),
           ),
-      background: hasGradient
+      background: validGradient != null
           ? Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: gradientColors!,
+                  colors: validGradient,
                   begin: gradientBegin,
                   end: gradientEnd,
                 ),
@@ -313,20 +376,32 @@ class CustomSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
+    final sliverAppBar = SliverAppBar(
       leading: _buildLeading(context),
-      actions: actions,
-      expandedHeight: expandedHeight,
-      collapsedHeight: collapsedHeight,
+      actions: validateActions(actions, enableSecurity: enableSecurity),
+      expandedHeight: validateAppBarHeight(
+        expandedHeight,
+        defaultValue: 200.0,
+        enableSecurity: enableSecurity,
+      ),
+      collapsedHeight: validateAppBarHeight(
+        collapsedHeight,
+        defaultValue: 60.0,
+        enableSecurity: enableSecurity,
+      ),
       pinned: pinned,
       floating: floating,
       snap: snap,
       stretch: stretch,
-      stretchTriggerOffset: stretchTriggerOffset,
+      stretchTriggerOffset: stretchTriggerOffset.clamp(0, 500),
       onStretchTrigger: onStretchTrigger != null
-          ? () async => onStretchTrigger!()
+          ? () async => safeAppBarCallback(onStretchTrigger, context: 'stretch')
           : null,
-      elevation: elevation,
+      elevation: validateAppBarElevation(
+        elevation,
+        defaultValue: 0,
+        enableSecurity: enableSecurity,
+      ),
       backgroundColor: gradientColors != null
           ? Colors.transparent
           : backgroundColor,
@@ -337,6 +412,12 @@ class CustomSliverAppBar extends StatelessWidget {
       centerTitle: centerTitle,
       surfaceTintColor: Colors.transparent,
     );
+
+    if (semanticLabel != null) {
+      return Semantics(label: semanticLabel, header: true, child: sliverAppBar);
+    }
+
+    return sliverAppBar;
   }
 }
 
@@ -356,10 +437,12 @@ class TransparentAppBar extends CustomAppBar {
     super.titleColor = Colors.white,
     super.elevation = 0,
     super.systemOverlayStyle = SystemUiOverlayStyle.light,
+    super.semanticLabel,
+    super.enableSecurity,
   }) : super(transparent: true);
 }
 
-/// AppBar with a search field built-in.
+/// Secure SearchAppBar with input validation and safe callbacks.
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? hintText;
   final TextEditingController? controller;
@@ -380,6 +463,9 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showBackButton;
   final IconData backIcon;
   final bool showClearButton;
+  final int maxSearchLength;
+  final String? semanticLabel;
+  final bool? enableSecurity;
 
   const SearchAppBar({
     super.key,
@@ -402,10 +488,39 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showBackButton = true,
     this.backIcon = Icons.arrow_back_ios,
     this.showClearButton = true,
+    this.maxSearchLength = 200,
+    this.semanticLabel,
+    this.enableSecurity,
   });
 
   @override
-  Size get preferredSize => Size.fromHeight(height);
+  Size get preferredSize => Size.fromHeight(
+    validateAppBarHeight(
+      height,
+      defaultValue: 60.0,
+      enableSecurity: enableSecurity,
+    ),
+  );
+
+  void _handleChange(String value) {
+    if (onChanged == null) return;
+    final sanitized = value.length > maxSearchLength
+        ? value.substring(0, maxSearchLength)
+        : value;
+    safeValueChanged(onChanged, sanitized, context: 'SearchAppBar.onChanged');
+  }
+
+  void _handleSubmit(String value) {
+    if (onSubmitted == null) return;
+    final sanitized = value.length > maxSearchLength
+        ? value.substring(0, maxSearchLength)
+        : value;
+    safeValueChanged(
+      onSubmitted,
+      sanitized,
+      context: 'SearchAppBar.onSubmitted',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -414,11 +529,15 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     final effectiveHintColor = hintColor ?? Colors.white70;
 
     Widget? flexibleSpace;
-    if (gradientColors != null && gradientColors!.isNotEmpty) {
+    final validGradient = validateGradientColors(
+      gradientColors,
+      enableSecurity: enableSecurity,
+    );
+    if (validGradient != null) {
       flexibleSpace = Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: gradientColors!,
+            colors: validGradient,
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -426,7 +545,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
-    return AppBar(
+    final appBar = AppBar(
       backgroundColor: gradientColors != null
           ? Colors.transparent
           : backgroundColor,
@@ -436,20 +555,34 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: showBackButton
           ? IconButton(
               icon: Icon(backIcon, color: effectiveIconColor),
-              onPressed: onBack ?? () => Get.back(),
+              onPressed: () => safeAppBarCallback(
+                onBack ?? () => Get.back(),
+                context: 'SearchAppBar.back',
+              ),
             )
           : null,
       title: TextField(
         controller: controller,
         autofocus: autofocus,
-        onChanged: onChanged,
-        onSubmitted: onSubmitted,
+        onChanged: _handleChange,
+        onSubmitted: _handleSubmit,
+        maxLength: maxSearchLength,
+        buildCounter:
+            (
+              context, {
+              required currentLength,
+              required isFocused,
+              required maxLength,
+            }) => null,
         style: textStyle ?? TextStyle(color: effectiveTextColor),
         cursorColor: effectiveTextColor,
         decoration:
             inputDecoration ??
             InputDecoration(
-              hintText: hintText,
+              hintText: sanitizeHintText(
+                hintText,
+                enableSecurity: enableSecurity,
+              ),
               hintStyle: TextStyle(color: effectiveHintColor),
               border: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -462,16 +595,22 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
             icon: Icon(Icons.close, color: effectiveIconColor),
             onPressed: () {
               controller?.clear();
-              onClear?.call();
+              safeAppBarCallback(onClear, context: 'SearchAppBar.clear');
             },
           ),
-        ...?actions,
+        ...?validateActions(actions, enableSecurity: enableSecurity),
       ],
     );
+
+    if (semanticLabel != null) {
+      return Semantics(label: semanticLabel, textField: true, child: appBar);
+    }
+
+    return appBar;
   }
 }
 
-/// AppBar with tabs built-in.
+/// Secure TabbedAppBar with input validation and safe callbacks.
 class TabbedAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final Widget? titleWidget;
@@ -492,6 +631,8 @@ class TabbedAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TabBarIndicatorSize indicatorSize;
   final EdgeInsetsGeometry? indicatorPadding;
   final Decoration? indicator;
+  final String? semanticLabel;
+  final bool? enableSecurity;
 
   const TabbedAppBar({
     super.key,
@@ -514,19 +655,36 @@ class TabbedAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.indicatorSize = TabBarIndicatorSize.label,
     this.indicatorPadding,
     this.indicator,
+    this.semanticLabel,
+    this.enableSecurity,
   });
 
   @override
-  Size get preferredSize => Size.fromHeight(height + tabBarHeight);
+  Size get preferredSize => Size.fromHeight(
+    validateAppBarHeight(
+          height,
+          defaultValue: 60.0,
+          enableSecurity: enableSecurity,
+        ) +
+        validateAppBarHeight(
+          tabBarHeight,
+          defaultValue: 48.0,
+          enableSecurity: enableSecurity,
+        ),
+  );
 
   @override
   Widget build(BuildContext context) {
     Widget? flexibleSpace;
-    if (gradientColors != null && gradientColors!.isNotEmpty) {
+    final validGradient = validateGradientColors(
+      gradientColors,
+      enableSecurity: enableSecurity,
+    );
+    if (validGradient != null) {
       flexibleSpace = Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: gradientColors!,
+            colors: validGradient,
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -534,7 +692,9 @@ class TabbedAppBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
-    return AppBar(
+    final validTabs = validateTabs(tabs, enableSecurity: enableSecurity);
+
+    final appBar = AppBar(
       backgroundColor: gradientColors != null
           ? Colors.transparent
           : backgroundColor,
@@ -546,25 +706,32 @@ class TabbedAppBar extends StatelessWidget implements PreferredSizeWidget {
           (showBackButton
               ? IconButton(
                   icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-                  onPressed: onBack ?? () => Get.back(),
+                  onPressed: () => safeAppBarCallback(
+                    onBack ?? () => Get.back(),
+                    context: 'TabbedAppBar.back',
+                  ),
                 )
               : null),
       title:
           titleWidget ??
           (title != null
               ? Text(
-                  title!,
-                  style: const TextStyle(
+                  sanitizeTitleText(title, enableSecurity: enableSecurity),
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: validateTitleFontSize(
+                      20,
+                      defaultValue: 20,
+                      enableSecurity: enableSecurity,
+                    ),
                     fontWeight: FontWeight.bold,
                   ),
                 )
               : null),
-      actions: actions,
+      actions: validateActions(actions, enableSecurity: enableSecurity),
       bottom: TabBar(
         controller: controller,
-        tabs: tabs,
+        tabs: validTabs,
         isScrollable: isScrollable,
         indicatorColor: indicatorColor ?? Colors.white,
         labelColor: labelColor ?? Colors.white,
@@ -574,5 +741,11 @@ class TabbedAppBar extends StatelessWidget implements PreferredSizeWidget {
         indicator: indicator,
       ),
     );
+
+    if (semanticLabel != null) {
+      return Semantics(label: semanticLabel, header: true, child: appBar);
+    }
+
+    return appBar;
   }
 }
