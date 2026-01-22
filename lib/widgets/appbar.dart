@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../utils/utils.dart';
+import 'widget.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool isCartandNot;
 
-  CustomAppBar({required this.title, Key? key, this.isCartandNot = true})
-      : super(key: key);
+  const CustomAppBar({
+    required this.title,
+    super.key,
+    this.isCartandNot = true,
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(60.0);
@@ -25,27 +31,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         fontWeight: FontWeight.bold,
         maxLines: 1,
       ),
-      actions: [
-        isCartandNot
-            ? NotificationIcon(
-                showcontainer: true,
-                iconColor: AppColors.white,
-                onPressed: () => Get.toNamed(Routes.NOTIFICATIONS))
-            : const SizedBox(),
-        isCartandNot
-            ? IconButton(
-                icon: const Icon(Icons.shopping_cart_outlined),
-                onPressed: () {
-                  Get.toNamed(Routes.CART);
-                },
-                color: Colors.white,
-              )
-            : IconButton(
-                icon: const Icon(Icons.more_vert_outlined),
-                onPressed: () {},
-                color: Colors.white,
-              ),
-      ],
       flexibleSpace: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(

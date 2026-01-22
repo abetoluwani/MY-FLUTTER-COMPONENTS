@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../utils/utils.dart';
 import 'widget.dart';
 
@@ -31,7 +32,8 @@ class AppElevatedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.r),
         ),
       ),
-      child: child ??
+      child:
+          child ??
           SmallAppText(
             title ?? "",
             color: textColor ?? AppColors.white,
@@ -42,9 +44,7 @@ class AppElevatedButton extends StatelessWidget {
   }
 }
 
-
-
- class NormalElevatedButton extends StatelessWidget {
+class NormalElevatedButton extends StatelessWidget {
   const NormalElevatedButton({
     super.key,
     required this.title,
@@ -62,26 +62,27 @@ class AppElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          minimumSize: Size(double.infinity, 50.h),
-          padding: padding ??
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          backgroundColor: color ?? AppColors.primaryDark,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radius ?? 10.r),
-          ),
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(double.infinity, 50.h),
+        padding:
+            padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        backgroundColor: color ?? AppColors.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radius ?? 10.r),
         ),
-        onPressed: onPressed,
-        child: SmallAppText(
-          title,
-          color: txtcolor ?? AppColors.white,
-        ));
+      ),
+      onPressed: onPressed,
+      child: SmallAppText(title, color: txtcolor ?? AppColors.white),
+    );
   }
 }
 
 class AppSecondaryElevatedButton extends StatelessWidget {
-  const AppSecondaryElevatedButton(
-      {super.key, required this.label, this.onPressed});
+  const AppSecondaryElevatedButton({
+    super.key,
+    required this.label,
+    this.onPressed,
+  });
   final String label;
   final void Function()? onPressed;
 
@@ -91,18 +92,16 @@ class AppSecondaryElevatedButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.white,
-            padding: simPad(0, 14),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            elevation: 0,
-            disabledBackgroundColor: AppColors.white),
-        onPressed: onPressed,
-        child: SmallAppText(
-          label,
-          color: AppColors.primary,
+          backgroundColor: AppColors.white,
+          padding: simPad(0, 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          elevation: 0,
+          disabledBackgroundColor: AppColors.white,
         ),
+        onPressed: onPressed,
+        child: SmallAppText(label, color: AppColors.primary),
       ),
     );
   }
@@ -149,7 +148,8 @@ class AppOutlinedButton extends StatelessWidget {
           elevation: 0,
         ),
         onPressed: onPressed ?? () {},
-        child: child ??
+        child:
+            child ??
             SmallAppText(
               label ?? '',
               color: textcolour ?? AppColors.primary,
@@ -179,23 +179,22 @@ class ConfigElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: width ?? AppHelpers.screenWidth() * 0.40,
+      width: width ?? screenWidth * 0.40,
       height: height ?? 50.h,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: bgcolour ?? AppColors.primary,
-            padding: simPad(0, 14),
-            shape: RoundedRectangleBorder(
-              borderRadius: radius ?? BorderRadius.circular(10.0),
-            ),
-            elevation: 0,
-            disabledBackgroundColor: AppColors.primary),
-        onPressed: onPressed ?? () {},
-        child: SmallAppText(
-          label,
-          color: textcolour ?? AppColors.white,
+          backgroundColor: bgcolour ?? AppColors.primary,
+          padding: simPad(0, 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: radius ?? BorderRadius.circular(10.0),
+          ),
+          elevation: 0,
+          disabledBackgroundColor: AppColors.primary,
         ),
+        onPressed: onPressed ?? () {},
+        child: SmallAppText(label, color: textcolour ?? AppColors.white),
       ),
     );
   }
@@ -219,24 +218,23 @@ class ConfigOutlinedButton extends StatelessWidget {
   final Color? textcolour, bgColour;
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: width ?? AppHelpers.screenWidth() * 0.40,
+      width: width ?? screenWidth * 0.40,
       height: height ?? 50.h,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: bgColour ?? AppColors.white,
-            padding: simPad(0, 14),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              side: BorderSide(color: brdcolour ?? AppColors.grey200),
-            ),
-            elevation: 0,
-            disabledBackgroundColor: AppColors.white),
-        onPressed: onPressed ?? () {},
-        child: SmallAppText(
-          label,
-          color: textcolour ?? AppColors.black,
+          backgroundColor: bgColour ?? AppColors.white,
+          padding: simPad(0, 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            side: BorderSide(color: brdcolour ?? AppColors.grey200),
+          ),
+          elevation: 0,
+          disabledBackgroundColor: AppColors.white,
         ),
+        onPressed: onPressed ?? () {},
+        child: SmallAppText(label, color: textcolour ?? AppColors.black),
       ),
     );
   }

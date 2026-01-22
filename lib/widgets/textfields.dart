@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import '../utils/utils.dart';
 import 'apptext.dart';
 import 'space.dart';
 
 class AppTextFormField extends StatelessWidget {
-  const AppTextFormField(
-      {super.key,
-      this.obscureText = false,
-      this.controller,
-      this.hint,
-      this.label,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.keyboardType,
-      this.validator,
-      this.onSaved,
-      this.color,
-      this.bordercolor,
-      required TextInputAction textInputAction,
-      this.fontsize});
+  const AppTextFormField({
+    super.key,
+    this.obscureText = false,
+    this.controller,
+    this.hint,
+    this.label,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.keyboardType,
+    this.validator,
+    this.onSaved,
+    this.color,
+    this.bordercolor,
+    required TextInputAction textInputAction,
+    this.fontsize,
+  });
 
   final bool obscureText;
   final TextEditingController? controller;
@@ -57,32 +59,40 @@ class AppTextFormField extends StatelessWidget {
           onSaved: onSaved as void Function(String?)?,
 
           decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: bordercolor ?? AppColors.green, width: 1.5),
-                borderRadius: BorderRadius.circular(12),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: bordercolor ?? AppColors.green,
+                width: 1.5,
               ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: bordercolor ?? AppColors.grey100, width: 1.5),
-                borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: bordercolor ?? AppColors.grey100,
+                width: 1.5,
               ),
-              border: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: AppColors.grey), // Grey border
-                borderRadius: BorderRadius.circular(12),
-              ),
-              prefixIcon: prefixIcon,
-              suffixIcon: suffixIcon,
-              hintText: hint,
-              fillColor: color ?? AppColors.white,
-              filled: true,
-              labelStyle: const TextStyle(
-                  color: AppColors.grey200), // Customize label text color
-              hintStyle: const TextStyle(color: AppColors.grey100)),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: AppColors.grey,
+              ), // Grey border
+              borderRadius: BorderRadius.circular(12),
+            ),
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
+            hintText: hint,
+            fillColor: color ?? AppColors.white,
+            filled: true,
+            labelStyle: const TextStyle(
+              color: AppColors.grey200,
+            ), // Customize label text color
+            hintStyle: const TextStyle(color: AppColors.grey100),
+          ),
           style: TextStyle(
-              color: AppColors.black,
-              fontSize: fontsize ?? 14.sp), // Customize text color
+            color: AppColors.black,
+            fontSize: fontsize ?? 14.sp,
+          ), // Customize text color
           cursorColor: AppColors.primary, // Customize cursor color
           validator:
               validator, // Use the provided validator function, or it will be null by default
@@ -93,18 +103,19 @@ class AppTextFormField extends StatelessWidget {
 }
 
 class NormalAppTextFormField extends StatelessWidget {
-  const NormalAppTextFormField(
-      {super.key,
-      this.obscureText = false,
-      this.controller,
-      this.hint,
-      this.label,
-      this.keyboardType,
-      this.fontsize,
-      this.validator,
-      this.onSaved,
-      this.color,
-      this.bordercolor});
+  const NormalAppTextFormField({
+    super.key,
+    this.obscureText = false,
+    this.controller,
+    this.hint,
+    this.label,
+    this.keyboardType,
+    this.fontsize,
+    this.validator,
+    this.onSaved,
+    this.color,
+    this.bordercolor,
+  });
 
   final bool obscureText;
   final TextEditingController? controller;
@@ -138,31 +149,39 @@ class NormalAppTextFormField extends StatelessWidget {
           keyboardType: keyboardType,
           onSaved: onSaved as void Function(String?)?,
           decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: bordercolor ?? AppColors.green, width: 1.5),
-                borderRadius: BorderRadius.circular(12),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: bordercolor ?? AppColors.green,
+                width: 1.5,
               ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: bordercolor ?? AppColors.grey100, width: 1.5),
-                borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: bordercolor ?? AppColors.grey100,
+                width: 1.5,
               ),
-              border: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: AppColors.grey), // Grey border
+              borderRadius: BorderRadius.circular(12),
+            ),
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: AppColors.grey,
+              ), // Grey border
 
-                borderRadius: BorderRadius.circular(12),
-              ),
-              hintText: hint,
-              fillColor: color ?? AppColors.white,
-              filled: true,
-              labelStyle: const TextStyle(
-                  color: AppColors.grey200), // Customize label text color
-              hintStyle: const TextStyle(color: AppColors.grey100)),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            hintText: hint,
+            fillColor: color ?? AppColors.white,
+            filled: true,
+            labelStyle: const TextStyle(
+              color: AppColors.grey200,
+            ), // Customize label text color
+            hintStyle: const TextStyle(color: AppColors.grey100),
+          ),
           style: TextStyle(
-              color: AppColors.black,
-              fontSize: fontsize ?? 14.sp), // Customize text color
+            color: AppColors.black,
+            fontSize: fontsize ?? 14.sp,
+          ), // Customize text color
           cursorColor: AppColors.primary, // Customize cursor color
           validator:
               validator, // Use the provided validator function, or it will be null by default
@@ -201,24 +220,26 @@ class AppPhoneTextField extends StatelessWidget {
         ),
         vSpace(10),
         IntlPhoneField(
-          onChanged: onChanged ??
-              (value) => print(value.countryCode + '' + value.number),
+          onChanged:
+              onChanged ?? (value) => ('${value.countryCode}${value.number}'),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           obscureText: obscureText,
           controller: controller,
           decoration: InputDecoration(
-              // labelText: 'Phone Number',
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.grey100),
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.green, width: 1.5),
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-              ),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.grey100, width: 1.5),
-                  borderRadius: BorderRadius.all(Radius.circular(12)))),
+            // labelText: 'Phone Number',
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.grey100),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.green, width: 1.5),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.grey100, width: 1.5),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
+          ),
           cursorColor: AppColors.green,
           keyboardType: TextInputType.phone,
           initialCountryCode: 'NG',
@@ -228,6 +249,7 @@ class AppPhoneTextField extends StatelessWidget {
     );
   }
 }
+
 class AppMultiLineTextFormField extends StatelessWidget {
   const AppMultiLineTextFormField({
     super.key,
@@ -276,13 +298,15 @@ class AppMultiLineTextFormField extends StatelessWidget {
           maxLines: maxLines,
           decoration: InputDecoration(
             border: OutlineInputBorder(
-              borderSide:
-                  const BorderSide(color: AppColors.grey200), // Grey border
+              borderSide: const BorderSide(
+                color: AppColors.grey200,
+              ), // Grey border
               borderRadius: BorderRadius.circular(10),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide:
-                  const BorderSide(color: AppColors.primary), // Grey border
+              borderSide: const BorderSide(
+                color: AppColors.primary,
+              ), // Grey border
               borderRadius: BorderRadius.circular(10),
             ),
             prefixIcon: prefixIcon,
@@ -290,10 +314,12 @@ class AppMultiLineTextFormField extends StatelessWidget {
             hintText: hint,
             hintStyle: TextStyle(color: AppColors.grey200, fontSize: 12.sp),
             labelStyle: const TextStyle(
-                color: AppColors.black), // Customize label text color
+              color: AppColors.black,
+            ), // Customize label text color
           ),
-          style:
-              const TextStyle(color: AppColors.black), // Customize text color
+          style: const TextStyle(
+            color: AppColors.black,
+          ), // Customize text color
           cursorColor: AppColors.primary, // Customize cursor color
           validator:
               validator, // Use the provided validator function, or it will be null by default
@@ -367,7 +393,8 @@ class AppRoundedTextFormField extends StatelessWidget {
           hintText: hint,
           hintStyle: TextStyle(color: AppColors.grey200, fontSize: 12.sp),
           labelStyle: const TextStyle(
-              color: AppColors.black), // Customize label text color
+            color: AppColors.black,
+          ), // Customize label text color
         ),
         style: const TextStyle(color: AppColors.black), // Customize text color
         cursorColor: AppColors.primary, // Customize cursor color
@@ -378,7 +405,6 @@ class AppRoundedTextFormField extends StatelessWidget {
     );
   }
 }
-
 
 class BioField extends StatelessWidget {
   const BioField({
@@ -410,28 +436,35 @@ class BioField extends StatelessWidget {
         vSpace(10),
         TextField(
           decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: bordercolor ?? AppColors.primary, width: 1.5),
-                borderRadius: BorderRadius.circular(12),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: bordercolor ?? AppColors.primary,
+                width: 1.5,
               ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: bordercolor ?? AppColors.grey100, width: 1.5),
-                borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: bordercolor ?? AppColors.grey100,
+                width: 1.5,
               ),
-              border: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: AppColors.grey), // Grey border
-                borderRadius: BorderRadius.circular(12),
-              ),
-              hintText: hint ?? "Send us a message",
-              fillColor: AppColors.white,
-              filled: true,
-              // Use the provided validator function, or it
-              labelStyle: const TextStyle(
-                  color: AppColors.grey200), // Customize label text color
-              hintStyle: const TextStyle(color: AppColors.grey100)),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: AppColors.grey,
+              ), // Grey border
+              borderRadius: BorderRadius.circular(12),
+            ),
+            hintText: hint ?? "Send us a message",
+            fillColor: AppColors.white,
+            filled: true,
+            // Use the provided validator function, or it
+            labelStyle: const TextStyle(
+              color: AppColors.grey200,
+            ), // Customize label text color
+            hintStyle: const TextStyle(color: AppColors.grey100),
+          ),
           cursorColor: AppColors.primary,
           minLines: 3, // Set this
           maxLines: 10, // and this

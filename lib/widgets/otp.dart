@@ -18,7 +18,10 @@ class OTPTextField extends StatelessWidget {
       width: 56,
       height: 56,
       textStyle: TextStyle(
-          fontSize: 20, color: AppColors.primary, fontWeight: FontWeight.w600),
+        fontSize: 20,
+        color: AppColors.primary,
+        fontWeight: FontWeight.w600,
+      ),
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.grey),
         borderRadius: BorderRadius.circular(15),
@@ -63,7 +66,7 @@ class OTPTextField extends StatelessWidget {
       defaultPinTheme: defaultPinTheme,
       showCursor: true,
       keyboardType: TextInputType.none,
-      // cursor: cursor,
+      cursor: cursor,
       // preFilledWidget: preFilledWidget,
     );
   }

@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../utils/theme/colours.dart';
+
+import '../utils/utils.dart';
 
 class SmallAppText extends StatelessWidget {
   SmallAppText(
@@ -61,7 +62,8 @@ class MedAppText extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       maxLines: maxLines ?? 99999,
       textAlign: alignment,
-      style: textStyle ??
+      style:
+          textStyle ??
           GoogleFonts.poppins(
             color: color ?? AppColors.black,
             fontSize: fontSize ?? 16.sp,
@@ -103,10 +105,7 @@ class BigAppText extends StatelessWidget {
   }
 }
 
-enum Currency {
-  naira,
-  tl,
-}
+enum Currency { naira, tl }
 
 class PriceText extends StatelessWidget {
   final String price;
@@ -156,8 +155,10 @@ class PriceText extends StatelessWidget {
 
     // Format the whole number with commas
     final RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
-    String formatted =
-        wholeNumber.replaceAllMapped(reg, (Match match) => '${match[1]},');
+    String formatted = wholeNumber.replaceAllMapped(
+      reg,
+      (Match match) => '${match[1]},',
+    );
 
     // Return formatted number with decimal if present
     return showDecimals ? formatted + decimal : formatted;
@@ -179,21 +180,21 @@ class PriceText extends StatelessWidget {
 
     String formattedPrice = '$indicator$currencySymbol $formattedNumber';
     if (formattedPrice.length > 20) {
-      formattedPrice = formattedPrice.substring(0, 20) + '...';
+      formattedPrice = '${formattedPrice.substring(0, 20)}...';
     }
 
     return Text(
       formattedPrice,
       style: fontSize != null
           ? Theme.of(context).textTheme.titleMedium!.copyWith(
-                fontSize: fontSize,
-                color: color ?? AppColors.white,
-                overflow: TextOverflow.ellipsis,
-              )
+              fontSize: fontSize,
+              color: color ?? AppColors.white,
+              overflow: TextOverflow.ellipsis,
+            )
           : Theme.of(context).textTheme.titleMedium!.apply(
-                color: color ?? AppColors.white,
-                overflow: TextOverflow.ellipsis,
-              ),
+              color: color ?? AppColors.white,
+              overflow: TextOverflow.ellipsis,
+            ),
       overflow: TextOverflow.ellipsis,
       maxLines: maxLines,
       textAlign: textAlign,
@@ -204,7 +205,7 @@ class PriceText extends StatelessWidget {
 class SlashedPriceText extends StatelessWidget {
   const SlashedPriceText({
     super.key,
-    this.currency = '\₺',
+    this.currency = '₺',
     this.smallSize = true,
     required this.price,
   });
@@ -218,9 +219,13 @@ class SlashedPriceText extends StatelessWidget {
       currency + price,
       style: smallSize
           ? Theme.of(context).textTheme.titleMedium!.apply(
-              decoration: TextDecoration.lineThrough, color: AppColors.grey)
+              decoration: TextDecoration.lineThrough,
+              color: AppColors.grey,
+            )
           : Theme.of(context).textTheme.headlineLarge!.apply(
-              decoration: TextDecoration.lineThrough, color: AppColors.grey),
+              decoration: TextDecoration.lineThrough,
+              color: AppColors.grey,
+            ),
     );
   }
 }
@@ -311,10 +316,12 @@ class ImportantAppText extends StatelessWidget {
             fontWeight: fontWeight ?? FontWeight.bold,
           ),
         ),
-        SmallAppText('*',
-            color: AppColors.red,
-            fontSize: fontSize ?? 22.sp,
-            fontWeight: FontWeight.bold)
+        SmallAppText(
+          '*',
+          color: AppColors.red,
+          fontSize: fontSize ?? 22.sp,
+          fontWeight: FontWeight.bold,
+        ),
       ],
     );
   }

@@ -1,7 +1,8 @@
 class FormValidator {
   static String? isValidEmail(String? email) {
-    final RegExp emailRegExp =
-        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    final RegExp emailRegExp = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
 
     if (!emailRegExp.hasMatch(email!)) {
       return 'Please enter a valid email address.';
@@ -59,8 +60,9 @@ class FormValidator {
     if (phoneNo == null || phoneNo.isEmpty) {
       return 'Please enter a valid phone number.';
     }
-    final regExp =
-        RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$');
+    final regExp = RegExp(
+      r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$',
+    );
     if (!regExp.hasMatch(phoneNo)) {
       return 'Please enter a valid phone number';
     }
