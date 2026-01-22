@@ -273,9 +273,17 @@ Mode-aware fields: `...Light` apply in light mode, `...Dark` apply in dark mode;
 
 ### CLI Commands
 
-- `sac install` — Adds the package dependency to your pubspec.
-- `sac doctor` — Quick environment check.
-- `sac examples` — Prints code snippets for reference.
+To use the `sac` command-line tool globally, first activate it:
+
+```bash
+dart pub global activate swiss_army_component
+```
+
+Make sure `~/.pub-cache/bin` is in your PATH. Then you can use:
+
+- `sac install` — Adds the package dependency to your project's pubspec.yaml
+- `sac doctor` — Quick environment check
+- `sac examples` — Prints code snippets for reference
 
 ## Exports Map
 

@@ -4,7 +4,7 @@ homepage: "https://github.com/abetoluwani/MY-FLUTTER-COMPONENTS"
 repository: "https://github.com/abetoluwani/MY-FLUTTER-COMPONENTS"
 issue_tracker: "https://github.com/abetoluwani/MY-FLUTTER-COMPONENTS/issues"
 
-version: 0.2.0
+version: 0.2.1
 
 environment:
   sdk: ^3.10.1
