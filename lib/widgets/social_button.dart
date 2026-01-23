@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:swiss_army_component/swiss_army_component.dart';
 
 /// Supported social login providers.
 enum SocialProvider { google, apple, facebook, email }
@@ -218,11 +217,12 @@ class SocialLoginButton extends StatelessWidget {
           isSvg: true,
         );
       case SocialProvider.facebook:
+        final isDark = Theme.of(context).brightness == Brightness.dark;
         return _SocialConfig(
           defaultLabel: 'Continue with Facebook',
-          bgColor: const Color(0xFF1877F2),
-          textColor: Colors.white,
-          iconData: _facebookSvg,
+          bgColor: isDark ? Colors.white : const Color(0xFF1877F2),
+          textColor: isDark ? Colors.black : Colors.white,
+          iconData: isDark ? _facebookBlueSvg : _facebookSvg,
           isSvg: true,
         );
       case SocialProvider.email:
@@ -265,6 +265,9 @@ const _googleSvg =
 
 const _facebookSvg =
     '''<svg viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="#FFFFFF" d="M24 4C12.954 4 4 12.954 4 24C4 33.856 11.206 42.067 20.655 43.766V29.351H15.826V24H20.655V19.721C20.655 14.935 23.498 12.288 27.818 12.288C29.887 12.288 32.052 12.658 32.052 12.658V17.357H29.667C27.29 17.357 26.549 18.831 26.549 21.054V24H31.841L30.995 29.351H26.549V43.844C36.326 42.348 44 34.026 44 24C44 12.954 35.046 4 24 4Z"/></svg>''';
+
+const _facebookBlueSvg =
+    '''<svg viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="#1877F2" d="M24 4C12.954 4 4 12.954 4 24C4 33.856 11.206 42.067 20.655 43.766V29.351H15.826V24H20.655V19.721C20.655 14.935 23.498 12.288 27.818 12.288C29.887 12.288 32.052 12.658 32.052 12.658V17.357H29.667C27.29 17.357 26.549 18.831 26.549 21.054V24H31.841L30.995 29.351H26.549V43.844C36.326 42.348 44 34.026 44 24C44 12.954 35.046 4 24 4Z"/></svg>''';
 
 // Apple logo (black for light mode)
 const _appleLightSvg =
