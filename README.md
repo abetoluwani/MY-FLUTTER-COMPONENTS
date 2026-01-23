@@ -84,6 +84,21 @@ Column(
 );
 ```
 
+**Customization:**
+`SocialLoginButton` allows full control over `bgColor`, `textColor`, `iconWidget`, `borderRadius`, `padding`, and more. If no overrides are provided, it uses standard provider branding.
+
+```dart
+SocialLoginButton(
+  provider: SocialProvider.google,
+  onPressed: () {},
+  label: 'Sign in with Google',
+  bgColor: Colors.blue,
+  textColor: Colors.white,
+  borderRadius: 20,
+  iconWidget: Icon(Icons.g_mobiledata, color: Colors.white),
+);
+```
+
 ### App Bars
 
 ```dart
