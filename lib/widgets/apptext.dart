@@ -206,7 +206,10 @@ class AppText extends StatelessWidget {
         decorationStyle: decorationStyle,
       );
     } else {
-      baseStyle = GoogleFonts.poppins(
+      // FIX: Default to standard TextStyle to inherit theme's font family
+      // instead of forcing GoogleFonts.poppins.
+      // Users can still enforce Poppins via theme or explicit props if they want.
+      baseStyle = TextStyle(
         fontSize: validatedDefaultFontSize,
         fontWeight: _getDefaultFontWeight(),
         letterSpacing: validatedDefaultLetterSpacing,

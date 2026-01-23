@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **AppText Theme Inheritance**: Removed hardcoded black color default from `AppText` and all derived widgets (`PriceText`, `BrandNameText`, etc.), allowing them to properly inherit text colors from `Theme.of(context)`.
+- **AppText Theme Inheritance**: Removed hardcoded black color and Poppins font defaults. `AppText` and derived widgets now properly inherit **color** and **fontFamily** from `Theme.of(context)`.
 - **Style Merging**: `AppText` now correctly prioritizes explicit properties (like `color`, `fontSize`) over the provided `textStyle`.
 - **Custom Font Support**: Added support for non-Google fonts. Providing a `fontFamily` now uses a standard `TextStyle`, enabling asset-based fonts.
 

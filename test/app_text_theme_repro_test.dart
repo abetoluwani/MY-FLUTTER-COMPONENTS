@@ -248,4 +248,45 @@ void main() {
 
     expect(textWidget.style?.fontFamily, 'CustomFont');
   });
+
+  testWidgets(
+    'AppText should inherit fontFamily from Theme when not provided',
+    (tester) async {
+      const expectedFontFamily = 'Roboto';
+
+      await tester.pumpWidget(
+        ScreenUtilInit(
+          designSize: const Size(375, 812),
+          child: MaterialApp(
+            theme: ThemeData(
+              fontFamily: expectedFontFamily, // Set global font
+              textTheme: const TextTheme(
+                bodyMedium: TextStyle(fontFamily: expectedFontFamily),
+              ),
+            ),
+            home: Scaffold(body: AppText('Theme Font Test')),
+          ),
+        ),
+      );
+
+      final textFinder = find.text('Theme Font Test');
+      final textWidget = tester.widget<Text>(textFinder);
+
+      final actualFont = textWidget.style?.fontFamily;
+
+      if (actualFont != null) {
+        // Should contain Roboto. If it's Poppins, this fails.
+        expect(
+          actualFont,
+          contains(expectedFontFamily),
+          reason: 'Should inherit $expectedFontFamily from theme',
+        );
+      } else {
+        // Inherited. Check context.
+        final context = tester.element(textFinder);
+        final defaultStyle = DefaultTextStyle.of(context).style;
+        expect(defaultStyle.fontFamily, contains(expectedFontFamily));
+      }
+    },
+  );
 }
