@@ -63,6 +63,27 @@ Column(
 
 Key props: `bgColor/textColor`, `radius`, `width/height`, `brdColor`, `buttonHeight`.
 
+### Social Login
+
+```dart
+Column(
+  children: [
+    SocialLoginButton(
+      provider: SocialProvider.google,
+      onPressed: () => handleGoogleSignIn(),
+    ),
+    SocialLoginButton(
+      provider: SocialProvider.apple,
+      onPressed: () => handleAppleSignIn(),
+    ),
+    SocialLoginButton(
+      provider: SocialProvider.facebook,
+      onPressed: () => handleFacebookSignIn(),
+    ),
+  ],
+);
+```
+
 ### App Bars
 
 ```dart

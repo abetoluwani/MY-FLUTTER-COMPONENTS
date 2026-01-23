@@ -15,6 +15,7 @@ export 'widgets/appbutton.dart';
 export 'widgets/apptext.dart';
 export 'widgets/otp.dart';
 export 'widgets/searchbar.dart';
+export 'widgets/social_button.dart';
 export 'widgets/space.dart';
 export 'widgets/textfields.dart';
 export 'widgets/widget.dart';
