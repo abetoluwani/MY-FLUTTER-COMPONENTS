@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 /// final config = SACThemeConfig(
 ///   primary: Colors.blue,
 ///   secondary: Colors.amber,
+///   scaffoldBackgroundLight: Colors.grey[50],
+///   appBarElevation: 0,
 /// );
 ///
 /// MaterialApp(
@@ -73,6 +75,203 @@ class SACThemeConfig {
   final Color? grey;
   final Color? darkGrey;
 
+  // --- Scaffold ---
+  final Color? scaffoldBackgroundLight;
+  final Color? scaffoldBackgroundDark;
+
+  // --- AppBar ---
+  final Color? appBarBackgroundLight;
+  final Color? appBarBackgroundDark;
+  final Color? appBarForegroundLight;
+  final Color? appBarForegroundDark;
+  final double? appBarElevation;
+  final bool? appBarCenterTitle;
+  final TextStyle? appBarTitleTextStyle;
+  final IconThemeData? appBarIconTheme;
+
+  // --- BottomNavigationBar ---
+  final Color? bottomNavBackgroundLight;
+  final Color? bottomNavBackgroundDark;
+  final Color? bottomNavSelectedColor;
+  final Color? bottomNavUnselectedColor;
+  final double? bottomNavElevation;
+  final BottomNavigationBarType? bottomNavType;
+
+  // --- NavigationBar (M3) ---
+  final Color? navigationBarBackgroundLight;
+  final Color? navigationBarBackgroundDark;
+  final Color? navigationBarIndicatorColor;
+  final double? navigationBarHeight;
+
+  // --- NavigationRail ---
+  final Color? navigationRailBackgroundLight;
+  final Color? navigationRailBackgroundDark;
+  final Color? navigationRailSelectedColor;
+  final Color? navigationRailUnselectedColor;
+
+  // --- Drawer ---
+  final Color? drawerBackgroundLight;
+  final Color? drawerBackgroundDark;
+  final double? drawerWidth;
+  final double? drawerElevation;
+
+  // --- FloatingActionButton ---
+  final Color? fabBackgroundLight;
+  final Color? fabBackgroundDark;
+  final Color? fabForegroundLight;
+  final Color? fabForegroundDark;
+  final double? fabElevation;
+  final ShapeBorder? fabShape;
+
+  // --- Buttons ---
+  final ButtonStyle? elevatedButtonStyle;
+  final ButtonStyle? outlinedButtonStyle;
+  final ButtonStyle? textButtonStyle;
+  final ButtonStyle? filledButtonStyle;
+  final ButtonStyle? iconButtonStyle;
+
+  // --- Cards ---
+  final Color? cardColorLight;
+  final Color? cardColorDark;
+  final double? cardElevation;
+  final ShapeBorder? cardShape;
+  final EdgeInsetsGeometry? cardMargin;
+
+  // --- Dialog ---
+  final Color? dialogBackgroundLight;
+  final Color? dialogBackgroundDark;
+  final double? dialogElevation;
+  final ShapeBorder? dialogShape;
+  final TextStyle? dialogTitleStyle;
+  final TextStyle? dialogContentStyle;
+
+  // --- BottomSheet ---
+  final Color? bottomSheetBackgroundLight;
+  final Color? bottomSheetBackgroundDark;
+  final double? bottomSheetElevation;
+  final ShapeBorder? bottomSheetShape;
+  final Color? bottomSheetDragHandleColor;
+
+  // --- Snackbar ---
+  final Color? snackBarBackgroundLight;
+  final Color? snackBarBackgroundDark;
+  final Color? snackBarActionColor;
+  final SnackBarBehavior? snackBarBehavior;
+
+  // --- Input/TextField ---
+  final Color? inputFillColorLight;
+  final Color? inputFillColorDark;
+  final Color? inputBorderColor;
+  final Color? inputFocusedBorderColor;
+  final Color? inputErrorBorderColor;
+  final TextStyle? inputLabelStyle;
+  final TextStyle? inputHintStyle;
+  final double? inputBorderRadius;
+
+  // --- Checkbox/Radio/Switch ---
+  final Color? checkboxFillColor;
+  final Color? radioFillColor;
+  final Color? switchActiveColor;
+  final Color? switchInactiveColor;
+  final Color? switchTrackColor;
+
+  // --- Slider ---
+  final Color? sliderActiveColor;
+  final Color? sliderInactiveColor;
+  final Color? sliderThumbColor;
+
+  // --- ProgressIndicator ---
+  final Color? progressIndicatorColor;
+  final Color? progressIndicatorBackgroundColor;
+  final double? circularProgressStrokeWidth;
+
+  // --- Tooltip ---
+  final Color? tooltipBackgroundColor;
+  final TextStyle? tooltipTextStyle;
+  final EdgeInsetsGeometry? tooltipPadding;
+
+  // --- Divider ---
+  final Color? dividerColor;
+  final double? dividerThickness;
+  final double? dividerIndent;
+
+  // --- ListTile ---
+  final Color? listTileIconColor;
+  final TextStyle? listTileTitleStyle;
+  final TextStyle? listTileSubtitleStyle;
+  final Color? listTileSelectedColor;
+
+  // --- TabBar ---
+  final Color? tabBarIndicatorColor;
+  final Color? tabBarLabelColor;
+  final Color? tabBarUnselectedLabelColor;
+  final double? tabBarIndicatorWeight;
+
+  // --- DataTable ---
+  final Color? dataTableHeadingRowColor;
+  final Color? dataTableDataRowColor;
+  final double? dataTableDividerThickness;
+
+  // --- Chip ---
+  final Color? chipBackgroundLight;
+  final Color? chipBackgroundDark;
+  final TextStyle? chipLabelStyle;
+  final Color? chipDeleteIconColor;
+  final Color? chipSelectedColor;
+
+  // --- Badge ---
+  final Color? badgeBackgroundColor;
+  final Color? badgeTextColor;
+
+  // --- SearchBar ---
+  final Color? searchBarBackgroundLight;
+  final Color? searchBarBackgroundDark;
+  final double? searchBarElevation;
+  final TextStyle? searchBarHintStyle;
+
+  // --- SegmentedButton ---
+  final Color? segmentedButtonSelectedColor;
+  final Color? segmentedButtonForegroundColor;
+
+  // --- PopupMenu ---
+  final Color? popupMenuBackgroundLight;
+  final Color? popupMenuBackgroundDark;
+  final double? popupMenuElevation;
+  final ShapeBorder? popupMenuShape;
+
+  // --- ExpansionTile ---
+  final Color? expansionTileBackgroundColor;
+  final Color? expansionTileCollapsedBackgroundColor;
+  final Color? expansionTileIconColor;
+
+  // --- Typography ---
+  final String? fontFamily;
+  final TextStyle? displayLarge;
+  final TextStyle? displayMedium;
+  final TextStyle? displaySmall;
+  final TextStyle? headlineLarge;
+  final TextStyle? headlineMedium;
+  final TextStyle? headlineSmall;
+  final TextStyle? titleLarge;
+  final TextStyle? titleMedium;
+  final TextStyle? titleSmall;
+  final TextStyle? bodyLarge;
+  final TextStyle? bodyMedium;
+  final TextStyle? bodySmall;
+  final TextStyle? labelLarge;
+  final TextStyle? labelMedium;
+  final TextStyle? labelSmall;
+
+  // --- Misc ---
+  final Color? splashColor;
+  final Color? highlightColor;
+  final Color? hoverColor;
+  final Color? focusColor;
+  final Color? disabledColor;
+  final Color? shadowColor;
+  final VisualDensity? visualDensity;
+  final MaterialTapTargetSize? materialTapTargetSize;
+
   const SACThemeConfig({
     this.primary,
     this.primaryLight,
@@ -100,6 +299,145 @@ class SACThemeConfig {
     this.purple,
     this.grey,
     this.darkGrey,
+    this.scaffoldBackgroundLight,
+    this.scaffoldBackgroundDark,
+    this.appBarBackgroundLight,
+    this.appBarBackgroundDark,
+    this.appBarForegroundLight,
+    this.appBarForegroundDark,
+    this.appBarElevation,
+    this.appBarCenterTitle,
+    this.appBarTitleTextStyle,
+    this.appBarIconTheme,
+    this.bottomNavBackgroundLight,
+    this.bottomNavBackgroundDark,
+    this.bottomNavSelectedColor,
+    this.bottomNavUnselectedColor,
+    this.bottomNavElevation,
+    this.bottomNavType,
+    this.navigationBarBackgroundLight,
+    this.navigationBarBackgroundDark,
+    this.navigationBarIndicatorColor,
+    this.navigationBarHeight,
+    this.navigationRailBackgroundLight,
+    this.navigationRailBackgroundDark,
+    this.navigationRailSelectedColor,
+    this.navigationRailUnselectedColor,
+    this.drawerBackgroundLight,
+    this.drawerBackgroundDark,
+    this.drawerWidth,
+    this.drawerElevation,
+    this.fabBackgroundLight,
+    this.fabBackgroundDark,
+    this.fabForegroundLight,
+    this.fabForegroundDark,
+    this.fabElevation,
+    this.fabShape,
+    this.elevatedButtonStyle,
+    this.outlinedButtonStyle,
+    this.textButtonStyle,
+    this.filledButtonStyle,
+    this.iconButtonStyle,
+    this.cardColorLight,
+    this.cardColorDark,
+    this.cardElevation,
+    this.cardShape,
+    this.cardMargin,
+    this.dialogBackgroundLight,
+    this.dialogBackgroundDark,
+    this.dialogElevation,
+    this.dialogShape,
+    this.dialogTitleStyle,
+    this.dialogContentStyle,
+    this.bottomSheetBackgroundLight,
+    this.bottomSheetBackgroundDark,
+    this.bottomSheetElevation,
+    this.bottomSheetShape,
+    this.bottomSheetDragHandleColor,
+    this.snackBarBackgroundLight,
+    this.snackBarBackgroundDark,
+    this.snackBarActionColor,
+    this.snackBarBehavior,
+    this.inputFillColorLight,
+    this.inputFillColorDark,
+    this.inputBorderColor,
+    this.inputFocusedBorderColor,
+    this.inputErrorBorderColor,
+    this.inputLabelStyle,
+    this.inputHintStyle,
+    this.inputBorderRadius,
+    this.checkboxFillColor,
+    this.radioFillColor,
+    this.switchActiveColor,
+    this.switchInactiveColor,
+    this.switchTrackColor,
+    this.sliderActiveColor,
+    this.sliderInactiveColor,
+    this.sliderThumbColor,
+    this.progressIndicatorColor,
+    this.progressIndicatorBackgroundColor,
+    this.circularProgressStrokeWidth,
+    this.tooltipBackgroundColor,
+    this.tooltipTextStyle,
+    this.tooltipPadding,
+    this.dividerColor,
+    this.dividerThickness,
+    this.dividerIndent,
+    this.listTileIconColor,
+    this.listTileTitleStyle,
+    this.listTileSubtitleStyle,
+    this.listTileSelectedColor,
+    this.tabBarIndicatorColor,
+    this.tabBarLabelColor,
+    this.tabBarUnselectedLabelColor,
+    this.tabBarIndicatorWeight,
+    this.dataTableHeadingRowColor,
+    this.dataTableDataRowColor,
+    this.dataTableDividerThickness,
+    this.chipBackgroundLight,
+    this.chipBackgroundDark,
+    this.chipLabelStyle,
+    this.chipDeleteIconColor,
+    this.chipSelectedColor,
+    this.badgeBackgroundColor,
+    this.badgeTextColor,
+    this.searchBarBackgroundLight,
+    this.searchBarBackgroundDark,
+    this.searchBarElevation,
+    this.searchBarHintStyle,
+    this.segmentedButtonSelectedColor,
+    this.segmentedButtonForegroundColor,
+    this.popupMenuBackgroundLight,
+    this.popupMenuBackgroundDark,
+    this.popupMenuElevation,
+    this.popupMenuShape,
+    this.expansionTileBackgroundColor,
+    this.expansionTileCollapsedBackgroundColor,
+    this.expansionTileIconColor,
+    this.fontFamily,
+    this.displayLarge,
+    this.displayMedium,
+    this.displaySmall,
+    this.headlineLarge,
+    this.headlineMedium,
+    this.headlineSmall,
+    this.titleLarge,
+    this.titleMedium,
+    this.titleSmall,
+    this.bodyLarge,
+    this.bodyMedium,
+    this.bodySmall,
+    this.labelLarge,
+    this.labelMedium,
+    this.labelSmall,
+    this.splashColor,
+    this.highlightColor,
+    this.hoverColor,
+    this.focusColor,
+    this.disabledColor,
+    this.shadowColor,
+    this.visualDensity,
+    this.materialTapTargetSize,
   });
 
   /// Returns a new config overriding selected fields.
@@ -130,6 +468,145 @@ class SACThemeConfig {
     Color? purple,
     Color? grey,
     Color? darkGrey,
+    Color? scaffoldBackgroundLight,
+    Color? scaffoldBackgroundDark,
+    Color? appBarBackgroundLight,
+    Color? appBarBackgroundDark,
+    Color? appBarForegroundLight,
+    Color? appBarForegroundDark,
+    double? appBarElevation,
+    bool? appBarCenterTitle,
+    TextStyle? appBarTitleTextStyle,
+    IconThemeData? appBarIconTheme,
+    Color? bottomNavBackgroundLight,
+    Color? bottomNavBackgroundDark,
+    Color? bottomNavSelectedColor,
+    Color? bottomNavUnselectedColor,
+    double? bottomNavElevation,
+    BottomNavigationBarType? bottomNavType,
+    Color? navigationBarBackgroundLight,
+    Color? navigationBarBackgroundDark,
+    Color? navigationBarIndicatorColor,
+    double? navigationBarHeight,
+    Color? navigationRailBackgroundLight,
+    Color? navigationRailBackgroundDark,
+    Color? navigationRailSelectedColor,
+    Color? navigationRailUnselectedColor,
+    Color? drawerBackgroundLight,
+    Color? drawerBackgroundDark,
+    double? drawerWidth,
+    double? drawerElevation,
+    Color? fabBackgroundLight,
+    Color? fabBackgroundDark,
+    Color? fabForegroundLight,
+    Color? fabForegroundDark,
+    double? fabElevation,
+    ShapeBorder? fabShape,
+    ButtonStyle? elevatedButtonStyle,
+    ButtonStyle? outlinedButtonStyle,
+    ButtonStyle? textButtonStyle,
+    ButtonStyle? filledButtonStyle,
+    ButtonStyle? iconButtonStyle,
+    Color? cardColorLight,
+    Color? cardColorDark,
+    double? cardElevation,
+    ShapeBorder? cardShape,
+    EdgeInsetsGeometry? cardMargin,
+    Color? dialogBackgroundLight,
+    Color? dialogBackgroundDark,
+    double? dialogElevation,
+    ShapeBorder? dialogShape,
+    TextStyle? dialogTitleStyle,
+    TextStyle? dialogContentStyle,
+    Color? bottomSheetBackgroundLight,
+    Color? bottomSheetBackgroundDark,
+    double? bottomSheetElevation,
+    ShapeBorder? bottomSheetShape,
+    Color? bottomSheetDragHandleColor,
+    Color? snackBarBackgroundLight,
+    Color? snackBarBackgroundDark,
+    Color? snackBarActionColor,
+    SnackBarBehavior? snackBarBehavior,
+    Color? inputFillColorLight,
+    Color? inputFillColorDark,
+    Color? inputBorderColor,
+    Color? inputFocusedBorderColor,
+    Color? inputErrorBorderColor,
+    TextStyle? inputLabelStyle,
+    TextStyle? inputHintStyle,
+    double? inputBorderRadius,
+    Color? checkboxFillColor,
+    Color? radioFillColor,
+    Color? switchActiveColor,
+    Color? switchInactiveColor,
+    Color? switchTrackColor,
+    Color? sliderActiveColor,
+    Color? sliderInactiveColor,
+    Color? sliderThumbColor,
+    Color? progressIndicatorColor,
+    Color? progressIndicatorBackgroundColor,
+    double? circularProgressStrokeWidth,
+    Color? tooltipBackgroundColor,
+    TextStyle? tooltipTextStyle,
+    EdgeInsetsGeometry? tooltipPadding,
+    Color? dividerColor,
+    double? dividerThickness,
+    double? dividerIndent,
+    Color? listTileIconColor,
+    TextStyle? listTileTitleStyle,
+    TextStyle? listTileSubtitleStyle,
+    Color? listTileSelectedColor,
+    Color? tabBarIndicatorColor,
+    Color? tabBarLabelColor,
+    Color? tabBarUnselectedLabelColor,
+    double? tabBarIndicatorWeight,
+    Color? dataTableHeadingRowColor,
+    Color? dataTableDataRowColor,
+    double? dataTableDividerThickness,
+    Color? chipBackgroundLight,
+    Color? chipBackgroundDark,
+    TextStyle? chipLabelStyle,
+    Color? chipDeleteIconColor,
+    Color? chipSelectedColor,
+    Color? badgeBackgroundColor,
+    Color? badgeTextColor,
+    Color? searchBarBackgroundLight,
+    Color? searchBarBackgroundDark,
+    double? searchBarElevation,
+    TextStyle? searchBarHintStyle,
+    Color? segmentedButtonSelectedColor,
+    Color? segmentedButtonForegroundColor,
+    Color? popupMenuBackgroundLight,
+    Color? popupMenuBackgroundDark,
+    double? popupMenuElevation,
+    ShapeBorder? popupMenuShape,
+    Color? expansionTileBackgroundColor,
+    Color? expansionTileCollapsedBackgroundColor,
+    Color? expansionTileIconColor,
+    String? fontFamily,
+    TextStyle? displayLarge,
+    TextStyle? displayMedium,
+    TextStyle? displaySmall,
+    TextStyle? headlineLarge,
+    TextStyle? headlineMedium,
+    TextStyle? headlineSmall,
+    TextStyle? titleLarge,
+    TextStyle? titleMedium,
+    TextStyle? titleSmall,
+    TextStyle? bodyLarge,
+    TextStyle? bodyMedium,
+    TextStyle? bodySmall,
+    TextStyle? labelLarge,
+    TextStyle? labelMedium,
+    TextStyle? labelSmall,
+    Color? splashColor,
+    Color? highlightColor,
+    Color? hoverColor,
+    Color? focusColor,
+    Color? disabledColor,
+    Color? shadowColor,
+    VisualDensity? visualDensity,
+    MaterialTapTargetSize? materialTapTargetSize,
   }) {
     return SACThemeConfig(
       primary: primary ?? this.primary,
@@ -158,6 +635,192 @@ class SACThemeConfig {
       purple: purple ?? this.purple,
       grey: grey ?? this.grey,
       darkGrey: darkGrey ?? this.darkGrey,
+      scaffoldBackgroundLight:
+          scaffoldBackgroundLight ?? this.scaffoldBackgroundLight,
+      scaffoldBackgroundDark:
+          scaffoldBackgroundDark ?? this.scaffoldBackgroundDark,
+      appBarBackgroundLight:
+          appBarBackgroundLight ?? this.appBarBackgroundLight,
+      appBarBackgroundDark: appBarBackgroundDark ?? this.appBarBackgroundDark,
+      appBarForegroundLight:
+          appBarForegroundLight ?? this.appBarForegroundLight,
+      appBarForegroundDark: appBarForegroundDark ?? this.appBarForegroundDark,
+      appBarElevation: appBarElevation ?? this.appBarElevation,
+      appBarCenterTitle: appBarCenterTitle ?? this.appBarCenterTitle,
+      appBarTitleTextStyle: appBarTitleTextStyle ?? this.appBarTitleTextStyle,
+      appBarIconTheme: appBarIconTheme ?? this.appBarIconTheme,
+      bottomNavBackgroundLight:
+          bottomNavBackgroundLight ?? this.bottomNavBackgroundLight,
+      bottomNavBackgroundDark:
+          bottomNavBackgroundDark ?? this.bottomNavBackgroundDark,
+      bottomNavSelectedColor:
+          bottomNavSelectedColor ?? this.bottomNavSelectedColor,
+      bottomNavUnselectedColor:
+          bottomNavUnselectedColor ?? this.bottomNavUnselectedColor,
+      bottomNavElevation: bottomNavElevation ?? this.bottomNavElevation,
+      bottomNavType: bottomNavType ?? this.bottomNavType,
+      navigationBarBackgroundLight:
+          navigationBarBackgroundLight ?? this.navigationBarBackgroundLight,
+      navigationBarBackgroundDark:
+          navigationBarBackgroundDark ?? this.navigationBarBackgroundDark,
+      navigationBarIndicatorColor:
+          navigationBarIndicatorColor ?? this.navigationBarIndicatorColor,
+      navigationBarHeight: navigationBarHeight ?? this.navigationBarHeight,
+      navigationRailBackgroundLight:
+          navigationRailBackgroundLight ?? this.navigationRailBackgroundLight,
+      navigationRailBackgroundDark:
+          navigationRailBackgroundDark ?? this.navigationRailBackgroundDark,
+      navigationRailSelectedColor:
+          navigationRailSelectedColor ?? this.navigationRailSelectedColor,
+      navigationRailUnselectedColor:
+          navigationRailUnselectedColor ?? this.navigationRailUnselectedColor,
+      drawerBackgroundLight:
+          drawerBackgroundLight ?? this.drawerBackgroundLight,
+      drawerBackgroundDark: drawerBackgroundDark ?? this.drawerBackgroundDark,
+      drawerWidth: drawerWidth ?? this.drawerWidth,
+      drawerElevation: drawerElevation ?? this.drawerElevation,
+      fabBackgroundLight: fabBackgroundLight ?? this.fabBackgroundLight,
+      fabBackgroundDark: fabBackgroundDark ?? this.fabBackgroundDark,
+      fabForegroundLight: fabForegroundLight ?? this.fabForegroundLight,
+      fabForegroundDark: fabForegroundDark ?? this.fabForegroundDark,
+      fabElevation: fabElevation ?? this.fabElevation,
+      fabShape: fabShape ?? this.fabShape,
+      elevatedButtonStyle: elevatedButtonStyle ?? this.elevatedButtonStyle,
+      outlinedButtonStyle: outlinedButtonStyle ?? this.outlinedButtonStyle,
+      textButtonStyle: textButtonStyle ?? this.textButtonStyle,
+      filledButtonStyle: filledButtonStyle ?? this.filledButtonStyle,
+      iconButtonStyle: iconButtonStyle ?? this.iconButtonStyle,
+      cardColorLight: cardColorLight ?? this.cardColorLight,
+      cardColorDark: cardColorDark ?? this.cardColorDark,
+      cardElevation: cardElevation ?? this.cardElevation,
+      cardShape: cardShape ?? this.cardShape,
+      cardMargin: cardMargin ?? this.cardMargin,
+      dialogBackgroundLight:
+          dialogBackgroundLight ?? this.dialogBackgroundLight,
+      dialogBackgroundDark: dialogBackgroundDark ?? this.dialogBackgroundDark,
+      dialogElevation: dialogElevation ?? this.dialogElevation,
+      dialogShape: dialogShape ?? this.dialogShape,
+      dialogTitleStyle: dialogTitleStyle ?? this.dialogTitleStyle,
+      dialogContentStyle: dialogContentStyle ?? this.dialogContentStyle,
+      bottomSheetBackgroundLight:
+          bottomSheetBackgroundLight ?? this.bottomSheetBackgroundLight,
+      bottomSheetBackgroundDark:
+          bottomSheetBackgroundDark ?? this.bottomSheetBackgroundDark,
+      bottomSheetElevation: bottomSheetElevation ?? this.bottomSheetElevation,
+      bottomSheetShape: bottomSheetShape ?? this.bottomSheetShape,
+      bottomSheetDragHandleColor:
+          bottomSheetDragHandleColor ?? this.bottomSheetDragHandleColor,
+      snackBarBackgroundLight:
+          snackBarBackgroundLight ?? this.snackBarBackgroundLight,
+      snackBarBackgroundDark:
+          snackBarBackgroundDark ?? this.snackBarBackgroundDark,
+      snackBarActionColor: snackBarActionColor ?? this.snackBarActionColor,
+      snackBarBehavior: snackBarBehavior ?? this.snackBarBehavior,
+      inputFillColorLight: inputFillColorLight ?? this.inputFillColorLight,
+      inputFillColorDark: inputFillColorDark ?? this.inputFillColorDark,
+      inputBorderColor: inputBorderColor ?? this.inputBorderColor,
+      inputFocusedBorderColor:
+          inputFocusedBorderColor ?? this.inputFocusedBorderColor,
+      inputErrorBorderColor:
+          inputErrorBorderColor ?? this.inputErrorBorderColor,
+      inputLabelStyle: inputLabelStyle ?? this.inputLabelStyle,
+      inputHintStyle: inputHintStyle ?? this.inputHintStyle,
+      inputBorderRadius: inputBorderRadius ?? this.inputBorderRadius,
+      checkboxFillColor: checkboxFillColor ?? this.checkboxFillColor,
+      radioFillColor: radioFillColor ?? this.radioFillColor,
+      switchActiveColor: switchActiveColor ?? this.switchActiveColor,
+      switchInactiveColor: switchInactiveColor ?? this.switchInactiveColor,
+      switchTrackColor: switchTrackColor ?? this.switchTrackColor,
+      sliderActiveColor: sliderActiveColor ?? this.sliderActiveColor,
+      sliderInactiveColor: sliderInactiveColor ?? this.sliderInactiveColor,
+      sliderThumbColor: sliderThumbColor ?? this.sliderThumbColor,
+      progressIndicatorColor:
+          progressIndicatorColor ?? this.progressIndicatorColor,
+      progressIndicatorBackgroundColor:
+          progressIndicatorBackgroundColor ??
+          this.progressIndicatorBackgroundColor,
+      circularProgressStrokeWidth:
+          circularProgressStrokeWidth ?? this.circularProgressStrokeWidth,
+      tooltipBackgroundColor:
+          tooltipBackgroundColor ?? this.tooltipBackgroundColor,
+      tooltipTextStyle: tooltipTextStyle ?? this.tooltipTextStyle,
+      tooltipPadding: tooltipPadding ?? this.tooltipPadding,
+      dividerColor: dividerColor ?? this.dividerColor,
+      dividerThickness: dividerThickness ?? this.dividerThickness,
+      dividerIndent: dividerIndent ?? this.dividerIndent,
+      listTileIconColor: listTileIconColor ?? this.listTileIconColor,
+      listTileTitleStyle: listTileTitleStyle ?? this.listTileTitleStyle,
+      listTileSubtitleStyle:
+          listTileSubtitleStyle ?? this.listTileSubtitleStyle,
+      listTileSelectedColor:
+          listTileSelectedColor ?? this.listTileSelectedColor,
+      tabBarIndicatorColor: tabBarIndicatorColor ?? this.tabBarIndicatorColor,
+      tabBarLabelColor: tabBarLabelColor ?? this.tabBarLabelColor,
+      tabBarUnselectedLabelColor:
+          tabBarUnselectedLabelColor ?? this.tabBarUnselectedLabelColor,
+      tabBarIndicatorWeight:
+          tabBarIndicatorWeight ?? this.tabBarIndicatorWeight,
+      dataTableHeadingRowColor:
+          dataTableHeadingRowColor ?? this.dataTableHeadingRowColor,
+      dataTableDataRowColor:
+          dataTableDataRowColor ?? this.dataTableDataRowColor,
+      dataTableDividerThickness:
+          dataTableDividerThickness ?? this.dataTableDividerThickness,
+      chipBackgroundLight: chipBackgroundLight ?? this.chipBackgroundLight,
+      chipBackgroundDark: chipBackgroundDark ?? this.chipBackgroundDark,
+      chipLabelStyle: chipLabelStyle ?? this.chipLabelStyle,
+      chipDeleteIconColor: chipDeleteIconColor ?? this.chipDeleteIconColor,
+      chipSelectedColor: chipSelectedColor ?? this.chipSelectedColor,
+      badgeBackgroundColor: badgeBackgroundColor ?? this.badgeBackgroundColor,
+      badgeTextColor: badgeTextColor ?? this.badgeTextColor,
+      searchBarBackgroundLight:
+          searchBarBackgroundLight ?? this.searchBarBackgroundLight,
+      searchBarBackgroundDark:
+          searchBarBackgroundDark ?? this.searchBarBackgroundDark,
+      searchBarElevation: searchBarElevation ?? this.searchBarElevation,
+      searchBarHintStyle: searchBarHintStyle ?? this.searchBarHintStyle,
+      segmentedButtonSelectedColor:
+          segmentedButtonSelectedColor ?? this.segmentedButtonSelectedColor,
+      segmentedButtonForegroundColor:
+          segmentedButtonForegroundColor ?? this.segmentedButtonForegroundColor,
+      popupMenuBackgroundLight:
+          popupMenuBackgroundLight ?? this.popupMenuBackgroundLight,
+      popupMenuBackgroundDark:
+          popupMenuBackgroundDark ?? this.popupMenuBackgroundDark,
+      popupMenuElevation: popupMenuElevation ?? this.popupMenuElevation,
+      popupMenuShape: popupMenuShape ?? this.popupMenuShape,
+      expansionTileBackgroundColor:
+          expansionTileBackgroundColor ?? this.expansionTileBackgroundColor,
+      expansionTileCollapsedBackgroundColor:
+          expansionTileCollapsedBackgroundColor ??
+          this.expansionTileCollapsedBackgroundColor,
+      expansionTileIconColor:
+          expansionTileIconColor ?? this.expansionTileIconColor,
+      fontFamily: fontFamily ?? this.fontFamily,
+      displayLarge: displayLarge ?? this.displayLarge,
+      displayMedium: displayMedium ?? this.displayMedium,
+      displaySmall: displaySmall ?? this.displaySmall,
+      headlineLarge: headlineLarge ?? this.headlineLarge,
+      headlineMedium: headlineMedium ?? this.headlineMedium,
+      headlineSmall: headlineSmall ?? this.headlineSmall,
+      titleLarge: titleLarge ?? this.titleLarge,
+      titleMedium: titleMedium ?? this.titleMedium,
+      titleSmall: titleSmall ?? this.titleSmall,
+      bodyLarge: bodyLarge ?? this.bodyLarge,
+      bodyMedium: bodyMedium ?? this.bodyMedium,
+      bodySmall: bodySmall ?? this.bodySmall,
+      labelLarge: labelLarge ?? this.labelLarge,
+      labelMedium: labelMedium ?? this.labelMedium,
+      labelSmall: labelSmall ?? this.labelSmall,
+      splashColor: splashColor ?? this.splashColor,
+      highlightColor: highlightColor ?? this.highlightColor,
+      hoverColor: hoverColor ?? this.hoverColor,
+      focusColor: focusColor ?? this.focusColor,
+      disabledColor: disabledColor ?? this.disabledColor,
+      shadowColor: shadowColor ?? this.shadowColor,
+      visualDensity: visualDensity ?? this.visualDensity,
+      materialTapTargetSize:
+          materialTapTargetSize ?? this.materialTapTargetSize,
     );
   }
 
@@ -191,6 +854,193 @@ class SACThemeConfig {
       purple: other.purple ?? purple,
       grey: other.grey ?? grey,
       darkGrey: other.darkGrey ?? darkGrey,
+      scaffoldBackgroundLight:
+          other.scaffoldBackgroundLight ?? scaffoldBackgroundLight,
+      scaffoldBackgroundDark:
+          other.scaffoldBackgroundDark ?? scaffoldBackgroundDark,
+      appBarBackgroundLight:
+          other.appBarBackgroundLight ?? appBarBackgroundLight,
+      appBarBackgroundDark: other.appBarBackgroundDark ?? appBarBackgroundDark,
+      appBarForegroundLight:
+          other.appBarForegroundLight ?? appBarForegroundLight,
+      appBarForegroundDark: other.appBarForegroundDark ?? appBarForegroundDark,
+      appBarElevation: other.appBarElevation ?? appBarElevation,
+      appBarCenterTitle: other.appBarCenterTitle ?? appBarCenterTitle,
+      appBarTitleTextStyle: other.appBarTitleTextStyle ?? appBarTitleTextStyle,
+      appBarIconTheme: other.appBarIconTheme ?? appBarIconTheme,
+      bottomNavBackgroundLight:
+          other.bottomNavBackgroundLight ?? bottomNavBackgroundLight,
+      bottomNavBackgroundDark:
+          other.bottomNavBackgroundDark ?? bottomNavBackgroundDark,
+      bottomNavSelectedColor:
+          other.bottomNavSelectedColor ?? bottomNavSelectedColor,
+      bottomNavUnselectedColor:
+          other.bottomNavUnselectedColor ?? bottomNavUnselectedColor,
+      bottomNavElevation: other.bottomNavElevation ?? bottomNavElevation,
+      bottomNavType: other.bottomNavType ?? bottomNavType,
+      navigationBarBackgroundLight:
+          other.navigationBarBackgroundLight ?? navigationBarBackgroundLight,
+      navigationBarBackgroundDark:
+          other.navigationBarBackgroundDark ?? navigationBarBackgroundDark,
+      navigationBarIndicatorColor:
+          other.navigationBarIndicatorColor ?? navigationBarIndicatorColor,
+      navigationBarHeight: other.navigationBarHeight ?? navigationBarHeight,
+      navigationRailBackgroundLight:
+          other.navigationRailBackgroundLight ?? navigationRailBackgroundLight,
+      navigationRailBackgroundDark:
+          other.navigationRailBackgroundDark ?? navigationRailBackgroundDark,
+      navigationRailSelectedColor:
+          other.navigationRailSelectedColor ?? navigationRailSelectedColor,
+      navigationRailUnselectedColor:
+          other.navigationRailUnselectedColor ?? navigationRailUnselectedColor,
+      drawerBackgroundLight:
+          other.drawerBackgroundLight ?? drawerBackgroundLight,
+      drawerBackgroundDark: other.drawerBackgroundDark ?? drawerBackgroundDark,
+      drawerWidth: other.drawerWidth ?? drawerWidth,
+      drawerElevation: other.drawerElevation ?? drawerElevation,
+      fabBackgroundLight: other.fabBackgroundLight ?? fabBackgroundLight,
+      fabBackgroundDark: other.fabBackgroundDark ?? fabBackgroundDark,
+      fabForegroundLight: other.fabForegroundLight ?? fabForegroundLight,
+      fabForegroundDark: other.fabForegroundDark ?? fabForegroundDark,
+      fabElevation: other.fabElevation ?? fabElevation,
+      fabShape: other.fabShape ?? fabShape,
+      elevatedButtonStyle: other.elevatedButtonStyle ?? elevatedButtonStyle,
+      outlinedButtonStyle: other.outlinedButtonStyle ?? outlinedButtonStyle,
+      textButtonStyle: other.textButtonStyle ?? textButtonStyle,
+      filledButtonStyle: other.filledButtonStyle ?? filledButtonStyle,
+      iconButtonStyle: other.iconButtonStyle ?? iconButtonStyle,
+      cardColorLight: other.cardColorLight ?? cardColorLight,
+      cardColorDark: other.cardColorDark ?? cardColorDark,
+      cardElevation: other.cardElevation ?? cardElevation,
+      cardShape: other.cardShape ?? cardShape,
+      cardMargin: other.cardMargin ?? cardMargin,
+      dialogBackgroundLight:
+          other.dialogBackgroundLight ?? dialogBackgroundLight,
+      dialogBackgroundDark: other.dialogBackgroundDark ?? dialogBackgroundDark,
+      dialogElevation: other.dialogElevation ?? dialogElevation,
+      dialogShape: other.dialogShape ?? dialogShape,
+      dialogTitleStyle: other.dialogTitleStyle ?? dialogTitleStyle,
+      dialogContentStyle: other.dialogContentStyle ?? dialogContentStyle,
+      bottomSheetBackgroundLight:
+          other.bottomSheetBackgroundLight ?? bottomSheetBackgroundLight,
+      bottomSheetBackgroundDark:
+          other.bottomSheetBackgroundDark ?? bottomSheetBackgroundDark,
+      bottomSheetElevation: other.bottomSheetElevation ?? bottomSheetElevation,
+      bottomSheetShape: other.bottomSheetShape ?? bottomSheetShape,
+      bottomSheetDragHandleColor:
+          other.bottomSheetDragHandleColor ?? bottomSheetDragHandleColor,
+      snackBarBackgroundLight:
+          other.snackBarBackgroundLight ?? snackBarBackgroundLight,
+      snackBarBackgroundDark:
+          other.snackBarBackgroundDark ?? snackBarBackgroundDark,
+      snackBarActionColor: other.snackBarActionColor ?? snackBarActionColor,
+      snackBarBehavior: other.snackBarBehavior ?? snackBarBehavior,
+      inputFillColorLight: other.inputFillColorLight ?? inputFillColorLight,
+      inputFillColorDark: other.inputFillColorDark ?? inputFillColorDark,
+      inputBorderColor: other.inputBorderColor ?? inputBorderColor,
+      inputFocusedBorderColor:
+          other.inputFocusedBorderColor ?? inputFocusedBorderColor,
+      inputErrorBorderColor:
+          other.inputErrorBorderColor ?? inputErrorBorderColor,
+      inputLabelStyle: other.inputLabelStyle ?? inputLabelStyle,
+      inputHintStyle: other.inputHintStyle ?? inputHintStyle,
+      inputBorderRadius: other.inputBorderRadius ?? inputBorderRadius,
+      checkboxFillColor: other.checkboxFillColor ?? checkboxFillColor,
+      radioFillColor: other.radioFillColor ?? radioFillColor,
+      switchActiveColor: other.switchActiveColor ?? switchActiveColor,
+      switchInactiveColor: other.switchInactiveColor ?? switchInactiveColor,
+      switchTrackColor: other.switchTrackColor ?? switchTrackColor,
+      sliderActiveColor: other.sliderActiveColor ?? sliderActiveColor,
+      sliderInactiveColor: other.sliderInactiveColor ?? sliderInactiveColor,
+      sliderThumbColor: other.sliderThumbColor ?? sliderThumbColor,
+      progressIndicatorColor:
+          other.progressIndicatorColor ?? progressIndicatorColor,
+      progressIndicatorBackgroundColor:
+          other.progressIndicatorBackgroundColor ??
+          progressIndicatorBackgroundColor,
+      circularProgressStrokeWidth:
+          other.circularProgressStrokeWidth ?? circularProgressStrokeWidth,
+      tooltipBackgroundColor:
+          other.tooltipBackgroundColor ?? tooltipBackgroundColor,
+      tooltipTextStyle: other.tooltipTextStyle ?? tooltipTextStyle,
+      tooltipPadding: other.tooltipPadding ?? tooltipPadding,
+      dividerColor: other.dividerColor ?? dividerColor,
+      dividerThickness: other.dividerThickness ?? dividerThickness,
+      dividerIndent: other.dividerIndent ?? dividerIndent,
+      listTileIconColor: other.listTileIconColor ?? listTileIconColor,
+      listTileTitleStyle: other.listTileTitleStyle ?? listTileTitleStyle,
+      listTileSubtitleStyle:
+          other.listTileSubtitleStyle ?? listTileSubtitleStyle,
+      listTileSelectedColor:
+          other.listTileSelectedColor ?? listTileSelectedColor,
+      tabBarIndicatorColor: other.tabBarIndicatorColor ?? tabBarIndicatorColor,
+      tabBarLabelColor: other.tabBarLabelColor ?? tabBarLabelColor,
+      tabBarUnselectedLabelColor:
+          other.tabBarUnselectedLabelColor ?? tabBarUnselectedLabelColor,
+      tabBarIndicatorWeight:
+          other.tabBarIndicatorWeight ?? tabBarIndicatorWeight,
+      dataTableHeadingRowColor:
+          other.dataTableHeadingRowColor ?? dataTableHeadingRowColor,
+      dataTableDataRowColor:
+          other.dataTableDataRowColor ?? dataTableDataRowColor,
+      dataTableDividerThickness:
+          other.dataTableDividerThickness ?? dataTableDividerThickness,
+      chipBackgroundLight: other.chipBackgroundLight ?? chipBackgroundLight,
+      chipBackgroundDark: other.chipBackgroundDark ?? chipBackgroundDark,
+      chipLabelStyle: other.chipLabelStyle ?? chipLabelStyle,
+      chipDeleteIconColor: other.chipDeleteIconColor ?? chipDeleteIconColor,
+      chipSelectedColor: other.chipSelectedColor ?? chipSelectedColor,
+      badgeBackgroundColor: other.badgeBackgroundColor ?? badgeBackgroundColor,
+      badgeTextColor: other.badgeTextColor ?? badgeTextColor,
+      searchBarBackgroundLight:
+          other.searchBarBackgroundLight ?? searchBarBackgroundLight,
+      searchBarBackgroundDark:
+          other.searchBarBackgroundDark ?? searchBarBackgroundDark,
+      searchBarElevation: other.searchBarElevation ?? searchBarElevation,
+      searchBarHintStyle: other.searchBarHintStyle ?? searchBarHintStyle,
+      segmentedButtonSelectedColor:
+          other.segmentedButtonSelectedColor ?? segmentedButtonSelectedColor,
+      segmentedButtonForegroundColor:
+          other.segmentedButtonForegroundColor ??
+          segmentedButtonForegroundColor,
+      popupMenuBackgroundLight:
+          other.popupMenuBackgroundLight ?? popupMenuBackgroundLight,
+      popupMenuBackgroundDark:
+          other.popupMenuBackgroundDark ?? popupMenuBackgroundDark,
+      popupMenuElevation: other.popupMenuElevation ?? popupMenuElevation,
+      popupMenuShape: other.popupMenuShape ?? popupMenuShape,
+      expansionTileBackgroundColor:
+          other.expansionTileBackgroundColor ?? expansionTileBackgroundColor,
+      expansionTileCollapsedBackgroundColor:
+          other.expansionTileCollapsedBackgroundColor ??
+          expansionTileCollapsedBackgroundColor,
+      expansionTileIconColor:
+          other.expansionTileIconColor ?? expansionTileIconColor,
+      fontFamily: other.fontFamily ?? fontFamily,
+      displayLarge: other.displayLarge ?? displayLarge,
+      displayMedium: other.displayMedium ?? displayMedium,
+      displaySmall: other.displaySmall ?? displaySmall,
+      headlineLarge: other.headlineLarge ?? headlineLarge,
+      headlineMedium: other.headlineMedium ?? headlineMedium,
+      headlineSmall: other.headlineSmall ?? headlineSmall,
+      titleLarge: other.titleLarge ?? titleLarge,
+      titleMedium: other.titleMedium ?? titleMedium,
+      titleSmall: other.titleSmall ?? titleSmall,
+      bodyLarge: other.bodyLarge ?? bodyLarge,
+      bodyMedium: other.bodyMedium ?? bodyMedium,
+      bodySmall: other.bodySmall ?? bodySmall,
+      labelLarge: other.labelLarge ?? labelLarge,
+      labelMedium: other.labelMedium ?? labelMedium,
+      labelSmall: other.labelSmall ?? labelSmall,
+      splashColor: other.splashColor ?? splashColor,
+      highlightColor: other.highlightColor ?? highlightColor,
+      hoverColor: other.hoverColor ?? hoverColor,
+      focusColor: other.focusColor ?? focusColor,
+      disabledColor: other.disabledColor ?? disabledColor,
+      shadowColor: other.shadowColor ?? shadowColor,
+      visualDensity: other.visualDensity ?? visualDensity,
+      materialTapTargetSize:
+          other.materialTapTargetSize ?? materialTapTargetSize,
     );
   }
 }

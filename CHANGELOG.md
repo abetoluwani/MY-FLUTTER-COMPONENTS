@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-01-23
+
+### Added
+
+- **Comprehensive Theme System**: Expanded `SACThemeConfig` with 50+ new properties for granular control over all Flutter Material components
+  - Component-specific theming: Scaffold, AppBar, BottomNavigationBar, NavigationBar, NavigationRail, Drawer, FAB
+  - Button theming: ElevatedButton, OutlinedButton, TextButton, FilledButton, IconButton
+  - Surface theming: Cards, Dialogs, BottomSheet, Snackbar, PopupMenu
+  - Input theming: TextField decoration, Checkbox, Radio, Switch, Slider, ProgressIndicator
+  - Display theming: Tooltip, Divider, ListTile, TabBar, DataTable, Chip, Badge, SearchBar, SegmentedButton, ExpansionTile
+  - Typography: Full `TextTheme` customization with `fontFamily` and individual text style overrides
+  - Interaction states: splash, highlight, hover, focus, disabled colors
+  - Mode-specific overrides: Separate `...Light` and `...Dark` properties for complete light/dark mode customization
+
+### Changed
+
+- Updated `README.md` with advanced theming documentation and examples
+- Enhanced `example/example.dart` to showcase new theme capabilities including typography configuration
+
+### Fixed
+
+- Lint issue in OTP widget: Added braces around if-statement return
+- Removed unnecessary library declaration
+- Removed duplicate import in test file
+
+---
+
 ## [0.2.1] - 2026-01-23
 
 ### Added

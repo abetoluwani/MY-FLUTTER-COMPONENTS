@@ -194,8 +194,10 @@ class ThemeExamples extends StatelessWidget {
         ),
         vSpace(16),
 
-        // SACThemeBase usage
-        MedAppText('3. SACThemeBase - Reusable Theme Class'),
+        vSpace(16),
+
+        // Advanced Customization
+        MedAppText('3. Advanced Component Customization'),
         vSpace(4),
         Container(
           padding: const EdgeInsets.all(12),
@@ -204,18 +206,46 @@ class ThemeExamples extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: const Text(
-            'class AppTheme extends SACThemeBase {\n'
-            '  @override\n'
-            '  SACThemeConfig? config() => SACThemeConfig(...);\n'
-            '}\n'
-            '// Use: AppTheme().light(), AppTheme().dark()',
+            'SACThemeConfig(\n'
+            '  // Specific overrides per component\n'
+            '  scaffoldBackgroundLight: Colors.white,\n'
+            '  appBarElevation: 0,\n'
+            '  inputBorderRadius: 12.0,\n'
+            '  fabShape: CircleBorder(),\n'
+            ');',
+            style: TextStyle(fontFamily: 'monospace', fontSize: 12),
+          ),
+        ),
+        vSpace(8),
+        SmallAppText(
+          'Over 50 properties available including Scaffold, AppBar, Navigation, Buttons, Cards, Dialogs, Inputs, and more.',
+        ),
+        vSpace(16),
+
+        // Typography Config
+        MedAppText('4. Typography Configuration'),
+        vSpace(4),
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.grey[100],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: const Text(
+            'SACThemeConfig(\n'
+            '  fontFamily: "Roboto",\n'
+            '  displayLarge: TextStyle(\n'
+            '    fontSize: 32,\n'
+            '    fontWeight: FontWeight.bold,\n'
+            '  ),\n'
+            ');',
             style: TextStyle(fontFamily: 'monospace', fontSize: 12),
           ),
         ),
         vSpace(16),
 
         // AppColors
-        MedAppText('4. AppColors - Color Constants'),
+        MedAppText('5. AppColors - Color Constants'),
         vSpace(8),
         Wrap(
           spacing: 8,

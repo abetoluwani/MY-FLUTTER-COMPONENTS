@@ -232,44 +232,48 @@ MaterialApp(
 
 // Per-mode overrides
 final config = SACThemeConfig(
-  primary: Colors.blue, // shared fallback
+  // Shared base colors (fallback)
+  primary: Colors.blue,
   secondary: Colors.amber,
+
+  // --- Light Mode Overrides ---
   primaryLight: Colors.teal,
-  secondaryLight: Colors.orange,
-  backgroundLight: const Color(0xFFFDFCF9),
-  surfaceLight: Colors.white,
+  backgroundLight: const Color(0xFFFDFCF9), // Light background
+  scaffoldBackgroundLight: Colors.white,    // specific scaffold color
+  appBarBackgroundLight: Colors.white,      // specific app bar color
+  inputFillColorLight: Colors.grey[100],    // specific input color
+
+  // --- Dark Mode Overrides ---
   primaryDark: Colors.deepPurple,
-  secondaryDark: Colors.tealAccent,
-  backgroundDark: const Color(0xFF0E1116),
-  surfaceDark: const Color(0xFF161B22),
+  backgroundDark: const Color(0xFF0E1116),  // Dark background
+  scaffoldBackgroundDark: Colors.black,     // specific scaffold color
+  appBarBackgroundDark: Colors.grey[900],   // specific app bar color
+  inputFillColorDark: Colors.grey[800],     // specific input color
+
+  // --- Component Geometry (Shared) ---
+  appBarElevation: 0,
+  inputBorderRadius: 12.0,
+  fontFamily: 'Roboto',
 );
 
 MaterialApp(
   theme: SACTheme.light(config),
   darkTheme: SACTheme.dark(config),
 );
-
-// Custom theme class using SACThemeBase
-class AppTheme extends SACThemeBase {
-  const AppTheme();
-
-  @override
-  SACThemeConfig? config() => const SACThemeConfig(
-        primaryLight: Colors.teal,
-        secondaryLight: Colors.orange,
-        primaryDark: Colors.deepPurple,
-        secondaryDark: Colors.tealAccent,
-      );
-}
-
-final appTheme = AppTheme();
-MaterialApp(
-  theme: appTheme.light(),
-  darkTheme: appTheme.dark(),
-);
 ```
 
-Mode-aware fields: `...Light` apply in light mode, `...Dark` apply in dark mode; shared fields (e.g., `primary`) are used when no mode-specific value is provided.
+### Advanced Theme Customization
+
+`SACThemeConfig` supports over 50 properties for granular control over every component:
+
+- **Structure**: `scaffoldBackground...`, `appBarBackground...`, `drawerWidth`, `visualDensity`
+- **Navigation**: `bottomNav...`, `navigationBar...`, `navigationRail...`
+- **Buttons**: `fab...`, `elevatedButtonStyle`, `outlinedButtonStyle`, etc.
+- **Inputs**: `inputFillColor...`, `inputBorderRadius`, `switchActiveColor`, `checkboxFillColor`
+- **Surfaces**: `cardColor...`, `dialogBackground...`, `bottomSheet...`, `snackBar...`
+- **Typography**: `fontFamily`, `displayLarge`, `bodyMedium`, etc.
+
+Mode-specific fields (`...Light` / `...Dark`) allow you to create completely distinct visual identities for light and dark modes while sharing structural traits like border radius.
 
 ### CLI Commands
 

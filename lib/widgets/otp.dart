@@ -802,8 +802,9 @@ class _OTPVerificationWidgetState extends State<OTPVerificationWidget> {
   }
 
   Future<void> _handleResend() async {
-    if (_remainingSeconds > 0 || _isResending || widget.onResend == null)
+    if (_remainingSeconds > 0 || _isResending || widget.onResend == null) {
       return;
+    }
 
     setState(() => _isResending = true);
 
