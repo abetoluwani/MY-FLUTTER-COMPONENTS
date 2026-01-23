@@ -5,11 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.2] - 2026-01-23
+
+### Fixed
+
+- **AppText Font Family Inheritance**: Removed hardcoded Poppins font default. `AppText` now properly inherits `fontFamily` from `Theme.of(context)`. Users can still use Poppins by setting it in their theme or via the `fontFamily` property.
+
+---
+
 ## [0.3.1] - 2026-01-23
 
 ### Fixed
 
-- **AppText Theme Inheritance**: Removed hardcoded black color and Poppins font defaults. `AppText` and derived widgets now properly inherit **color** and **fontFamily** from `Theme.of(context)`.
+- **AppText Theme Color Inheritance**: Removed hardcoded black color default from `AppText` and all derived widgets, allowing proper color inheritance from theme.
 - **Style Merging**: `AppText` now correctly prioritizes explicit properties (like `color`, `fontSize`) over the provided `textStyle`.
 - **Custom Font Support**: Added support for non-Google fonts. Providing a `fontFamily` now uses a standard `TextStyle`, enabling asset-based fonts.
 
