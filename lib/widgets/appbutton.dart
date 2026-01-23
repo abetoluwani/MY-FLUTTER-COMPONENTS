@@ -140,7 +140,7 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
     );
     final safeElevation = validateElevation(
       widget.elevation,
-      defaultValue: 2,
+      defaultValue: 0,
       enableSecurity: widget.enableSecurity,
     );
     final safeIconSize = validateSize(
@@ -400,7 +400,11 @@ class _NormalElevatedButtonState extends State<NormalElevatedButton> {
               widget.padding ??
               const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           backgroundColor: widget.color ?? AppColors.primary,
-          elevation: widget.elevation,
+          elevation: validateElevation(
+            widget.elevation,
+            defaultValue: 0,
+            enableSecurity: widget.enableSecurity,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(safeRadius),
           ),
