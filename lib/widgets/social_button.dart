@@ -1,85 +1,195 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:swiss_army_component/swiss_army_component.dart';
 
 /// Supported social login providers.
 enum SocialProvider { google, apple, facebook, email }
 
-/// A dedicated button for social login interactions.
+/// A highly customizable button for social login interactions.
 ///
-/// Automatically handles branding (colors, icons) for supported providers.
+/// Provides sensible defaults for popular providers (Google, Apple, Facebook),
+/// but allows full customization of colors, icons, labels, and styling.
 ///
-/// Example:
+/// Example - Default Branding:
 /// ```dart
 /// SocialLoginButton(
 ///   provider: SocialProvider.google,
 ///   onPressed: () => signInWithGoogle(),
 /// );
 /// ```
+///
+/// Example - Custom Styling:
+/// ```dart
+/// SocialLoginButton(
+///   provider: SocialProvider.google,
+///   onPressed: () => signInWithGoogle(),
+///   label: 'Sign in with Google',
+///   bgColor: Colors.blue,
+///   textColor: Colors.white,
+///   borderRadius: 20,
+///   iconWidget: Icon(Icons.g_mobiledata, color: Colors.white),
+/// );
+/// ```
 class SocialLoginButton extends StatelessWidget {
+  /// The social provider (determines default branding if no overrides).
   final SocialProvider provider;
+
+  /// Callback when button is pressed.
   final VoidCallback? onPressed;
+
+  /// Custom label text. Defaults to "Continue with {Provider}".
   final String? label;
+
+  /// Custom background color. Overrides provider default.
+  final Color? bgColor;
+
+  /// Custom text color. Overrides provider default.
+  final Color? textColor;
+
+  /// Custom icon widget. Overrides the default SVG/icon for the provider.
+  final Widget? iconWidget;
+
+  /// Icon size if using default icon. Default: 20.
+  final double? iconSize;
+
+  /// Button width. Default: full width.
   final double? width;
+
+  /// Button height. Default: 50.
   final double? height;
+
+  /// Border radius. Default: 10.
+  final double? borderRadius;
+
+  /// Border side. Overrides provider default.
+  final BorderSide? borderSide;
+
+  /// Padding inside the button.
+  final EdgeInsetsGeometry? padding;
+
+  /// Font size for the label. Default: 15.
+  final double? fontSize;
+
+  /// Font weight for the label. Default: FontWeight.w600.
+  final FontWeight? fontWeight;
+
+  /// Elevation. Default: 0.
+  final double? elevation;
+
+  /// Show loading indicator.
   final bool isLoading;
+
+  /// Enable/disable the button.
   final bool enabled;
+
+  /// Spacing between icon and text. Default: 12.
+  final double? iconSpacing;
 
   const SocialLoginButton({
     super.key,
     required this.provider,
     required this.onPressed,
     this.label,
+    this.bgColor,
+    this.textColor,
+    this.iconWidget,
+    this.iconSize,
     this.width,
     this.height,
+    this.borderRadius,
+    this.borderSide,
+    this.padding,
+    this.fontSize,
+    this.fontWeight,
+    this.elevation,
     this.isLoading = false,
     this.enabled = true,
+    this.iconSpacing,
   });
 
   @override
   Widget build(BuildContext context) {
-    // Determine style based on provider
+    // Get provider defaults
     final config = _getProviderConfig(provider, context);
 
-    return AppElevatedButton(
-      onPressed: onPressed,
-      title: label ?? config.defaultLabel,
-      bgColor: config.bgColor,
-      textColor: config.textColor,
-      width: width,
-      height: height,
-      elevation: 0,
-      side: config.borderSide,
-      isLoading: isLoading,
-      enabled: enabled,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _buildIcon(config),
-          SizedBox(width: 12),
-          SmallAppText(
-            label ?? config.defaultLabel,
-            color: config.textColor,
-            fontWeight: FontWeight.w600,
-            fontSize: 15,
+    // Apply overrides
+    final effectiveBgColor = bgColor ?? config.bgColor;
+    final effectiveTextColor = textColor ?? config.textColor;
+    final effectiveBorderSide = borderSide ?? config.borderSide;
+    final effectiveLabel = label ?? config.defaultLabel;
+    final effectiveIconSize = iconSize ?? 20.0;
+    final effectiveFontSize = fontSize ?? 15.0;
+    final effectiveFontWeight = fontWeight ?? FontWeight.w600;
+    final effectiveIconSpacing = iconSpacing ?? 12.0;
+    final effectiveRadius = borderRadius ?? 10.0;
+    final effectiveHeight = height ?? 50.h;
+    final effectiveElevation = elevation ?? 0.0;
+
+    return SizedBox(
+      width: width ?? double.infinity,
+      height: effectiveHeight,
+      child: ElevatedButton(
+        onPressed: enabled && !isLoading ? onPressed : null,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: effectiveBgColor,
+          foregroundColor: effectiveTextColor,
+          elevation: effectiveElevation,
+          padding:
+              padding ?? EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(effectiveRadius),
+            side: effectiveBorderSide ?? BorderSide.none,
           ),
-        ],
+          disabledBackgroundColor: effectiveBgColor.withValues(alpha: 0.5),
+        ),
+        child: isLoading
+            ? SizedBox(
+                width: 20.w,
+                height: 20.h,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(effectiveTextColor),
+                ),
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildIcon(config, effectiveIconSize, effectiveTextColor),
+                  SizedBox(width: effectiveIconSpacing),
+                  Text(
+                    effectiveLabel,
+                    style: TextStyle(
+                      color: effectiveTextColor,
+                      fontWeight: effectiveFontWeight,
+                      fontSize: effectiveFontSize,
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }
 
-  Widget _buildIcon(_SocialConfig config) {
+  Widget _buildIcon(_SocialConfig config, double size, Color fallbackColor) {
+    // If user provided a custom icon widget, use it
+    if (iconWidget != null) {
+      return iconWidget!;
+    }
+
+    // Otherwise, use the provider default
     if (config.isSvg) {
       return SvgPicture.string(
         config.iconData as String,
-        width: 20,
-        height: 20,
+        width: size,
+        height: size,
       );
     } else {
       return Icon(
         config.iconData as IconData,
-        color: config.iconColor,
-        size: 20,
+        color: config.iconColor ?? fallbackColor,
+        size: size,
       );
     }
   }
