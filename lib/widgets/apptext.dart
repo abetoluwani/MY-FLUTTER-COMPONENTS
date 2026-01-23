@@ -172,54 +172,146 @@ class AppText extends StatelessWidget {
   }
 
   TextStyle _buildTextStyle() {
-    final validatedFontSize = validateTextFontSize(
-      fontSize,
-      defaultValue: _getDefaultFontSize().sp,
+    // 1. Calculate & Validate Defaults
+    final defaultFontSize = _getDefaultFontSize().sp;
+    // We validate defaults to ensure they respect security limits too
+    final validatedDefaultFontSize = validateTextFontSize(
+      null,
+      defaultValue: defaultFontSize,
       enableSecurity: enableSecurity,
     );
 
-    final validatedLetterSpacing = validateLetterSpacing(
-      letterSpacing,
+    final validatedDefaultLetterSpacing = validateLetterSpacing(
+      null,
       enableSecurity: enableSecurity,
     );
 
-    final validatedWordSpacing = validateWordSpacing(
-      wordSpacing,
+    final validatedDefaultWordSpacing = validateWordSpacing(
+      null,
       enableSecurity: enableSecurity,
     );
 
-    final validatedHeight = height != null
-        ? validateLineHeight(height, enableSecurity: enableSecurity)
-        : null;
+    // 2. Create Base Style (Defaults + Poppins or Custom Font)
+    // We start with null color to allow theme inheritance
+    TextStyle baseStyle;
 
-    final validatedDecorationThickness = decorationThickness != null
-        ? validateDecorationThickness(
-            decorationThickness,
-            enableSecurity: enableSecurity,
-          )
-        : null;
+    if (fontFamily != null) {
+      baseStyle = TextStyle(
+        fontFamily: fontFamily,
+        fontSize: validatedDefaultFontSize,
+        fontWeight: _getDefaultFontWeight(),
+        letterSpacing: validatedDefaultLetterSpacing,
+        wordSpacing: validatedDefaultWordSpacing,
+        decoration: _getTextDecoration(),
+        decorationStyle: decorationStyle,
+      );
+    } else {
+      baseStyle = GoogleFonts.poppins(
+        fontSize: validatedDefaultFontSize,
+        fontWeight: _getDefaultFontWeight(),
+        letterSpacing: validatedDefaultLetterSpacing,
+        wordSpacing: validatedDefaultWordSpacing,
+        decoration: _getTextDecoration(),
+        decorationStyle: decorationStyle,
+      );
+    }
 
-    final validatedShadows = validateTextShadows(
-      shadows,
-      enableSecurity: enableSecurity,
-    );
+    // 3. Merge User Provided Style
+    // If textStyle is provided, it merges ON TOP of base defaults.
+    TextStyle effectiveStyle = baseStyle.merge(textStyle);
 
-    return textStyle ??
-        GoogleFonts.poppins(
-          color: gradient == null ? (color ?? AppColors.black) : null,
-          fontSize: validatedFontSize,
-          fontWeight: fontWeight ?? _getDefaultFontWeight(),
-          fontStyle: fontStyle,
-          letterSpacing: validatedLetterSpacing,
-          wordSpacing: validatedWordSpacing,
-          height: validatedHeight,
-          decoration: _getTextDecoration(),
-          decorationColor: decorationColor,
-          decorationStyle: decorationStyle,
-          decorationThickness: validatedDecorationThickness,
-          backgroundColor: backgroundColor,
-          shadows: validatedShadows,
-        );
+    if (color != null) {
+      effectiveStyle = effectiveStyle.copyWith(color: color);
+    }
+
+    if (fontSize != null) {
+      final validatedFontSize = validateTextFontSize(
+        fontSize,
+        defaultValue: defaultFontSize,
+        enableSecurity: enableSecurity,
+      );
+      effectiveStyle = effectiveStyle.copyWith(fontSize: validatedFontSize);
+    }
+
+    if (fontWeight != null) {
+      effectiveStyle = effectiveStyle.copyWith(fontWeight: fontWeight);
+    }
+
+    if (fontStyle != null) {
+      effectiveStyle = effectiveStyle.copyWith(fontStyle: fontStyle);
+    }
+
+    if (letterSpacing != null) {
+      final validated = validateLetterSpacing(
+        letterSpacing,
+        enableSecurity: enableSecurity,
+      );
+      effectiveStyle = effectiveStyle.copyWith(letterSpacing: validated);
+    }
+
+    if (wordSpacing != null) {
+      final validated = validateWordSpacing(
+        wordSpacing,
+        enableSecurity: enableSecurity,
+      );
+      effectiveStyle = effectiveStyle.copyWith(wordSpacing: validated);
+    }
+
+    if (height != null) {
+      final validated = validateLineHeight(
+        height,
+        enableSecurity: enableSecurity,
+      );
+      effectiveStyle = effectiveStyle.copyWith(height: validated);
+    }
+
+    if (backgroundColor != null) {
+      effectiveStyle = effectiveStyle.copyWith(
+        backgroundColor: backgroundColor,
+      );
+    }
+
+    if (shadows != null) {
+      final validated = validateTextShadows(
+        shadows,
+        enableSecurity: enableSecurity,
+      );
+      effectiveStyle = effectiveStyle.copyWith(shadows: validated);
+    }
+
+    if (decorationColor != null) {
+      effectiveStyle = effectiveStyle.copyWith(
+        decorationColor: decorationColor,
+      );
+    }
+
+    if (decorationThickness != null) {
+      final validated = validateDecorationThickness(
+        decorationThickness,
+        enableSecurity: enableSecurity,
+      );
+      effectiveStyle = effectiveStyle.copyWith(decorationThickness: validated);
+    }
+
+    // Handle special cases
+    // _getTextDecoration() logic uses 'decoration' prop. If decoration prop is null, it returns null.
+    // If textStyle has decoration, we assume 'decoration' prop should override it if not null.
+    // Since we put _getTextDecoration() in baseStyle, and merged textStyle,
+    // if textStyle has decoration, it overrides base (null).
+    // But if 'this.decoration' (enum) is set, we want IT to win.
+
+    if (decoration != null) {
+      effectiveStyle = effectiveStyle.copyWith(
+        decoration: _getTextDecoration(),
+      );
+    }
+
+    // Gradient handled in build(), but if we want color to be null when gradient is present:
+    if (gradient != null) {
+      effectiveStyle = effectiveStyle.copyWith(color: null);
+    }
+
+    return effectiveStyle;
   }
 
   @override
@@ -727,7 +819,7 @@ class PriceText extends StatelessWidget {
     return absValue.toStringAsFixed(showDecimals ? decimalPlaces : 0);
   }
 
-  Color _getColor() {
+  Color? _getColor() {
     if (isProfit != null && showProfitLossColors) {
       if (isProfit!) {
         return profitColor ?? Colors.green;
@@ -735,7 +827,7 @@ class PriceText extends StatelessWidget {
         return lossColor ?? AppColors.red;
       }
     }
-    return color ?? AppColors.black;
+    return color;
   }
 
   @override
@@ -1006,7 +1098,7 @@ class BrandNameText extends StatelessWidget {
           GoogleFonts.poppins(
             fontSize: validatedFontSize,
             fontWeight: fontWeight ?? _getDefaultFontWeight(),
-            color: color ?? AppColors.black,
+            color: color,
             letterSpacing: validatedLetterSpacing,
           ),
       overflow: overflow ?? TextOverflow.ellipsis,
@@ -1096,7 +1188,7 @@ class ProductTitleText extends StatelessWidget {
           GoogleFonts.poppins(
             fontSize: validatedFontSize,
             fontWeight: fontWeight ?? FontWeight.w500,
-            color: color ?? AppColors.black,
+            color: color,
             letterSpacing: validatedLetterSpacing,
           ),
       overflow: overflow ?? TextOverflow.ellipsis,
@@ -1203,7 +1295,7 @@ class ImportantAppText extends StatelessWidget {
     final mainTextStyle =
         textStyle ??
         GoogleFonts.poppins(
-          color: color ?? AppColors.black,
+          color: color,
           fontSize: validatedFontSize,
           fontWeight: fontWeight ?? FontWeight.bold,
           fontStyle: fontStyle,
@@ -1334,7 +1426,7 @@ class HighlightedText extends StatelessWidget {
         GoogleFonts.poppins(
           fontSize: validatedFontSize,
           fontWeight: fontWeight ?? FontWeight.normal,
-          color: color ?? AppColors.black,
+          color: color,
         );
 
     final highlightStyle = baseStyle.copyWith(
@@ -1458,7 +1550,7 @@ class _ExpandableTextState extends State<ExpandableText> {
         GoogleFonts.poppins(
           fontSize: validatedFontSize,
           fontWeight: widget.fontWeight ?? FontWeight.normal,
-          color: widget.color ?? AppColors.black,
+          color: widget.color,
         );
 
     final linkStyle = baseStyle.copyWith(

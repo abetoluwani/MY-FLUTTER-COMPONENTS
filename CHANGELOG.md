@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1] - 2026-01-23
+
+### Fixed
+
+- **AppText Theme Inheritance**: Removed hardcoded black color default from `AppText` and all derived widgets (`PriceText`, `BrandNameText`, etc.), allowing them to properly inherit text colors from `Theme.of(context)`.
+- **Style Merging**: `AppText` now correctly prioritizes explicit properties (like `color`, `fontSize`) over the provided `textStyle`.
+- **Custom Font Support**: Added support for non-Google fonts. Providing a `fontFamily` now uses a standard `TextStyle`, enabling asset-based fonts.
+
+### Changed
+
+- Updated text widgets to behave more predictably when composing styles.
+
+---
+
 ## [0.3.0] - 2026-01-23
 
 ### Added

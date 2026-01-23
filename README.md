@@ -136,6 +136,8 @@ PriceText(price: '1299.95', currency: Currency.naira, isProfit: true);
 const SlashedPriceText(price: '1599', currency: '₺');
 ```
 
+**Note:** `AppText` defaults to Google Fonts (Poppins), but you can use custom asset fonts by providing the `fontFamily` property or a `textStyle` with a font family.
+
 ### Spacing Helpers
 
 ```dart

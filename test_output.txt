@@ -1,0 +1,29 @@
+00:00 +0: loading /Users/stealthexploit/Documents/Swiss-Army/test/app_text_theme_repro_test.dart                                                                                                       00:01 +0: loading /Users/stealthexploit/Documents/Swiss-Army/test/app_text_theme_repro_test.dart                                                                                                       00:02 +0: loading /Users/stealthexploit/Documents/Swiss-Army/test/app_text_theme_repro_test.dart                                                                                                       00:03 +0: loading /Users/stealthexploit/Documents/Swiss-Army/test/app_text_theme_repro_test.dart                                                                                                       00:04 +0: loading /Users/stealthexploit/Documents/Swiss-Army/test/app_text_theme_repro_test.dart                                                                                                       00:04 +0: AppText should inherit color from Theme when no color is provided                                                                                                                            00:05 +0: AppText should inherit color from Theme when no color is provided                                                                                                                            00:06 +0: AppText should inherit color from Theme when no color is provided                                                                                                                            00:06 +1: AppText should inherit color from Theme when no color is provided                                                                                                                            00:06 +1: PriceText should inherit color from Theme when no color is provided                                                                                                                          00:07 +1: PriceText should inherit color from Theme when no color is provided                                                                                                                          00:07 +1: PriceText should inherit color from Theme when no color is provided                                                                                                                          
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: not null
+  Actual: <null>
+Could not find text widget containing "100.00"
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/stealthexploit/Documents/Swiss-Army/test/app_text_theme_repro_test.dart:87:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/stealthexploit/Documents/Swiss-Army/test/app_text_theme_repro_test.dart line 87
+The test description was:
+  PriceText should inherit color from Theme when no color is provided
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:07 +1 -1: PriceText should inherit color from Theme when no color is provided [E]                                                                                                                   
+  Test failed. See exception logs above.
+  The test description was: PriceText should inherit color from Theme when no color is provided
+  
+
+To run this test again: /usr/local/share/flutter/bin/cache/dart-sdk/bin/dart test /Users/stealthexploit/Documents/Swiss-Army/test/app_text_theme_repro_test.dart -p vm --plain-name 'PriceText should inherit color from Theme when no color is provided'
+00:07 +1 -1: Some tests failed.                                                                                                                                                                        
