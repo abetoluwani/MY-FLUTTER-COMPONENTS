@@ -2,9 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-
 class ButtonSecurityConfig {
-   
   static bool enforceValidation = false;
   static Duration defaultDebounceDuration = const Duration(milliseconds: 300);
   static Duration defaultCooldownDuration = const Duration(seconds: 1);
@@ -19,6 +17,7 @@ class ButtonSecurityConfig {
   static void setDefaultDebounceDuration(Duration duration) {
     defaultDebounceDuration = duration;
   }
+
   static void setDefaultCooldownDuration(Duration duration) {
     defaultCooldownDuration = duration;
   }
@@ -157,9 +156,9 @@ Future<void> safeExecuteAsync(
   }
 }
 
-double validateSize(
+double? validateSize(
   double? value, {
-  required double defaultValue,
+  double? defaultValue,
   double? min,
   double? max,
   bool? enableSecurity,
@@ -185,9 +184,9 @@ double validateSize(
   return value;
 }
 
-double validateFontSize(
+double? validateFontSize(
   double? value, {
-  required double defaultValue,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   return validateSize(
@@ -199,9 +198,9 @@ double validateFontSize(
   );
 }
 
-double validateElevation(
+double? validateElevation(
   double? value, {
-  required double defaultValue,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   if (value == null) return defaultValue;
@@ -224,9 +223,9 @@ double validateElevation(
   return value;
 }
 
-double validateBorderRadius(
+double? validateBorderRadius(
   double? value, {
-  required double defaultValue,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   if (value == null) return defaultValue;

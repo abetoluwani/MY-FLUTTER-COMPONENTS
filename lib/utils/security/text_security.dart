@@ -128,9 +128,9 @@ String validateTextContent(String? text, {bool? enableSecurity}) {
 }
 
 /// Validates font size within configured bounds.
-double validateTextFontSize(
+double? validateTextFontSize(
   double? fontSize, {
-  required double defaultValue,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   final shouldValidate = enableSecurity ?? TextSecurityConfig.enforceValidation;
@@ -160,9 +160,9 @@ double validateTextFontSize(
 }
 
 /// Validates letter spacing within configured bounds.
-double validateLetterSpacing(
+double? validateLetterSpacing(
   double? spacing, {
-  double defaultValue = 0.0,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   final shouldValidate = enableSecurity ?? TextSecurityConfig.enforceValidation;
@@ -192,9 +192,9 @@ double validateLetterSpacing(
 }
 
 /// Validates word spacing within configured bounds.
-double validateWordSpacing(
+double? validateWordSpacing(
   double? spacing, {
-  double defaultValue = 0.0,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   final shouldValidate = enableSecurity ?? TextSecurityConfig.enforceValidation;
@@ -224,9 +224,9 @@ double validateWordSpacing(
 }
 
 /// Validates line height within configured bounds.
-double validateLineHeight(
+double? validateLineHeight(
   double? height, {
-  double defaultValue = 1.2,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   final shouldValidate = enableSecurity ?? TextSecurityConfig.enforceValidation;
@@ -282,9 +282,9 @@ int validateMaxLines(int? maxLines, {int? defaultValue, bool? enableSecurity}) {
 }
 
 /// Validates decoration thickness within configured bounds.
-double validateDecorationThickness(
+double? validateDecorationThickness(
   double? thickness, {
-  double defaultValue = 1.0,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   final shouldValidate = enableSecurity ?? TextSecurityConfig.enforceValidation;
@@ -314,9 +314,9 @@ double validateDecorationThickness(
 }
 
 /// Validates text scale factor within configured bounds.
-double validateTextScaleFactor(
+double? validateTextScaleFactor(
   double? scaleFactor, {
-  double defaultValue = 1.0,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   final shouldValidate = enableSecurity ?? TextSecurityConfig.enforceValidation;

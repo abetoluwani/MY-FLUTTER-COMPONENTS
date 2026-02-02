@@ -30,7 +30,11 @@ void main() {
     // Check elevation state property. We assume normal state (empty set).
     final double? elevation = style.elevation?.resolve({});
 
-    expect(elevation, 0.0, reason: 'Default elevation should be 0');
+    expect(
+      elevation,
+      null,
+      reason: 'Default elevation should be null (theme default)',
+    );
   });
 
   testWidgets('NormalElevatedButton should have elevation 0 by default', (
@@ -54,6 +58,10 @@ void main() {
     final ButtonStyle style = button.style!;
     final double? elevation = style.elevation?.resolve({});
 
-    expect(elevation, 0.0, reason: 'Default elevation should be 0');
+    expect(
+      elevation,
+      null,
+      reason: 'Default elevation should be null (theme default)',
+    );
   });
 }

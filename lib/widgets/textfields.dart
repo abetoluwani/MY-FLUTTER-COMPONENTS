@@ -309,49 +309,49 @@ class _AppTextFieldState extends State<AppTextField> {
 
   // ============== Getters with Validation ==============
 
-  double get _fontSize => validateTextFieldFontSize(
+  double? get _fontSize => validateTextFieldFontSize(
     widget.fontSize,
     defaultValue: _defaultFontSize.sp,
     enableSecurity: widget.enableSecurity,
   );
 
-  double get _labelFontSize => validateTextFieldFontSize(
+  double? get _labelFontSize => validateTextFieldFontSize(
     widget.labelFontSize,
     defaultValue: _defaultLabelFontSize.sp,
     enableSecurity: widget.enableSecurity,
   );
 
-  double get _hintFontSize => validateTextFieldFontSize(
+  double? get _hintFontSize => validateTextFieldFontSize(
     widget.hintFontSize,
     defaultValue: _defaultHintFontSize.sp,
     enableSecurity: widget.enableSecurity,
   );
 
-  double get _borderRadius => validateTextFieldBorderRadius(
+  double? get _borderRadius => validateTextFieldBorderRadius(
     widget.borderRadius,
     defaultValue: _getDefaultBorderRadius(),
     enableSecurity: widget.enableSecurity,
   );
 
-  double get _borderWidth => validateTextFieldBorderWidth(
+  double? get _borderWidth => validateTextFieldBorderWidth(
     widget.borderWidth,
     defaultValue: _defaultBorderWidth,
     enableSecurity: widget.enableSecurity,
   );
 
-  double get _labelSpacing => validateLabelSpacing(
+  double? get _labelSpacing => validateLabelSpacing(
     widget.labelSpacing,
     defaultValue: _defaultLabelSpacing.h,
     enableSecurity: widget.enableSecurity,
   );
 
-  double get _prefixIconSize => validateTextFieldIconSize(
+  double? get _prefixIconSize => validateTextFieldIconSize(
     widget.prefixIconSize,
     defaultValue: _defaultIconSize.sp,
     enableSecurity: widget.enableSecurity,
   );
 
-  double get _suffixIconSize => validateTextFieldIconSize(
+  double? get _suffixIconSize => validateTextFieldIconSize(
     widget.suffixIconSize,
     defaultValue: _defaultIconSize.sp,
     enableSecurity: widget.enableSecurity,
@@ -437,12 +437,12 @@ class _AppTextFieldState extends State<AppTextField> {
             _defaultContentPaddingH,
             defaultValue: _defaultContentPaddingH,
             enableSecurity: widget.enableSecurity,
-          ),
+          )!,
           vertical: validateContentPadding(
             _defaultContentPaddingV,
             defaultValue: _defaultContentPaddingV,
             enableSecurity: widget.enableSecurity,
-          ),
+          )!,
         );
   }
 
@@ -456,12 +456,12 @@ class _AppTextFieldState extends State<AppTextField> {
       case TextFieldStyle.rounded:
       case TextFieldStyle.pill:
         return OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_borderRadius),
-          borderSide: BorderSide(color: borderColor, width: borderWidth),
+          borderRadius: BorderRadius.circular(_borderRadius ?? 4.0),
+          borderSide: BorderSide(color: borderColor, width: borderWidth ?? 1.0),
         );
       case TextFieldStyle.underline:
         return UnderlineInputBorder(
-          borderSide: BorderSide(color: borderColor, width: borderWidth),
+          borderSide: BorderSide(color: borderColor, width: borderWidth ?? 1.0),
         );
     }
   }
@@ -518,19 +518,19 @@ class _AppTextFieldState extends State<AppTextField> {
       errorBorder: _buildBorder(color: _errorColor),
       focusedErrorBorder: _buildBorder(
         color: _errorColor,
-        width: _borderWidth + 0.5,
+        width: (_borderWidth ?? 1.0) + 0.5,
       ),
       disabledBorder: _buildBorder(color: AppColors.grey100),
       contentPadding: _contentPadding,
       prefixIcon: _buildPrefixIcon(),
       suffixIcon: _buildSuffixIcon(),
       prefixIconConstraints: BoxConstraints(
-        minWidth: _prefixIconSize + 24,
-        minHeight: _prefixIconSize,
+        minWidth: (_prefixIconSize ?? 24.0) + 24,
+        minHeight: _prefixIconSize ?? 24.0,
       ),
       suffixIconConstraints: BoxConstraints(
-        minWidth: _suffixIconSize + 24,
-        minHeight: _suffixIconSize,
+        minWidth: (_suffixIconSize ?? 24.0) + 24,
+        minHeight: _suffixIconSize ?? 24.0,
       ),
       isDense: widget.fieldStyle == TextFieldStyle.pill,
     );
@@ -566,8 +566,8 @@ class _AppTextFieldState extends State<AppTextField> {
       suffixWidgets.add(
         widget.loadingWidget ??
             SizedBox(
-              width: _suffixIconSize * 0.8,
-              height: _suffixIconSize * 0.8,
+              width: (_suffixIconSize ?? 24.0) * 0.8,
+              height: (_suffixIconSize ?? 24.0) * 0.8,
               child: CircularProgressIndicator(
                 strokeWidth: 2,
                 valueColor: AlwaysStoppedAnimation<Color>(_iconColor),
@@ -905,25 +905,25 @@ class AppPhoneTextField extends StatelessWidget {
   static const double _defaultBorderRadius = 12.0;
   static const double _defaultBorderWidth = 1.5;
 
-  double get _labelFontSize => validateTextFieldFontSize(
+  double? get _labelFontSize => validateTextFieldFontSize(
     labelFontSize,
     defaultValue: _defaultLabelFontSize.sp,
     enableSecurity: enableSecurity,
   );
 
-  double get _labelSpacing => validateLabelSpacing(
+  double? get _labelSpacing => validateLabelSpacing(
     labelSpacing,
     defaultValue: _defaultLabelSpacing.h,
     enableSecurity: enableSecurity,
   );
 
-  double get _borderRadius => validateTextFieldBorderRadius(
+  double? get _borderRadius => validateTextFieldBorderRadius(
     borderRadius,
     defaultValue: _defaultBorderRadius,
     enableSecurity: enableSecurity,
   );
 
-  double get _borderWidth => validateTextFieldBorderWidth(
+  double? get _borderWidth => validateTextFieldBorderWidth(
     borderWidth,
     defaultValue: _defaultBorderWidth,
     enableSecurity: enableSecurity,
@@ -973,31 +973,31 @@ class AppPhoneTextField extends StatelessWidget {
             filled: true,
             fillColor: backgroundColor ?? AppColors.white,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(_borderRadius),
+              borderRadius: BorderRadius.circular(_borderRadius ?? 4.0),
               borderSide: BorderSide(
                 color: borderColor ?? AppColors.grey100,
-                width: _borderWidth,
+                width: _borderWidth ?? 1.0,
               ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(_borderRadius),
+              borderRadius: BorderRadius.circular(_borderRadius ?? 4.0),
               borderSide: BorderSide(
                 color: borderColor ?? AppColors.grey100,
-                width: _borderWidth,
+                width: _borderWidth ?? 1.0,
               ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(_borderRadius),
+              borderRadius: BorderRadius.circular(_borderRadius ?? 4.0),
               borderSide: BorderSide(
                 color: focusedBorderColor ?? AppColors.primary,
-                width: _borderWidth,
+                width: _borderWidth ?? 1.0,
               ),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(_borderRadius),
+              borderRadius: BorderRadius.circular(_borderRadius ?? 4.0),
               borderSide: BorderSide(
                 color: errorBorderColor ?? AppColors.red,
-                width: _borderWidth,
+                width: _borderWidth ?? 1.0,
               ),
             ),
           ),

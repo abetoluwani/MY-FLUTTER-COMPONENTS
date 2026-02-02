@@ -132,9 +132,9 @@ int validateInputLength(
 }
 
 /// Validates font size within configured bounds.
-double validateTextFieldFontSize(
+double? validateTextFieldFontSize(
   double? fontSize, {
-  required double defaultValue,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   final shouldValidate =
@@ -165,9 +165,9 @@ double validateTextFieldFontSize(
 }
 
 /// Validates border radius within configured bounds.
-double validateTextFieldBorderRadius(
+double? validateTextFieldBorderRadius(
   double? radius, {
-  required double defaultValue,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   final shouldValidate =
@@ -198,9 +198,9 @@ double validateTextFieldBorderRadius(
 }
 
 /// Validates border width within configured bounds.
-double validateTextFieldBorderWidth(
+double? validateTextFieldBorderWidth(
   double? width, {
-  double defaultValue = 1.0,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   final shouldValidate =
@@ -231,9 +231,9 @@ double validateTextFieldBorderWidth(
 }
 
 /// Validates content padding within configured bounds.
-double validateContentPadding(
+double? validateContentPadding(
   double? padding, {
-  required double defaultValue,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   final shouldValidate =
@@ -264,9 +264,9 @@ double validateContentPadding(
 }
 
 /// Validates icon size within configured bounds.
-double validateTextFieldIconSize(
+double? validateTextFieldIconSize(
   double? size, {
-  required double defaultValue,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   final shouldValidate =
@@ -396,9 +396,9 @@ double validateTextFieldHeight(
 }
 
 /// Validates label spacing within configured bounds.
-double validateLabelSpacing(
+double? validateLabelSpacing(
   double? spacing, {
-  double defaultValue = 8.0,
+  double? defaultValue,
   bool? enableSecurity,
 }) {
   final shouldValidate =

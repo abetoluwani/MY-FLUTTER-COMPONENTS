@@ -142,21 +142,6 @@ class AppText extends StatelessWidget {
     }
   }
 
-  FontWeight _getDefaultFontWeight() {
-    switch (style) {
-      case AppTextStyle.small:
-      case AppTextStyle.medium:
-      case AppTextStyle.caption:
-      case AppTextStyle.label:
-        return FontWeight.normal;
-      case AppTextStyle.large:
-        return FontWeight.w500;
-      case AppTextStyle.heading:
-      case AppTextStyle.display:
-        return FontWeight.bold;
-    }
-  }
-
   TextDecoration? _getTextDecoration() {
     if (decoration == null) return null;
     switch (decoration!) {
@@ -171,66 +156,56 @@ class AppText extends StatelessWidget {
     }
   }
 
-  TextStyle _buildTextStyle() {
-    // 1. Calculate & Validate Defaults
-    final defaultFontSize = _getDefaultFontSize().sp;
-    // We validate defaults to ensure they respect security limits too
-    final validatedDefaultFontSize = validateTextFontSize(
-      null,
-      defaultValue: defaultFontSize,
-      enableSecurity: enableSecurity,
-    );
+  TextStyle _buildTextStyle(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
 
-    final validatedDefaultLetterSpacing = validateLetterSpacing(
-      null,
-      enableSecurity: enableSecurity,
-    );
-
-    final validatedDefaultWordSpacing = validateWordSpacing(
-      null,
-      enableSecurity: enableSecurity,
-    );
-
-    // 2. Create Base Style (Defaults + Poppins or Custom Font)
-    // We start with null color to allow theme inheritance
+    // 1. Pick base style from Theme based on AppTextStyle enum
     TextStyle baseStyle;
-
-    if (fontFamily != null) {
-      baseStyle = TextStyle(
-        fontFamily: fontFamily,
-        fontSize: validatedDefaultFontSize,
-        fontWeight: _getDefaultFontWeight(),
-        letterSpacing: validatedDefaultLetterSpacing,
-        wordSpacing: validatedDefaultWordSpacing,
-        decoration: _getTextDecoration(),
-        decorationStyle: decorationStyle,
-      );
-    } else {
-      // FIX: Default to standard TextStyle to inherit theme's font family
-      // instead of forcing GoogleFonts.poppins.
-      // Users can still enforce Poppins via theme or explicit props if they want.
-      baseStyle = TextStyle(
-        fontSize: validatedDefaultFontSize,
-        fontWeight: _getDefaultFontWeight(),
-        letterSpacing: validatedDefaultLetterSpacing,
-        wordSpacing: validatedDefaultWordSpacing,
-        decoration: _getTextDecoration(),
-        decorationStyle: decorationStyle,
-      );
+    switch (style) {
+      case AppTextStyle.small:
+        baseStyle = textTheme.bodySmall ?? const TextStyle(fontSize: 12);
+        break;
+      case AppTextStyle.medium:
+        baseStyle = textTheme.bodyMedium ?? const TextStyle(fontSize: 14);
+        break;
+      case AppTextStyle.large:
+        baseStyle = textTheme.bodyLarge ?? const TextStyle(fontSize: 16);
+        break;
+      case AppTextStyle.heading:
+        baseStyle =
+            textTheme.titleLarge ??
+            const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+        break;
+      case AppTextStyle.display:
+        baseStyle =
+            textTheme.displayLarge ??
+            const TextStyle(fontSize: 28, fontWeight: FontWeight.bold);
+        break;
+      case AppTextStyle.caption:
+        baseStyle = textTheme.labelSmall ?? const TextStyle(fontSize: 11);
+        break;
+      case AppTextStyle.label:
+        baseStyle = textTheme.labelMedium ?? const TextStyle(fontSize: 13);
+        break;
     }
 
-    // 3. Merge User Provided Style
-    // If textStyle is provided, it merges ON TOP of base defaults.
+    // 2. Merge User Provided textStyle Prop (Merges on top of Theme)
     TextStyle effectiveStyle = baseStyle.merge(textStyle);
+
+    // 3. Apply Local Property Overrides (Individual props win)
+    if (fontFamily != null) {
+      effectiveStyle = effectiveStyle.copyWith(fontFamily: fontFamily);
+    }
 
     if (color != null) {
       effectiveStyle = effectiveStyle.copyWith(color: color);
     }
 
     if (fontSize != null) {
+      // We still use validateTextFontSize to enforce security if enabled
       final validatedFontSize = validateTextFontSize(
         fontSize,
-        defaultValue: defaultFontSize,
+        defaultValue: effectiveStyle.fontSize ?? _getDefaultFontSize().sp,
         enableSecurity: enableSecurity,
       );
       effectiveStyle = effectiveStyle.copyWith(fontSize: validatedFontSize);
@@ -296,16 +271,11 @@ class AppText extends StatelessWidget {
       effectiveStyle = effectiveStyle.copyWith(decorationThickness: validated);
     }
 
-    // Handle special cases
-    // _getTextDecoration() logic uses 'decoration' prop. If decoration prop is null, it returns null.
-    // If textStyle has decoration, we assume 'decoration' prop should override it if not null.
-    // Since we put _getTextDecoration() in baseStyle, and merged textStyle,
-    // if textStyle has decoration, it overrides base (null).
-    // But if 'this.decoration' (enum) is set, we want IT to win.
-
+    // Decoration (underline, etc.)
     if (decoration != null) {
       effectiveStyle = effectiveStyle.copyWith(
         decoration: _getTextDecoration(),
+        decorationStyle: decorationStyle,
       );
     }
 
@@ -331,7 +301,7 @@ class AppText extends StatelessWidget {
 
     final textWidget = Text(
       validatedContent,
-      style: _buildTextStyle(),
+      style: _buildTextStyle(context),
       textAlign: textAlign,
       textDirection: textDirection,
       maxLines: validatedMaxLines,
@@ -357,7 +327,7 @@ class AppText extends StatelessWidget {
     if (selectable) {
       result = SelectableText(
         validatedContent,
-        style: _buildTextStyle(),
+        style: _buildTextStyle(context),
         textAlign: textAlign,
         textDirection: textDirection,
         maxLines: validatedMaxLines,
@@ -1310,7 +1280,7 @@ class ImportantAppText extends StatelessWidget {
 
     final indicatorStyle = GoogleFonts.poppins(
       color: indicatorColor ?? AppColors.red,
-      fontSize: indicatorFontSize ?? (validatedFontSize + 2),
+      fontSize: indicatorFontSize ?? (validatedFontSize ?? 14.sp) + 2,
       fontWeight: indicatorFontWeight ?? FontWeight.bold,
     );
 

@@ -127,20 +127,20 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveTextColor = widget.textColor ?? AppColors.white;
+    final effectiveTextColor = widget.textColor;
     final safeHeight = validateSize(
       widget.height,
-      defaultValue: 50.h,
+      defaultValue: null,
       enableSecurity: widget.enableSecurity,
     );
     final safeFontSize = validateFontSize(
       widget.fontSize,
-      defaultValue: 14.sp,
+      defaultValue: null,
       enableSecurity: widget.enableSecurity,
     );
     final safeElevation = validateElevation(
       widget.elevation,
-      defaultValue: 0,
+      defaultValue: null,
       enableSecurity: widget.enableSecurity,
     );
     final safeIconSize = validateSize(
@@ -160,7 +160,9 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
             height: 20.h,
             child: CircularProgressIndicator(
               strokeWidth: 2,
-              valueColor: AlwaysStoppedAnimation<Color>(effectiveTextColor),
+              valueColor: AlwaysStoppedAnimation<Color>(
+                effectiveTextColor ?? Theme.of(context).colorScheme.primary,
+              ),
             ),
           );
     } else if (widget.child != null) {
@@ -214,15 +216,11 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
         clipBehavior: widget.clipBehavior,
         statesController: widget.statesController,
         style: ElevatedButton.styleFrom(
-          backgroundColor: widget.bgColor ?? AppColors.primary,
-          foregroundColor: effectiveTextColor,
-          disabledBackgroundColor:
-              widget.disabledBgColor ??
-              (widget.bgColor ?? AppColors.primary).withValues(alpha: 0.5),
-          disabledForegroundColor:
-              widget.disabledTextColor ??
-              effectiveTextColor.withValues(alpha: 0.5),
-          minimumSize: Size(0, safeHeight),
+          backgroundColor: widget.bgColor,
+          foregroundColor: widget.textColor,
+          disabledBackgroundColor: widget.disabledBgColor,
+          disabledForegroundColor: widget.disabledTextColor,
+          minimumSize: safeHeight != null ? Size(0, safeHeight) : null,
           padding: widget.padding,
           elevation: safeElevation,
           shape: RoundedRectangleBorder(
@@ -348,10 +346,7 @@ class _NormalElevatedButtonState extends State<NormalElevatedButton> {
       content = SizedBox(
         width: 20.w,
         height: 20.h,
-        child: CircularProgressIndicator(
-          strokeWidth: 2,
-          valueColor: AlwaysStoppedAnimation<Color>(effectiveTextColor),
-        ),
+        child: CircularProgressIndicator(strokeWidth: 2),
       );
     } else {
       final textWidget = SmallAppText(
@@ -395,18 +390,16 @@ class _NormalElevatedButtonState extends State<NormalElevatedButton> {
       height: widget.height,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          minimumSize: Size(0, widget.height ?? 50.h),
-          padding:
-              widget.padding ??
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          backgroundColor: widget.color ?? AppColors.primary,
+          minimumSize: widget.height != null ? Size(0, widget.height!) : null,
+          padding: widget.padding,
+          backgroundColor: widget.color,
           elevation: validateElevation(
             widget.elevation,
-            defaultValue: 0,
+            defaultValue: null,
             enableSecurity: widget.enableSecurity,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(safeRadius),
+            borderRadius: BorderRadius.circular(safeRadius!),
           ),
         ),
         onPressed: widget.enabled && !widget.isLoading && !_isDebouncing
@@ -510,7 +503,7 @@ class _AppSecondaryElevatedButtonState
 
   @override
   Widget build(BuildContext context) {
-    final effectiveTextColor = widget.textColor ?? AppColors.primary;
+    final effectiveTextColor = widget.textColor;
 
     Widget content;
     if (widget.isLoading) {
@@ -519,7 +512,9 @@ class _AppSecondaryElevatedButtonState
         height: 20.h,
         child: CircularProgressIndicator(
           strokeWidth: 2,
-          valueColor: AlwaysStoppedAnimation<Color>(effectiveTextColor),
+          valueColor: AlwaysStoppedAnimation<Color>(
+            effectiveTextColor ?? Theme.of(context).colorScheme.primary,
+          ),
         ),
       );
     } else if (widget.prefixIcon != null || widget.suffixIcon != null) {
@@ -556,16 +551,16 @@ class _AppSecondaryElevatedButtonState
       height: widget.height,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: widget.bgColor ?? AppColors.white,
-          padding: widget.padding ?? simPad(0, 14),
-          minimumSize: Size(0, widget.height ?? 50.h),
+          backgroundColor: widget.bgColor,
+          padding: widget.padding,
+          minimumSize: widget.height != null ? Size(0, widget.height!) : null,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               validateBorderRadius(
                 widget.radius,
                 defaultValue: 10.0,
                 enableSecurity: widget.enableSecurity,
-              ),
+              )!,
             ),
           ),
           elevation: validateElevation(
@@ -573,8 +568,7 @@ class _AppSecondaryElevatedButtonState
             defaultValue: 0,
             enableSecurity: widget.enableSecurity,
           ),
-          disabledBackgroundColor: (widget.bgColor ?? AppColors.white)
-              .withValues(alpha: 0.5),
+          disabledBackgroundColor: widget.bgColor?.withValues(alpha: 0.5),
         ),
         onPressed: widget.enabled && !widget.isLoading && !_isDebouncing
             ? _handlePress
@@ -687,17 +681,14 @@ class _AppOutlinedButtonState extends State<AppOutlinedButton> {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveTextColor = widget.textcolour ?? AppColors.primary;
+    final effectiveTextColor = widget.textcolour;
 
     Widget content;
     if (widget.isLoading) {
       content = SizedBox(
         width: 20.w,
         height: 20.h,
-        child: CircularProgressIndicator(
-          strokeWidth: 2,
-          valueColor: AlwaysStoppedAnimation<Color>(effectiveTextColor),
-        ),
+        child: CircularProgressIndicator(strokeWidth: 2),
       );
     } else if (widget.child != null) {
       content = widget.child!;
@@ -740,7 +731,7 @@ class _AppOutlinedButtonState extends State<AppOutlinedButton> {
 
     final button = SizedBox(
       width: widget.buttonWidth ?? double.infinity,
-      height: widget.buttonHeight ?? 50.h,
+      height: widget.buttonHeight,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: widget.bgColor ?? Colors.transparent,
@@ -748,16 +739,16 @@ class _AppOutlinedButtonState extends State<AppOutlinedButton> {
               ? BorderSide.none
               : BorderSide(
                   width: widget.borderWidth ?? 1.0,
-                  color: widget.brdColor ?? AppColors.primary,
+                  color: widget.brdColor ?? Theme.of(context).primaryColor,
                 ),
-          padding: widget.padding ?? simPad(0, 15),
+          padding: widget.padding,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               validateBorderRadius(
                 widget.radius,
                 defaultValue: 10.0,
                 enableSecurity: widget.enableSecurity,
-              ),
+              )!, // Defaults to 10.0 so ! is safe here if we keep default, but better to allow null if we want full theme
             ),
           ),
           elevation: 0,
@@ -877,10 +868,7 @@ class _ConfigElevatedButtonState extends State<ConfigElevatedButton> {
       content = SizedBox(
         width: 20.w,
         height: 20.h,
-        child: CircularProgressIndicator(
-          strokeWidth: 2,
-          valueColor: AlwaysStoppedAnimation<Color>(effectiveTextColor),
-        ),
+        child: CircularProgressIndicator(strokeWidth: 2),
       );
     } else {
       final textWidget = SmallAppText(
@@ -1053,10 +1041,7 @@ class _ConfigOutlinedButtonState extends State<ConfigOutlinedButton> {
       content = SizedBox(
         width: 20.w,
         height: 20.h,
-        child: CircularProgressIndicator(
-          strokeWidth: 2,
-          valueColor: AlwaysStoppedAnimation<Color>(effectiveTextColor),
-        ),
+        child: CircularProgressIndicator(strokeWidth: 2),
       );
     } else {
       final textWidget = SmallAppText(
@@ -1108,7 +1093,7 @@ class _ConfigOutlinedButtonState extends State<ConfigOutlinedButton> {
                 widget.radius,
                 defaultValue: 10.0,
                 enableSecurity: widget.enableSecurity,
-              ),
+              )!,
             ),
             side: BorderSide(
               color: widget.brdcolour ?? AppColors.grey200,
@@ -1250,7 +1235,7 @@ class _AppIconButtonState extends State<AppIconButton> {
                 widget.radius,
                 defaultValue: 12.r,
                 enableSecurity: widget.enableSecurity,
-              ),
+              )!,
             ),
             side: widget.side ?? BorderSide.none,
           ),
@@ -1581,7 +1566,7 @@ class _AppGradientButtonState extends State<AppGradientButton> {
           end: widget.gradientEnd,
           stops: widget.gradientStops,
         ),
-        borderRadius: BorderRadius.circular(safeRadius),
+        borderRadius: BorderRadius.circular(safeRadius!),
         boxShadow: widget.shadow != null ? [widget.shadow!] : null,
       ),
       child: ElevatedButton(

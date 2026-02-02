@@ -329,6 +329,7 @@ void main() {
     });
 
     test('safeOTPCallback catches errors', () {
+      OTPSecurityConfig.enableSecurityLogging = false;
       expect(
         () => safeOTPCallback(
           (value) {
@@ -339,6 +340,7 @@ void main() {
         ),
         returnsNormally,
       );
+      OTPSecurityConfig.enableSecurityLogging = true;
     });
 
     test('safeOTPVoidCallback executes without crashing', () {
