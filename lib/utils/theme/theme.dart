@@ -401,26 +401,50 @@ class SACTheme {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(config?.inputBorderRadius ?? 12),
           borderSide: BorderSide(
-            color: config?.inputBorderColor ?? colors.border,
+            color: isDark
+                ? (config?.inputBorderColorDark ??
+                      config?.inputBorderColor ??
+                      colors.border)
+                : (config?.inputBorderColorLight ??
+                      config?.inputBorderColor ??
+                      colors.border),
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(config?.inputBorderRadius ?? 12),
           borderSide: BorderSide(
-            color: config?.inputBorderColor ?? colors.border,
+            color: isDark
+                ? (config?.inputBorderColorDark ??
+                      config?.inputBorderColor ??
+                      colors.border)
+                : (config?.inputBorderColorLight ??
+                      config?.inputBorderColor ??
+                      colors.border),
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(config?.inputBorderRadius ?? 12),
           borderSide: BorderSide(
-            color: config?.inputFocusedBorderColor ?? colors.primary,
+            color: isDark
+                ? (config?.inputFocusedBorderColorDark ??
+                      config?.inputFocusedBorderColor ??
+                      colors.primary)
+                : (config?.inputFocusedBorderColorLight ??
+                      config?.inputFocusedBorderColor ??
+                      colors.primary),
             width: 1.5,
           ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(config?.inputBorderRadius ?? 12),
           borderSide: BorderSide(
-            color: config?.inputErrorBorderColor ?? colors.error,
+            color: isDark
+                ? (config?.inputErrorBorderColorDark ??
+                      config?.inputErrorBorderColor ??
+                      colors.error)
+                : (config?.inputErrorBorderColorLight ??
+                      config?.inputErrorBorderColor ??
+                      colors.error),
           ),
         ),
         labelStyle: config?.inputLabelStyle,
@@ -431,43 +455,99 @@ class SACTheme {
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith(
           (states) => states.contains(WidgetState.selected)
-              ? (config?.checkboxFillColor ?? colors.primary)
+              ? (isDark
+                    ? (config?.checkboxFillColorDark ??
+                          config?.checkboxFillColor ??
+                          colors.primary)
+                    : (config?.checkboxFillColorLight ??
+                          config?.checkboxFillColor ??
+                          colors.primary))
               : null,
         ),
       ),
       radioTheme: RadioThemeData(
         fillColor: WidgetStateProperty.resolveWith(
           (states) => states.contains(WidgetState.selected)
-              ? (config?.radioFillColor ?? colors.primary)
+              ? (isDark
+                    ? (config?.radioFillColorDark ??
+                          config?.radioFillColor ??
+                          colors.primary)
+                    : (config?.radioFillColorLight ??
+                          config?.radioFillColor ??
+                          colors.primary))
               : null,
         ),
       ),
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith(
           (states) => states.contains(WidgetState.selected)
-              ? (config?.switchActiveColor ?? colors.primary)
-              : (config?.switchInactiveColor ?? colors.textMuted),
+              ? (isDark
+                    ? (config?.switchActiveColorDark ??
+                          config?.switchActiveColor ??
+                          colors.primary)
+                    : (config?.switchActiveColorLight ??
+                          config?.switchActiveColor ??
+                          colors.primary))
+              : (isDark
+                    ? (config?.switchInactiveColorDark ??
+                          config?.switchInactiveColor ??
+                          colors.textMuted)
+                    : (config?.switchInactiveColorLight ??
+                          config?.switchInactiveColor ??
+                          colors.textMuted)),
         ),
         trackColor: WidgetStateProperty.resolveWith(
-          (states) =>
-              (config?.switchTrackColor ??
-              colors.border.withValues(alpha: 0.3)),
+          (states) => (isDark
+              ? (config?.switchTrackColorDark ??
+                    config?.switchTrackColor ??
+                    colors.border.withValues(alpha: 0.3))
+              : (config?.switchTrackColorLight ??
+                    config?.switchTrackColor ??
+                    colors.border.withValues(alpha: 0.3))),
         ),
       ),
 
       // Slider
       sliderTheme: SliderThemeData(
-        activeTrackColor: config?.sliderActiveColor ?? colors.primary,
-        inactiveTrackColor: config?.sliderInactiveColor ?? colors.border,
-        thumbColor: config?.sliderThumbColor ?? colors.primary,
+        activeTrackColor: isDark
+            ? (config?.sliderActiveColorDark ??
+                  config?.sliderActiveColor ??
+                  colors.primary)
+            : (config?.sliderActiveColorLight ??
+                  config?.sliderActiveColor ??
+                  colors.primary),
+        inactiveTrackColor: isDark
+            ? (config?.sliderInactiveColorDark ??
+                  config?.sliderInactiveColor ??
+                  colors.border)
+            : (config?.sliderInactiveColorLight ??
+                  config?.sliderInactiveColor ??
+                  colors.border),
+        thumbColor: isDark
+            ? (config?.sliderThumbColorDark ??
+                  config?.sliderThumbColor ??
+                  colors.primary)
+            : (config?.sliderThumbColorLight ??
+                  config?.sliderThumbColor ??
+                  colors.primary),
       ),
 
       // Progress Indicator
       progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: config?.progressIndicatorColor ?? colors.primary,
-        circularTrackColor:
-            config?.progressIndicatorBackgroundColor ??
-            colors.border.withValues(alpha: 0.2),
+        color: isDark
+            ? (config?.progressIndicatorColorDark ??
+                  config?.progressIndicatorColor ??
+                  colors.primary)
+            : (config?.progressIndicatorColorLight ??
+                  config?.progressIndicatorColor ??
+                  colors.primary),
+        circularTrackColor: isDark
+            ? (config?.progressIndicatorBackgroundColorDark ??
+                  config?.progressIndicatorBackgroundColor ??
+                  colors.border.withValues(alpha: 0.2))
+            : (config?.progressIndicatorBackgroundColorLight ??
+                  config?.progressIndicatorBackgroundColor ??
+                  colors.border.withValues(alpha: 0.2)),
       ),
 
       // Tooltip
@@ -490,36 +570,86 @@ class SACTheme {
 
       // Divider
       dividerTheme: DividerThemeData(
-        color: config?.dividerColor ?? colors.border,
+        color: isDark
+            ? (config?.dividerColorDark ??
+                  config?.dividerColor ??
+                  colors.border)
+            : (config?.dividerColorLight ??
+                  config?.dividerColor ??
+                  colors.border),
         thickness: config?.dividerThickness ?? 1,
         indent: config?.dividerIndent ?? 0,
         endIndent: config?.dividerIndent ?? 0,
       ),
 
       // ListTile
+      // ListTile
       listTileTheme: ListTileThemeData(
-        iconColor: config?.listTileIconColor ?? colors.textMuted,
+        iconColor: isDark
+            ? (config?.listTileIconColorDark ??
+                  config?.listTileIconColor ??
+                  colors.textMuted)
+            : (config?.listTileIconColorLight ??
+                  config?.listTileIconColor ??
+                  colors.textMuted),
         titleTextStyle: config?.listTileTitleStyle,
         subtitleTextStyle: config?.listTileSubtitleStyle,
-        selectedColor: config?.listTileSelectedColor ?? colors.primary,
+        selectedColor: isDark
+            ? (config?.listTileSelectedColorDark ??
+                  config?.listTileSelectedColor ??
+                  colors.primary)
+            : (config?.listTileSelectedColorLight ??
+                  config?.listTileSelectedColor ??
+                  colors.primary),
       ),
 
       // TabBar
+      // TabBar
       tabBarTheme: TabBarThemeData(
-        indicatorColor: config?.tabBarIndicatorColor ?? colors.primary,
-        labelColor: config?.tabBarLabelColor ?? colors.primary,
-        unselectedLabelColor:
-            config?.tabBarUnselectedLabelColor ?? colors.textMuted,
+        indicatorColor: isDark
+            ? (config?.tabBarIndicatorColorDark ??
+                  config?.tabBarIndicatorColor ??
+                  colors.primary)
+            : (config?.tabBarIndicatorColorLight ??
+                  config?.tabBarIndicatorColor ??
+                  colors.primary),
+        labelColor: isDark
+            ? (config?.tabBarLabelColorDark ??
+                  config?.tabBarLabelColor ??
+                  colors.primary)
+            : (config?.tabBarLabelColorLight ??
+                  config?.tabBarLabelColor ??
+                  colors.primary),
+        unselectedLabelColor: isDark
+            ? (config?.tabBarUnselectedLabelColorDark ??
+                  config?.tabBarUnselectedLabelColor ??
+                  colors.textMuted)
+            : (config?.tabBarUnselectedLabelColorLight ??
+                  config?.tabBarUnselectedLabelColor ??
+                  colors.textMuted),
         indicatorSize: TabBarIndicatorSize.tab,
       ),
 
       // DataTable
+      // DataTable
       dataTableTheme: DataTableThemeData(
         headingRowColor: WidgetStateProperty.all(
-          config?.dataTableHeadingRowColor ?? colors.surface,
+          isDark
+              ? (config?.dataTableHeadingRowColorDark ??
+                    config?.dataTableHeadingRowColor ??
+                    colors.surface)
+              : (config?.dataTableHeadingRowColorLight ??
+                    config?.dataTableHeadingRowColor ??
+                    colors.surface),
         ),
         dataRowColor: WidgetStateProperty.all(
-          config?.dataTableDataRowColor ?? colors.background,
+          isDark
+              ? (config?.dataTableDataRowColorDark ??
+                    config?.dataTableDataRowColor ??
+                    colors.background)
+              : (config?.dataTableDataRowColorLight ??
+                    config?.dataTableDataRowColor ??
+                    colors.background),
         ),
         dividerThickness: config?.dataTableDividerThickness,
       ),
@@ -541,9 +671,22 @@ class SACTheme {
               ),
 
       // Badge
+      // Badge
       badgeTheme: BadgeThemeData(
-        backgroundColor: config?.badgeBackgroundColor ?? colors.error,
-        textColor: config?.badgeTextColor ?? AppColors.white,
+        backgroundColor: isDark
+            ? (config?.badgeBackgroundColorDark ??
+                  config?.badgeBackgroundColor ??
+                  colors.error)
+            : (config?.badgeBackgroundColorLight ??
+                  config?.badgeBackgroundColor ??
+                  colors.error),
+        textColor: isDark
+            ? (config?.badgeTextColorDark ??
+                  config?.badgeTextColor ??
+                  AppColors.white)
+            : (config?.badgeTextColorLight ??
+                  config?.badgeTextColor ??
+                  AppColors.white),
       ),
 
       // SearchBar
@@ -566,13 +709,24 @@ class SACTheme {
             Set<WidgetState> states,
           ) {
             if (states.contains(WidgetState.selected)) {
-              return config?.segmentedButtonSelectedColor ??
-                  colors.primary.withValues(alpha: 0.2);
+              return isDark
+                  ? (config?.segmentedButtonSelectedColorDark ??
+                        config?.segmentedButtonSelectedColor ??
+                        colors.primary.withValues(alpha: 0.2))
+                  : (config?.segmentedButtonSelectedColorLight ??
+                        config?.segmentedButtonSelectedColor ??
+                        colors.primary.withValues(alpha: 0.2));
             }
             return null;
           }),
           foregroundColor: WidgetStateProperty.all(
-            config?.segmentedButtonForegroundColor ?? colors.textPrimary,
+            isDark
+                ? (config?.segmentedButtonForegroundColorDark ??
+                      config?.segmentedButtonForegroundColor ??
+                      colors.textPrimary)
+                : (config?.segmentedButtonForegroundColorLight ??
+                      config?.segmentedButtonForegroundColor ??
+                      colors.textPrimary),
           ),
         ),
       ),
@@ -588,11 +742,27 @@ class SACTheme {
 
       // ExpansionTile
       expansionTileTheme: ExpansionTileThemeData(
-        backgroundColor:
-            config?.expansionTileBackgroundColor ?? Colors.transparent,
-        collapsedBackgroundColor:
-            config?.expansionTileCollapsedBackgroundColor ?? Colors.transparent,
-        iconColor: config?.expansionTileIconColor ?? colors.primary,
+        backgroundColor: isDark
+            ? (config?.expansionTileBackgroundColorDark ??
+                  config?.expansionTileBackgroundColor ??
+                  Colors.transparent)
+            : (config?.expansionTileBackgroundColorLight ??
+                  config?.expansionTileBackgroundColor ??
+                  Colors.transparent),
+        collapsedBackgroundColor: isDark
+            ? (config?.expansionTileCollapsedBackgroundColorDark ??
+                  config?.expansionTileCollapsedBackgroundColor ??
+                  Colors.transparent)
+            : (config?.expansionTileCollapsedBackgroundColorLight ??
+                  config?.expansionTileCollapsedBackgroundColor ??
+                  Colors.transparent),
+        iconColor: isDark
+            ? (config?.expansionTileIconColorDark ??
+                  config?.expansionTileIconColor ??
+                  colors.primary)
+            : (config?.expansionTileIconColorLight ??
+                  config?.expansionTileIconColor ??
+                  colors.primary),
         textColor: colors.textPrimary,
         collapsedTextColor: colors.textPrimary,
       ),

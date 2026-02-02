@@ -5,3 +5,4 @@ export 'space.dart';
 export 'textfields.dart';
 export 'searchbar.dart';
 export 'appbar.dart';
+export 'social_button.dart';

@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-02-03
+
+### Added
+
+- **SocialButton Enhancements**:
+  - Added support for new providers: X (Twitter), LinkedIn, GitHub, Microsoft, and Discord.
+  - Added `style` parameter supporting `SocialButtonStyle.filled` (default), `SocialButtonStyle.outlined`, and `SocialButtonStyle.elevated`.
+  - Providers now support theme-aware branding (e.g., Apple/GitHub adapt to light/dark mode).
+
+### Fixed
+
+- **BigAppText Theme Inheritance**: `BigAppText` now simply uses `AppTextStyle.large` which inherits from `Theme.of(context).textTheme.bodyLarge`, ensuring correct color inheritance.
+- **Tests**: Improved test robustness for `widget_test.dart` and `otp_security_test.dart` by disabling noisy debug logs.
+
+---
+
 ## [0.4.3] - 2026-02-02
 
 ### Fixed

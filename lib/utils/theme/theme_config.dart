@@ -162,27 +162,53 @@ class SACThemeConfig {
   final Color? inputFillColorLight;
   final Color? inputFillColorDark;
   final Color? inputBorderColor;
+  final Color? inputBorderColorLight;
+  final Color? inputBorderColorDark;
   final Color? inputFocusedBorderColor;
+  final Color? inputFocusedBorderColorLight;
+  final Color? inputFocusedBorderColorDark;
   final Color? inputErrorBorderColor;
+  final Color? inputErrorBorderColorLight;
+  final Color? inputErrorBorderColorDark;
   final TextStyle? inputLabelStyle;
   final TextStyle? inputHintStyle;
   final double? inputBorderRadius;
 
   // --- Checkbox/Radio/Switch ---
   final Color? checkboxFillColor;
+  final Color? checkboxFillColorLight;
+  final Color? checkboxFillColorDark;
   final Color? radioFillColor;
+  final Color? radioFillColorLight;
+  final Color? radioFillColorDark;
   final Color? switchActiveColor;
+  final Color? switchActiveColorLight;
+  final Color? switchActiveColorDark;
   final Color? switchInactiveColor;
+  final Color? switchInactiveColorLight;
+  final Color? switchInactiveColorDark;
   final Color? switchTrackColor;
+  final Color? switchTrackColorLight;
+  final Color? switchTrackColorDark;
 
   // --- Slider ---
   final Color? sliderActiveColor;
+  final Color? sliderActiveColorLight;
+  final Color? sliderActiveColorDark;
   final Color? sliderInactiveColor;
+  final Color? sliderInactiveColorLight;
+  final Color? sliderInactiveColorDark;
   final Color? sliderThumbColor;
+  final Color? sliderThumbColorLight;
+  final Color? sliderThumbColorDark;
 
   // --- ProgressIndicator ---
   final Color? progressIndicatorColor;
+  final Color? progressIndicatorColorLight;
+  final Color? progressIndicatorColorDark;
   final Color? progressIndicatorBackgroundColor;
+  final Color? progressIndicatorBackgroundColorLight;
+  final Color? progressIndicatorBackgroundColorDark;
   final double? circularProgressStrokeWidth;
 
   // --- Tooltip ---
@@ -192,24 +218,40 @@ class SACThemeConfig {
 
   // --- Divider ---
   final Color? dividerColor;
+  final Color? dividerColorLight;
+  final Color? dividerColorDark;
   final double? dividerThickness;
   final double? dividerIndent;
 
   // --- ListTile ---
   final Color? listTileIconColor;
+  final Color? listTileIconColorLight;
+  final Color? listTileIconColorDark;
   final TextStyle? listTileTitleStyle;
   final TextStyle? listTileSubtitleStyle;
   final Color? listTileSelectedColor;
+  final Color? listTileSelectedColorLight;
+  final Color? listTileSelectedColorDark;
 
   // --- TabBar ---
   final Color? tabBarIndicatorColor;
+  final Color? tabBarIndicatorColorLight;
+  final Color? tabBarIndicatorColorDark;
   final Color? tabBarLabelColor;
+  final Color? tabBarLabelColorLight;
+  final Color? tabBarLabelColorDark;
   final Color? tabBarUnselectedLabelColor;
+  final Color? tabBarUnselectedLabelColorLight;
+  final Color? tabBarUnselectedLabelColorDark;
   final double? tabBarIndicatorWeight;
 
   // --- DataTable ---
   final Color? dataTableHeadingRowColor;
+  final Color? dataTableHeadingRowColorLight;
+  final Color? dataTableHeadingRowColorDark;
   final Color? dataTableDataRowColor;
+  final Color? dataTableDataRowColorLight;
+  final Color? dataTableDataRowColorDark;
   final double? dataTableDividerThickness;
 
   // --- Chip ---
@@ -221,7 +263,11 @@ class SACThemeConfig {
 
   // --- Badge ---
   final Color? badgeBackgroundColor;
+  final Color? badgeBackgroundColorLight;
+  final Color? badgeBackgroundColorDark;
   final Color? badgeTextColor;
+  final Color? badgeTextColorLight;
+  final Color? badgeTextColorDark;
 
   // --- SearchBar ---
   final Color? searchBarBackgroundLight;
@@ -231,7 +277,11 @@ class SACThemeConfig {
 
   // --- SegmentedButton ---
   final Color? segmentedButtonSelectedColor;
+  final Color? segmentedButtonSelectedColorLight;
+  final Color? segmentedButtonSelectedColorDark;
   final Color? segmentedButtonForegroundColor;
+  final Color? segmentedButtonForegroundColorLight;
+  final Color? segmentedButtonForegroundColorDark;
 
   // --- PopupMenu ---
   final Color? popupMenuBackgroundLight;
@@ -241,8 +291,14 @@ class SACThemeConfig {
 
   // --- ExpansionTile ---
   final Color? expansionTileBackgroundColor;
+  final Color? expansionTileBackgroundColorLight;
+  final Color? expansionTileBackgroundColorDark;
   final Color? expansionTileCollapsedBackgroundColor;
+  final Color? expansionTileCollapsedBackgroundColorLight;
+  final Color? expansionTileCollapsedBackgroundColorDark;
   final Color? expansionTileIconColor;
+  final Color? expansionTileIconColorLight;
+  final Color? expansionTileIconColorDark;
 
   // --- Typography ---
   final String? fontFamily;
@@ -265,6 +321,8 @@ class SACThemeConfig {
   // --- Misc ---
   final Color? splashColor;
   final Color? highlightColor;
+  final Color? highlightColorLight;
+  final Color? highlightColorDark;
   final Color? hoverColor;
   final Color? focusColor;
   final Color? disabledColor;
@@ -361,38 +419,80 @@ class SACThemeConfig {
     this.inputFillColorLight,
     this.inputFillColorDark,
     this.inputBorderColor,
+    this.inputBorderColorLight,
+    this.inputBorderColorDark,
     this.inputFocusedBorderColor,
+    this.inputFocusedBorderColorLight,
+    this.inputFocusedBorderColorDark,
     this.inputErrorBorderColor,
+    this.inputErrorBorderColorLight,
+    this.inputErrorBorderColorDark,
     this.inputLabelStyle,
     this.inputHintStyle,
     this.inputBorderRadius,
     this.checkboxFillColor,
+    this.checkboxFillColorLight,
+    this.checkboxFillColorDark,
     this.radioFillColor,
+    this.radioFillColorLight,
+    this.radioFillColorDark,
     this.switchActiveColor,
+    this.switchActiveColorLight,
+    this.switchActiveColorDark,
     this.switchInactiveColor,
+    this.switchInactiveColorLight,
+    this.switchInactiveColorDark,
     this.switchTrackColor,
+    this.switchTrackColorLight,
+    this.switchTrackColorDark,
     this.sliderActiveColor,
+    this.sliderActiveColorLight,
+    this.sliderActiveColorDark,
     this.sliderInactiveColor,
+    this.sliderInactiveColorLight,
+    this.sliderInactiveColorDark,
     this.sliderThumbColor,
+    this.sliderThumbColorLight,
+    this.sliderThumbColorDark,
     this.progressIndicatorColor,
+    this.progressIndicatorColorLight,
+    this.progressIndicatorColorDark,
     this.progressIndicatorBackgroundColor,
+    this.progressIndicatorBackgroundColorLight,
+    this.progressIndicatorBackgroundColorDark,
     this.circularProgressStrokeWidth,
     this.tooltipBackgroundColor,
     this.tooltipTextStyle,
     this.tooltipPadding,
     this.dividerColor,
+    this.dividerColorLight,
+    this.dividerColorDark,
     this.dividerThickness,
     this.dividerIndent,
     this.listTileIconColor,
+    this.listTileIconColorLight,
+    this.listTileIconColorDark,
     this.listTileTitleStyle,
     this.listTileSubtitleStyle,
     this.listTileSelectedColor,
+    this.listTileSelectedColorLight,
+    this.listTileSelectedColorDark,
     this.tabBarIndicatorColor,
+    this.tabBarIndicatorColorLight,
+    this.tabBarIndicatorColorDark,
     this.tabBarLabelColor,
+    this.tabBarLabelColorLight,
+    this.tabBarLabelColorDark,
     this.tabBarUnselectedLabelColor,
+    this.tabBarUnselectedLabelColorLight,
+    this.tabBarUnselectedLabelColorDark,
     this.tabBarIndicatorWeight,
     this.dataTableHeadingRowColor,
+    this.dataTableHeadingRowColorLight,
+    this.dataTableHeadingRowColorDark,
     this.dataTableDataRowColor,
+    this.dataTableDataRowColorLight,
+    this.dataTableDataRowColorDark,
     this.dataTableDividerThickness,
     this.chipBackgroundLight,
     this.chipBackgroundDark,
@@ -400,20 +500,34 @@ class SACThemeConfig {
     this.chipDeleteIconColor,
     this.chipSelectedColor,
     this.badgeBackgroundColor,
+    this.badgeBackgroundColorLight,
+    this.badgeBackgroundColorDark,
     this.badgeTextColor,
+    this.badgeTextColorLight,
+    this.badgeTextColorDark,
     this.searchBarBackgroundLight,
     this.searchBarBackgroundDark,
     this.searchBarElevation,
     this.searchBarHintStyle,
     this.segmentedButtonSelectedColor,
+    this.segmentedButtonSelectedColorLight,
+    this.segmentedButtonSelectedColorDark,
     this.segmentedButtonForegroundColor,
+    this.segmentedButtonForegroundColorLight,
+    this.segmentedButtonForegroundColorDark,
     this.popupMenuBackgroundLight,
     this.popupMenuBackgroundDark,
     this.popupMenuElevation,
     this.popupMenuShape,
     this.expansionTileBackgroundColor,
+    this.expansionTileBackgroundColorLight,
+    this.expansionTileBackgroundColorDark,
     this.expansionTileCollapsedBackgroundColor,
+    this.expansionTileCollapsedBackgroundColorLight,
+    this.expansionTileCollapsedBackgroundColorDark,
     this.expansionTileIconColor,
+    this.expansionTileIconColorLight,
+    this.expansionTileIconColorDark,
     this.fontFamily,
     this.displayLarge,
     this.displayMedium,
@@ -432,6 +546,8 @@ class SACThemeConfig {
     this.labelSmall,
     this.splashColor,
     this.highlightColor,
+    this.highlightColorLight,
+    this.highlightColorDark,
     this.hoverColor,
     this.focusColor,
     this.disabledColor,
@@ -530,38 +646,80 @@ class SACThemeConfig {
     Color? inputFillColorLight,
     Color? inputFillColorDark,
     Color? inputBorderColor,
+    Color? inputBorderColorLight,
+    Color? inputBorderColorDark,
     Color? inputFocusedBorderColor,
+    Color? inputFocusedBorderColorLight,
+    Color? inputFocusedBorderColorDark,
     Color? inputErrorBorderColor,
+    Color? inputErrorBorderColorLight,
+    Color? inputErrorBorderColorDark,
     TextStyle? inputLabelStyle,
     TextStyle? inputHintStyle,
     double? inputBorderRadius,
     Color? checkboxFillColor,
+    Color? checkboxFillColorLight,
+    Color? checkboxFillColorDark,
     Color? radioFillColor,
+    Color? radioFillColorLight,
+    Color? radioFillColorDark,
     Color? switchActiveColor,
+    Color? switchActiveColorLight,
+    Color? switchActiveColorDark,
     Color? switchInactiveColor,
+    Color? switchInactiveColorLight,
+    Color? switchInactiveColorDark,
     Color? switchTrackColor,
+    Color? switchTrackColorLight,
+    Color? switchTrackColorDark,
     Color? sliderActiveColor,
+    Color? sliderActiveColorLight,
+    Color? sliderActiveColorDark,
     Color? sliderInactiveColor,
+    Color? sliderInactiveColorLight,
+    Color? sliderInactiveColorDark,
     Color? sliderThumbColor,
+    Color? sliderThumbColorLight,
+    Color? sliderThumbColorDark,
     Color? progressIndicatorColor,
+    Color? progressIndicatorColorLight,
+    Color? progressIndicatorColorDark,
     Color? progressIndicatorBackgroundColor,
+    Color? progressIndicatorBackgroundColorLight,
+    Color? progressIndicatorBackgroundColorDark,
     double? circularProgressStrokeWidth,
     Color? tooltipBackgroundColor,
     TextStyle? tooltipTextStyle,
     EdgeInsetsGeometry? tooltipPadding,
     Color? dividerColor,
+    Color? dividerColorLight,
+    Color? dividerColorDark,
     double? dividerThickness,
     double? dividerIndent,
     Color? listTileIconColor,
+    Color? listTileIconColorLight,
+    Color? listTileIconColorDark,
     TextStyle? listTileTitleStyle,
     TextStyle? listTileSubtitleStyle,
     Color? listTileSelectedColor,
+    Color? listTileSelectedColorLight,
+    Color? listTileSelectedColorDark,
     Color? tabBarIndicatorColor,
+    Color? tabBarIndicatorColorLight,
+    Color? tabBarIndicatorColorDark,
     Color? tabBarLabelColor,
+    Color? tabBarLabelColorLight,
+    Color? tabBarLabelColorDark,
     Color? tabBarUnselectedLabelColor,
+    Color? tabBarUnselectedLabelColorLight,
+    Color? tabBarUnselectedLabelColorDark,
     double? tabBarIndicatorWeight,
     Color? dataTableHeadingRowColor,
+    Color? dataTableHeadingRowColorLight,
+    Color? dataTableHeadingRowColorDark,
     Color? dataTableDataRowColor,
+    Color? dataTableDataRowColorLight,
+    Color? dataTableDataRowColorDark,
     double? dataTableDividerThickness,
     Color? chipBackgroundLight,
     Color? chipBackgroundDark,
@@ -569,20 +727,34 @@ class SACThemeConfig {
     Color? chipDeleteIconColor,
     Color? chipSelectedColor,
     Color? badgeBackgroundColor,
+    Color? badgeBackgroundColorLight,
+    Color? badgeBackgroundColorDark,
     Color? badgeTextColor,
+    Color? badgeTextColorLight,
+    Color? badgeTextColorDark,
     Color? searchBarBackgroundLight,
     Color? searchBarBackgroundDark,
     double? searchBarElevation,
     TextStyle? searchBarHintStyle,
     Color? segmentedButtonSelectedColor,
+    Color? segmentedButtonSelectedColorLight,
+    Color? segmentedButtonSelectedColorDark,
     Color? segmentedButtonForegroundColor,
+    Color? segmentedButtonForegroundColorLight,
+    Color? segmentedButtonForegroundColorDark,
     Color? popupMenuBackgroundLight,
     Color? popupMenuBackgroundDark,
     double? popupMenuElevation,
     ShapeBorder? popupMenuShape,
     Color? expansionTileBackgroundColor,
+    Color? expansionTileBackgroundColorLight,
+    Color? expansionTileBackgroundColorDark,
     Color? expansionTileCollapsedBackgroundColor,
+    Color? expansionTileCollapsedBackgroundColorLight,
+    Color? expansionTileCollapsedBackgroundColorDark,
     Color? expansionTileIconColor,
+    Color? expansionTileIconColorLight,
+    Color? expansionTileIconColorDark,
     String? fontFamily,
     TextStyle? displayLarge,
     TextStyle? displayMedium,
@@ -601,6 +773,8 @@ class SACThemeConfig {
     TextStyle? labelSmall,
     Color? splashColor,
     Color? highlightColor,
+    Color? highlightColorLight,
+    Color? highlightColorDark,
     Color? hoverColor,
     Color? focusColor,
     Color? disabledColor,
@@ -719,26 +893,75 @@ class SACThemeConfig {
       inputFillColorLight: inputFillColorLight ?? this.inputFillColorLight,
       inputFillColorDark: inputFillColorDark ?? this.inputFillColorDark,
       inputBorderColor: inputBorderColor ?? this.inputBorderColor,
+      inputBorderColorLight:
+          inputBorderColorLight ?? this.inputBorderColorLight,
+      inputBorderColorDark: inputBorderColorDark ?? this.inputBorderColorDark,
       inputFocusedBorderColor:
           inputFocusedBorderColor ?? this.inputFocusedBorderColor,
+      inputFocusedBorderColorLight:
+          inputFocusedBorderColorLight ?? this.inputFocusedBorderColorLight,
+      inputFocusedBorderColorDark:
+          inputFocusedBorderColorDark ?? this.inputFocusedBorderColorDark,
       inputErrorBorderColor:
           inputErrorBorderColor ?? this.inputErrorBorderColor,
+      inputErrorBorderColorLight:
+          inputErrorBorderColorLight ?? this.inputErrorBorderColorLight,
+      inputErrorBorderColorDark:
+          inputErrorBorderColorDark ?? this.inputErrorBorderColorDark,
       inputLabelStyle: inputLabelStyle ?? this.inputLabelStyle,
       inputHintStyle: inputHintStyle ?? this.inputHintStyle,
       inputBorderRadius: inputBorderRadius ?? this.inputBorderRadius,
       checkboxFillColor: checkboxFillColor ?? this.checkboxFillColor,
+      checkboxFillColorLight:
+          checkboxFillColorLight ?? this.checkboxFillColorLight,
+      checkboxFillColorDark:
+          checkboxFillColorDark ?? this.checkboxFillColorDark,
       radioFillColor: radioFillColor ?? this.radioFillColor,
+      radioFillColorLight: radioFillColorLight ?? this.radioFillColorLight,
+      radioFillColorDark: radioFillColorDark ?? this.radioFillColorDark,
       switchActiveColor: switchActiveColor ?? this.switchActiveColor,
+      switchActiveColorLight:
+          switchActiveColorLight ?? this.switchActiveColorLight,
+      switchActiveColorDark:
+          switchActiveColorDark ?? this.switchActiveColorDark,
       switchInactiveColor: switchInactiveColor ?? this.switchInactiveColor,
+      switchInactiveColorLight:
+          switchInactiveColorLight ?? this.switchInactiveColorLight,
+      switchInactiveColorDark:
+          switchInactiveColorDark ?? this.switchInactiveColorDark,
       switchTrackColor: switchTrackColor ?? this.switchTrackColor,
+      switchTrackColorLight:
+          switchTrackColorLight ?? this.switchTrackColorLight,
+      switchTrackColorDark: switchTrackColorDark ?? this.switchTrackColorDark,
       sliderActiveColor: sliderActiveColor ?? this.sliderActiveColor,
+      sliderActiveColorLight:
+          sliderActiveColorLight ?? this.sliderActiveColorLight,
+      sliderActiveColorDark:
+          sliderActiveColorDark ?? this.sliderActiveColorDark,
       sliderInactiveColor: sliderInactiveColor ?? this.sliderInactiveColor,
+      sliderInactiveColorLight:
+          sliderInactiveColorLight ?? this.sliderInactiveColorLight,
+      sliderInactiveColorDark:
+          sliderInactiveColorDark ?? this.sliderInactiveColorDark,
       sliderThumbColor: sliderThumbColor ?? this.sliderThumbColor,
+      sliderThumbColorLight:
+          sliderThumbColorLight ?? this.sliderThumbColorLight,
+      sliderThumbColorDark: sliderThumbColorDark ?? this.sliderThumbColorDark,
       progressIndicatorColor:
           progressIndicatorColor ?? this.progressIndicatorColor,
+      progressIndicatorColorLight:
+          progressIndicatorColorLight ?? this.progressIndicatorColorLight,
+      progressIndicatorColorDark:
+          progressIndicatorColorDark ?? this.progressIndicatorColorDark,
       progressIndicatorBackgroundColor:
           progressIndicatorBackgroundColor ??
           this.progressIndicatorBackgroundColor,
+      progressIndicatorBackgroundColorLight:
+          progressIndicatorBackgroundColorLight ??
+          this.progressIndicatorBackgroundColorLight,
+      progressIndicatorBackgroundColorDark:
+          progressIndicatorBackgroundColorDark ??
+          this.progressIndicatorBackgroundColorDark,
       circularProgressStrokeWidth:
           circularProgressStrokeWidth ?? this.circularProgressStrokeWidth,
       tooltipBackgroundColor:
@@ -746,24 +969,54 @@ class SACThemeConfig {
       tooltipTextStyle: tooltipTextStyle ?? this.tooltipTextStyle,
       tooltipPadding: tooltipPadding ?? this.tooltipPadding,
       dividerColor: dividerColor ?? this.dividerColor,
+      dividerColorLight: dividerColorLight ?? this.dividerColorLight,
+      dividerColorDark: dividerColorDark ?? this.dividerColorDark,
       dividerThickness: dividerThickness ?? this.dividerThickness,
       dividerIndent: dividerIndent ?? this.dividerIndent,
       listTileIconColor: listTileIconColor ?? this.listTileIconColor,
+      listTileIconColorLight:
+          listTileIconColorLight ?? this.listTileIconColorLight,
+      listTileIconColorDark:
+          listTileIconColorDark ?? this.listTileIconColorDark,
       listTileTitleStyle: listTileTitleStyle ?? this.listTileTitleStyle,
       listTileSubtitleStyle:
           listTileSubtitleStyle ?? this.listTileSubtitleStyle,
       listTileSelectedColor:
           listTileSelectedColor ?? this.listTileSelectedColor,
+      listTileSelectedColorLight:
+          listTileSelectedColorLight ?? this.listTileSelectedColorLight,
+      listTileSelectedColorDark:
+          listTileSelectedColorDark ?? this.listTileSelectedColorDark,
       tabBarIndicatorColor: tabBarIndicatorColor ?? this.tabBarIndicatorColor,
+      tabBarIndicatorColorLight:
+          tabBarIndicatorColorLight ?? this.tabBarIndicatorColorLight,
+      tabBarIndicatorColorDark:
+          tabBarIndicatorColorDark ?? this.tabBarIndicatorColorDark,
       tabBarLabelColor: tabBarLabelColor ?? this.tabBarLabelColor,
+      tabBarLabelColorLight:
+          tabBarLabelColorLight ?? this.tabBarLabelColorLight,
+      tabBarLabelColorDark: tabBarLabelColorDark ?? this.tabBarLabelColorDark,
       tabBarUnselectedLabelColor:
           tabBarUnselectedLabelColor ?? this.tabBarUnselectedLabelColor,
+      tabBarUnselectedLabelColorLight:
+          tabBarUnselectedLabelColorLight ??
+          this.tabBarUnselectedLabelColorLight,
+      tabBarUnselectedLabelColorDark:
+          tabBarUnselectedLabelColorDark ?? this.tabBarUnselectedLabelColorDark,
       tabBarIndicatorWeight:
           tabBarIndicatorWeight ?? this.tabBarIndicatorWeight,
       dataTableHeadingRowColor:
           dataTableHeadingRowColor ?? this.dataTableHeadingRowColor,
+      dataTableHeadingRowColorLight:
+          dataTableHeadingRowColorLight ?? this.dataTableHeadingRowColorLight,
+      dataTableHeadingRowColorDark:
+          dataTableHeadingRowColorDark ?? this.dataTableHeadingRowColorDark,
       dataTableDataRowColor:
           dataTableDataRowColor ?? this.dataTableDataRowColor,
+      dataTableDataRowColorLight:
+          dataTableDataRowColorLight ?? this.dataTableDataRowColorLight,
+      dataTableDataRowColorDark:
+          dataTableDataRowColorDark ?? this.dataTableDataRowColorDark,
       dataTableDividerThickness:
           dataTableDividerThickness ?? this.dataTableDividerThickness,
       chipBackgroundLight: chipBackgroundLight ?? this.chipBackgroundLight,
@@ -772,7 +1025,13 @@ class SACThemeConfig {
       chipDeleteIconColor: chipDeleteIconColor ?? this.chipDeleteIconColor,
       chipSelectedColor: chipSelectedColor ?? this.chipSelectedColor,
       badgeBackgroundColor: badgeBackgroundColor ?? this.badgeBackgroundColor,
+      badgeBackgroundColorLight:
+          badgeBackgroundColorLight ?? this.badgeBackgroundColorLight,
+      badgeBackgroundColorDark:
+          badgeBackgroundColorDark ?? this.badgeBackgroundColorDark,
       badgeTextColor: badgeTextColor ?? this.badgeTextColor,
+      badgeTextColorLight: badgeTextColorLight ?? this.badgeTextColorLight,
+      badgeTextColorDark: badgeTextColorDark ?? this.badgeTextColorDark,
       searchBarBackgroundLight:
           searchBarBackgroundLight ?? this.searchBarBackgroundLight,
       searchBarBackgroundDark:
@@ -781,8 +1040,20 @@ class SACThemeConfig {
       searchBarHintStyle: searchBarHintStyle ?? this.searchBarHintStyle,
       segmentedButtonSelectedColor:
           segmentedButtonSelectedColor ?? this.segmentedButtonSelectedColor,
+      segmentedButtonSelectedColorLight:
+          segmentedButtonSelectedColorLight ??
+          this.segmentedButtonSelectedColorLight,
+      segmentedButtonSelectedColorDark:
+          segmentedButtonSelectedColorDark ??
+          this.segmentedButtonSelectedColorDark,
       segmentedButtonForegroundColor:
           segmentedButtonForegroundColor ?? this.segmentedButtonForegroundColor,
+      segmentedButtonForegroundColorLight:
+          segmentedButtonForegroundColorLight ??
+          this.segmentedButtonForegroundColorLight,
+      segmentedButtonForegroundColorDark:
+          segmentedButtonForegroundColorDark ??
+          this.segmentedButtonForegroundColorDark,
       popupMenuBackgroundLight:
           popupMenuBackgroundLight ?? this.popupMenuBackgroundLight,
       popupMenuBackgroundDark:
@@ -791,11 +1062,27 @@ class SACThemeConfig {
       popupMenuShape: popupMenuShape ?? this.popupMenuShape,
       expansionTileBackgroundColor:
           expansionTileBackgroundColor ?? this.expansionTileBackgroundColor,
+      expansionTileBackgroundColorLight:
+          expansionTileBackgroundColorLight ??
+          this.expansionTileBackgroundColorLight,
+      expansionTileBackgroundColorDark:
+          expansionTileBackgroundColorDark ??
+          this.expansionTileBackgroundColorDark,
       expansionTileCollapsedBackgroundColor:
           expansionTileCollapsedBackgroundColor ??
           this.expansionTileCollapsedBackgroundColor,
+      expansionTileCollapsedBackgroundColorLight:
+          expansionTileCollapsedBackgroundColorLight ??
+          this.expansionTileCollapsedBackgroundColorLight,
+      expansionTileCollapsedBackgroundColorDark:
+          expansionTileCollapsedBackgroundColorDark ??
+          this.expansionTileCollapsedBackgroundColorDark,
       expansionTileIconColor:
           expansionTileIconColor ?? this.expansionTileIconColor,
+      expansionTileIconColorLight:
+          expansionTileIconColorLight ?? this.expansionTileIconColorLight,
+      expansionTileIconColorDark:
+          expansionTileIconColorDark ?? this.expansionTileIconColorDark,
       fontFamily: fontFamily ?? this.fontFamily,
       displayLarge: displayLarge ?? this.displayLarge,
       displayMedium: displayMedium ?? this.displayMedium,
@@ -814,6 +1101,8 @@ class SACThemeConfig {
       labelSmall: labelSmall ?? this.labelSmall,
       splashColor: splashColor ?? this.splashColor,
       highlightColor: highlightColor ?? this.highlightColor,
+      highlightColorLight: highlightColorLight ?? this.highlightColorLight,
+      highlightColorDark: highlightColorDark ?? this.highlightColorDark,
       hoverColor: hoverColor ?? this.hoverColor,
       focusColor: focusColor ?? this.focusColor,
       disabledColor: disabledColor ?? this.disabledColor,

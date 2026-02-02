@@ -12,6 +12,11 @@ void main() {
     TextSecurityConfig.resetToDefaults();
     TextFieldSecurityConfig.resetToDefaults();
     SearchBarSecurityConfig.resetToDefaults();
+
+    // Disable logging to keep test output clean
+    TextSecurityConfig.enableSecurityLogging = false;
+    TextFieldSecurityConfig.enableSecurityLogging = false;
+    SearchBarSecurityConfig.enableSecurityLogging = false;
   });
 
   // ============== AppText Widget Tests ==============

@@ -8,6 +8,7 @@ void main() {
   setUp(() {
     // Reset to defaults before each test
     OTPSecurityConfig.resetToDefaults();
+    OTPSecurityConfig.enableSecurityLogging = false;
   });
 
   group('OTP Security Config Defaults', () {

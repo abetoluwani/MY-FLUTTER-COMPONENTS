@@ -1,21 +1,7 @@
 library swiss_army_component;
 
-export 'utils/logging/app_logger.dart';
-export 'utils/theme/chip_theme.dart';
-export 'utils/theme/colors.dart';
-// Theme
-export 'utils/theme/theme.dart';
-export 'utils/theme/theme_config.dart';
+
 // Utils
 export 'utils/utils.dart';
-export 'utils/validators/validator.dart';
 // Widgets
-export 'widgets/appbar.dart';
-export 'widgets/appbutton.dart';
-export 'widgets/apptext.dart';
-export 'widgets/otp.dart';
-export 'widgets/searchbar.dart';
-export 'widgets/social_button.dart';
-export 'widgets/space.dart';
-export 'widgets/textfields.dart';
 export 'widgets/widget.dart';

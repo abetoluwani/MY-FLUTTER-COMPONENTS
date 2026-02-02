@@ -164,6 +164,7 @@ void main() {
             theme: ThemeData(
               textTheme: const TextTheme(
                 bodyMedium: TextStyle(color: expectedColor),
+                bodyLarge: TextStyle(color: expectedColor),
               ),
             ),
             home: Scaffold(

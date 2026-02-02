@@ -395,25 +395,41 @@ class _AppTextFieldState extends State<AppTextField> {
   }
 
   Color _getDefaultBackgroundColor() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     switch (widget.fieldStyle) {
       case TextFieldStyle.filled:
-        return AppColors.grey300;
+        return isDark ? AppColors.grey800 : AppColors.grey300;
       case TextFieldStyle.outlined:
       case TextFieldStyle.underline:
       case TextFieldStyle.rounded:
       case TextFieldStyle.pill:
-        return AppColors.white;
+        return isDark
+            ? (Theme.of(context).inputDecorationTheme.fillColor ??
+                  AppColors.grey900)
+            : AppColors.white;
     }
   }
 
   Color get _borderColor {
     if (_hasError || widget.errorText != null) {
-      return widget.errorBorderColor ?? AppColors.red;
+      return widget.errorBorderColor ??
+          Theme.of(
+            context,
+          ).inputDecorationTheme.errorBorder?.borderSide.color ??
+          AppColors.red;
     }
     if (_isFocused) {
-      return widget.focusedBorderColor ?? AppColors.primary;
+      return widget.focusedBorderColor ??
+          Theme.of(
+            context,
+          ).inputDecorationTheme.focusedBorder?.borderSide.color ??
+          AppColors.primary;
     }
-    return widget.borderColor ?? AppColors.grey100;
+    return widget.borderColor ??
+        Theme.of(
+          context,
+        ).inputDecorationTheme.enabledBorder?.borderSide.color ??
+        AppColors.grey100;
   }
 
   Color get _iconColor {
@@ -424,11 +440,27 @@ class _AppTextFieldState extends State<AppTextField> {
     return widget.iconColor ?? AppColors.grey;
   }
 
-  Color get _textColor => widget.textColor ?? AppColors.black;
-  Color get _hintColor => widget.hintColor ?? AppColors.grey200;
-  Color get _labelColor => widget.labelColor ?? AppColors.black;
+  Color get _textColor =>
+      widget.textColor ??
+      Theme.of(context).textTheme.bodyLarge?.color ??
+      AppColors.black;
+
+  Color get _hintColor =>
+      widget.hintColor ??
+      Theme.of(context).inputDecorationTheme.hintStyle?.color ??
+      AppColors.grey200;
+
+  Color get _labelColor =>
+      widget.labelColor ??
+      Theme.of(context).inputDecorationTheme.labelStyle?.color ??
+      AppColors.black;
+
   Color get _cursorColor => widget.cursorColor ?? AppColors.primary;
-  Color get _errorColor => widget.errorColor ?? AppColors.red;
+
+  Color get _errorColor =>
+      widget.errorColor ??
+      Theme.of(context).inputDecorationTheme.errorStyle?.color ??
+      AppColors.red;
 
   EdgeInsetsGeometry get _contentPadding {
     return widget.contentPadding ??
@@ -931,6 +963,31 @@ class AppPhoneTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Resolve theme colors
+    final theme = Theme.of(context);
+    final effectiveLabelColor =
+        labelColor ??
+        theme.inputDecorationTheme.labelStyle?.color ??
+        AppColors.black;
+    final effectiveHintColor =
+        hintColor ??
+        theme.inputDecorationTheme.hintStyle?.color ??
+        AppColors.grey200;
+    final effectiveBorderColor =
+        borderColor ??
+        theme.inputDecorationTheme.enabledBorder?.borderSide.color ??
+        AppColors.grey100;
+    final effectiveFocusedBorderColor =
+        focusedBorderColor ??
+        theme.inputDecorationTheme.focusedBorder?.borderSide.color ??
+        AppColors.primary;
+    final effectiveErrorBorderColor =
+        errorBorderColor ??
+        theme.inputDecorationTheme.errorBorder?.borderSide.color ??
+        AppColors.red;
+    final effectiveTextColor =
+        textColor ?? theme.textTheme.bodyLarge?.color ?? AppColors.black;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -944,7 +1001,7 @@ class AppPhoneTextField extends StatelessWidget {
                 style:
                     labelStyle ??
                     TextStyle(
-                      color: labelColor ?? AppColors.black,
+                      color: effectiveLabelColor,
                       fontSize: _labelFontSize,
                       fontWeight: labelFontWeight ?? FontWeight.w500,
                     ),
@@ -969,34 +1026,37 @@ class AppPhoneTextField extends StatelessWidget {
           controller: controller,
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: TextStyle(color: hintColor ?? AppColors.grey200),
+            hintStyle: TextStyle(color: effectiveHintColor),
             filled: true,
-            fillColor: backgroundColor ?? AppColors.white,
+            fillColor:
+                backgroundColor ??
+                theme.inputDecorationTheme.fillColor ??
+                AppColors.white,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(_borderRadius ?? 4.0),
               borderSide: BorderSide(
-                color: borderColor ?? AppColors.grey100,
+                color: effectiveBorderColor,
                 width: _borderWidth ?? 1.0,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(_borderRadius ?? 4.0),
               borderSide: BorderSide(
-                color: borderColor ?? AppColors.grey100,
+                color: effectiveBorderColor,
                 width: _borderWidth ?? 1.0,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(_borderRadius ?? 4.0),
               borderSide: BorderSide(
-                color: focusedBorderColor ?? AppColors.primary,
+                color: effectiveFocusedBorderColor,
                 width: _borderWidth ?? 1.0,
               ),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(_borderRadius ?? 4.0),
               borderSide: BorderSide(
-                color: errorBorderColor ?? AppColors.red,
+                color: effectiveErrorBorderColor,
                 width: _borderWidth ?? 1.0,
               ),
             ),
@@ -1007,8 +1067,11 @@ class AppPhoneTextField extends StatelessWidget {
               ? (country) => onCountryChanged!(country.code)
               : null,
           validator: validator,
-          cursorColor: cursorColor ?? AppColors.primary,
-          style: TextStyle(color: textColor ?? AppColors.black),
+          cursorColor:
+              cursorColor ??
+              theme.textSelectionTheme.cursorColor ??
+              AppColors.primary,
+          style: TextStyle(color: effectiveTextColor),
           showDropdownIcon: showDropdownIcon,
           dropdownIconPosition: IconPosition.trailing,
           dropdownIcon: Icon(
@@ -1223,9 +1286,16 @@ class AppRoundedTextField extends StatelessWidget {
       obscureText: obscureText,
       showPasswordToggle: showPasswordToggle,
       fieldStyle: isPill ? TextFieldStyle.pill : TextFieldStyle.rounded,
-      backgroundColor: backgroundColor ?? AppColors.grey300,
+      backgroundColor:
+          backgroundColor ??
+          (Theme.of(context).brightness == Brightness.dark
+              ? AppColors.grey800
+              : AppColors.grey300),
       borderColor: showBorder
-          ? (borderColor ?? AppColors.grey200)
+          ? (borderColor ??
+                (Theme.of(context).brightness == Brightness.dark
+                    ? AppColors.grey700
+                    : AppColors.grey200))
           : Colors.transparent,
       focusedBorderColor: showBorder
           ? (focusedBorderColor ?? AppColors.primary)
