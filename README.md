@@ -68,15 +68,15 @@ Key props: `bgColor/textColor`, `radius`, `width/height`, `brdColor`, `buttonHei
 ```dart
 Column(
   children: [
-    SocialLoginButton(
+    SocialButton(
       provider: SocialProvider.google,
       onPressed: () => handleGoogleSignIn(),
     ),
-    SocialLoginButton(
+    SocialButton(
       provider: SocialProvider.apple,
       onPressed: () => handleAppleSignIn(),
     ),
-    SocialLoginButton(
+    SocialButton(
       provider: SocialProvider.facebook,
       onPressed: () => handleFacebookSignIn(),
     ),
@@ -85,10 +85,10 @@ Column(
 ```
 
 **Customization:**
-`SocialLoginButton` allows full control over `bgColor`, `textColor`, `iconWidget`, `borderRadius`, `padding`, and more. If no overrides are provided, it uses standard provider branding.
+`SocialButton` allows full control over `bgColor`, `textColor`, `iconWidget`, `borderRadius`, `padding`, and more. If no overrides are provided, it uses standard provider branding.
 
 ```dart
-SocialLoginButton(
+SocialButton(
   provider: SocialProvider.google,
   onPressed: () {},
   label: 'Sign in with Google',

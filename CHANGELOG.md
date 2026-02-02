@@ -33,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **SocialLoginButton**: Added adaptive branding for Facebook. In dark mode, it now switches to a white background with a blue logo, consistent with the Apple login button branding.
+- **SocialButton**: Added adaptive branding for Facebook. In dark mode, it now switches to a white background with a blue logo, consistent with the Apple login button branding.
 
 ---
 
@@ -41,7 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **SocialLoginButton**: Added full customization support. Users can now override `bgColor`, `textColor`, `iconWidget`, `iconSize`, `borderRadius`, `borderSide`, `padding`, `fontSize`, `fontWeight`, `elevation`, and `iconSpacing`. Provider defaults are preserved when no overrides are specified.
+- **SocialButton**: Added full customization support. Users can now override `bgColor`, `textColor`, `iconWidget`, `iconSize`, `borderRadius`, `borderSide`, `padding`, `fontSize`, `fontWeight`, `elevation`, and `iconSpacing`. Provider defaults are preserved when no overrides are specified.
 
 ---
 
@@ -49,7 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **SocialLoginButton**: New widget for social authentication with built-in branding for Google, Apple, Facebook, and Email providers. Uses embedded SVGs for logos, so no asset configuration is required.
+- **SocialButton**: New widget for social authentication with built-in branding for Google, Apple, Facebook, and Email providers. Uses embedded SVGs for logos, so no asset configuration is required.
 
 ### Dependencies
 
