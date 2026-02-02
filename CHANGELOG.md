@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.3] - 2026-02-02
+
+### Fixed
+
+- **Theme Configuration**: Fixed an issue where `SACThemeConfig` specific text style overrides (e.g., `bodyLarge`, `displaySmall`) were being ignored and overridden by the default primary text color. Users can now confidently override specific text styles in their theme config.
+
+---
+
 ## [0.4.2] - 2026-01-23
 
 ### Fixed

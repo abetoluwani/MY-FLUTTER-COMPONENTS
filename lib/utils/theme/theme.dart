@@ -235,30 +235,31 @@ class SACTheme {
 
       // Typography
       fontFamily: config?.fontFamily,
-      textTheme:
-          TextTheme(
-            displayLarge: config?.displayLarge,
-            displayMedium: config?.displayMedium,
-            displaySmall: config?.displaySmall,
-            headlineLarge: config?.headlineLarge,
-            headlineMedium: config?.headlineMedium,
-            headlineSmall: config?.headlineSmall,
-            titleLarge: config?.titleLarge,
-            titleMedium: config?.titleMedium,
-            titleSmall: config?.titleSmall,
-            bodyLarge:
-                config?.bodyLarge ?? TextStyle(color: colors.textPrimary),
-            bodyMedium:
-                config?.bodyMedium ?? TextStyle(color: colors.textPrimary),
-            bodySmall: config?.bodySmall ?? TextStyle(color: colors.textMuted),
-            labelLarge: config?.labelLarge,
-            labelMedium: config?.labelMedium,
-            labelSmall: config?.labelSmall,
-          ).apply(
-            bodyColor: colors.textPrimary,
-            displayColor: colors.textPrimary,
-            fontFamily: config?.fontFamily,
-          ),
+      textTheme: TextTheme(
+        displayLarge:
+            config?.displayLarge ?? TextStyle(color: colors.textPrimary),
+        displayMedium:
+            config?.displayMedium ?? TextStyle(color: colors.textPrimary),
+        displaySmall:
+            config?.displaySmall ?? TextStyle(color: colors.textPrimary),
+        headlineLarge:
+            config?.headlineLarge ?? TextStyle(color: colors.textPrimary),
+        headlineMedium:
+            config?.headlineMedium ?? TextStyle(color: colors.textPrimary),
+        headlineSmall:
+            config?.headlineSmall ?? TextStyle(color: colors.textPrimary),
+        titleLarge: config?.titleLarge ?? TextStyle(color: colors.textPrimary),
+        titleMedium:
+            config?.titleMedium ?? TextStyle(color: colors.textPrimary),
+        titleSmall: config?.titleSmall ?? TextStyle(color: colors.textPrimary),
+        bodyLarge: config?.bodyLarge ?? TextStyle(color: colors.textPrimary),
+        bodyMedium: config?.bodyMedium ?? TextStyle(color: colors.textPrimary),
+        bodySmall: config?.bodySmall ?? TextStyle(color: colors.textMuted),
+        labelLarge: config?.labelLarge ?? TextStyle(color: colors.textPrimary),
+        labelMedium:
+            config?.labelMedium ?? TextStyle(color: colors.textPrimary),
+        labelSmall: config?.labelSmall ?? TextStyle(color: colors.textPrimary),
+      ),
 
       // AppBar
       appBarTheme: AppBarTheme(
